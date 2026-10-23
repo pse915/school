@@ -1,0 +1,21 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> timetable-react@0.1.0 test:e2e
+> playwright test --grep-invert 50MB
+
+
+Running 9 tests using 1 worker
+
+(node:58) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/app.spec.ts:6:1 › React v2 login, twelve menus, salary calculate, download and responsive screen (6.2s)
+  ✓  2 tests/e2e/app.spec.ts:28:1 › absence registration, recommendation, assignment and cancellation execute Python writes (2.5s)
+  ✓  3 tests/e2e/app.spec.ts:41:1 › drag uses Python preview and explicit confirmation (1.4s)
+  ✓  4 tests/e2e/app.spec.ts:66:1 › lesson dialog outside-click / ESC dismissal leaves a usable timetable after swap (2.3s)
+  ✓  5 tests/e2e/app.spec.ts:94:1 › dialog can be opened and dismissed repeatedly without losing the React root (10.3s)
+  ✓  6 tests/e2e/app.spec.ts:112:1 › swap preview cancel, outside click and ESC all keep timetable interactive (2.6s)
+  ✓  7 tests/e2e/app.spec.ts:135:1 › settings modal outside click and ESC preserve the React app root (1.4s)
+  ✓  8 tests/e2e/exam.spec.ts:2:1 › exam pages share the authenticated React root (4.3s)
+  ✓  9 tests/e2e/startup.spec.ts:2:1 › real timetable_app2 entry displays login and clears startup notice after React is ready (1.1s)
+
+  9 passed (32.8s)

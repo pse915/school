@@ -1,0 +1,17 @@
+[global]
+developmentMode = false
+
+[server]
+maxUploadSize = 50
+enableXsrfProtection = true
+fileWatcherType = "none"
+
+[client]
+toolbarMode = "minimal"
+
+[theme]
+base = "light"
+primaryColor = "#4263eb"
+
+[browser]
+gatherUsageStats = false

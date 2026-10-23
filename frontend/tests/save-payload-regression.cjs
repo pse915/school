@@ -1,0 +1,25 @@
+// Exercise the actual request-values expression shipped to Streamlit.
+const fs=require('node:fs');
+const path=require('node:path');
+const assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+const bundle=fs.readFileSync(path.join(root,'dist/timetable.js'),'utf8');
+const match=bundle.match(/x = \(\) => (Object\.fromEntries\(y\.filter\([\s\S]*?\)\)), S = async/);
+assert.ok(match,'Locate deployed values() expression');
+const collect=new Function('y','b','h','return '+match[1]);
+const b=['editor','text_input'];
+const rows=[{grade:1,classNo:7}];
+const drafts={exam_grid_classes:rows};
+const editor=disabled=>[{id:'exam_grid_classes',kind:'editor',disabled}];
+assert.deepEqual(collect(editor([]),b,drafts),drafts,'Empty protected-column list must send edited rows');
+assert.deepEqual(collect(editor(['grade']),b,drafts),drafts,'Partially protected tables must send editable cells');
+assert.deepEqual(collect(editor(false),b,drafts),drafts);
+assert.deepEqual(collect(editor(undefined),b,drafts),drafts);
+assert.deepEqual(collect(editor(true),b,drafts),{},'Fully disabled table must be excluded');
+assert.deepEqual(collect(editor([]),b,{}),{},'Untouched table has no draft');
+assert.deepEqual(collect([{id:'x',kind:'button',disabled:false}],b,{x:1}),{},'Buttons must not become inputs');
+const old=editor([]).filter(n=>b.includes(n.kind)&&!n.disabled&&n.id in drafts);
+assert.equal(old.length,0,'Reproduce original lost-edit defect');
+const source=fs.readFileSync(path.join(root,'src/App.tsx'),'utf8');
+assert.ok(source.includes('n.disabled!==true&&n.id in drafts'),'Source and deployed bundle must agree');
+console.log('9 save payload regression checks passed; original defect reproduced.');

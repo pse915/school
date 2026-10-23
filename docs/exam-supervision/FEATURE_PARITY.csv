@@ -1,0 +1,26 @@
+﻿기능,원본 함수,Python 이전,React 화면,구현 및 원본 상태,검증 범위
+로그인·권한,apiBootstrap / requireAdmin_ / loginAdmin,Service.authorize / install.allowed_tabs,공통 로그인·메뉴,기존 계정·서버 역할 재검증 사용; 원본 GAS 우회 인증 미이식,권한·사용자 전환·요청 중복 테스트
+학급 관리,saveClasses_,Service._save_table(saveClasses),시험일정 설정,학년 1~3·반 1~100; 사용자 열 보존,저장 원자성 테스트
+명단·역할·상치교과,roster_ / saveRoster_,models.read_roster / Service._save_table(saveRoster),교사 명단·감독 조건,교사 500명; ID 불변; 삭제 명시·연관 조건 정리,저장·사용자 열·삭제·교과 제한 테스트
+시험일정·학년 운영,validateSchedule_ / saveSchedule_ / derivedGradePlan_ / normalizeGradePlan_,engine.validate_schedule / grade_plan / Service._save_table,시험일정 설정,원본 학년·일차 조합 제한 유지,엔진 비교·9개 화면 렌더 테스트
+감독 설정,saveSettings_ / optimizationConfig_,engine.optimization / Service._save_table,교사 명단·감독 조건,자습 인원·상한·동의어·최적화 JSON 편집,프리셋별 엔진 비교
+감독불가·강사제외,saveUnavailable_ / saveInstructorFlags_,Service._save_table / Context.eligible,교사 명단·감독 조건,하드 제약,저장·배정불가 엔진 비교
+수업시간표·겸임·규칙,availabilityData_ / teachAvailability_ / visitingAvailability_ / teachingRuleRestrictions_,models.read_availability / Context.eligible,수업·겸임교사 일정,수업시간표 별칭·수업없음·기간·날짜 우선순위,원본 예외 규칙 비교·표 저장 테스트
+명시적 미등록 교사 투입,missingFallbackPlan_ / eligible_,Context.fallback_plan / fallback_allowed,감독 조건·후보 진단,일반 후보 매칭 부족 시에만 명시한 교사,원본 후보 비교
+후보 진단,availabilityReport_,Service.availability,수업·겸임교사 일정,시간별 후보와 중복 집계되는 제외 사유,후보 비교·화면 렌더
+자동 생성,seeded_ / makeAttempt_ / solve_ / generate_,engine.seeded / make_attempt / solve / Service.compute,자동 배정·직접 수정,12회 재시작·원본 난수·매칭·하드 제약,8개 시드 매칭·6개 PRNG 시드·생성 불변성
+배정 개선,incrementalObjective_ / optimizeLocal_ / improve_,engine.IncrementalObjective / optimize_local / Service.compute,자동 배정·직접 수정,단일 변경·쌍 교환·고정 자리 유지,증분 trial/rollback 전체 평가 동등·고정 자리 테스트
+유효성 검사,fullValidate_ / eligible_,Context.validate / eligible,배정 검증·저장,누락·중복·교과·역할·시간 중복·상한,12개 합성 입력 원본 비교·잘못된 수동 변경 차단
+직접 변경·교환,update_ / swap_ / roleSwap_,Service.handle(update/swap/roleSwap),자동 배정·직접 수정,직접 변경 고정; 신규 오류 없는 개선만 부분 수정 허용,역할 교환·부적합 변경·저장 이력 테스트
+공정성·업무강도,objectiveParts_ / objectiveVector_ / buildStats_ / fairness_ / optimizationReport_,engine.objective_parts / objective_vector / build_stats / optimization_report / Service.fairness,공정성 분석,사전식 우선순위·점심 단절·교사별 진단·막대 차트,원본 통계·점수 비교; 공정성 화면 렌더
+학년 우대 비교,compareGradeBonus_,Service.compute(compareGradeBonus),자동 배정·직접 수정,같은 시드·각 3500ms; 저장하지 않는 비교,규칙·학년 비용·프리셋 비교; 실제 계정 미검증
+개인·전체 조회,getTeacher_ / getConfirmed_,Service.handle / confirmed,교사별 감독 조회·전체 감독 시간표,이름 검색·학년/날짜/교시/학급 필터·카드 보기,교사 본인 범위·화면 렌더
+결과 직접 편집 감지,syncDirectResultEdits_ / readResultAssignments_,models.model / read_results / Service._save,조회·수정,읽기는 무저장; 다음 저장 시 검증·재생성,직접 편집 재조회·수동 결과 보존 테스트
+저장·이력·재생성,writeDraft_ / bump_ / materialize_ / publishEditable_ / readHistory_ / repairSheets_,Service._save / _materialize / Repository.commit,배정 기록·인쇄,결과·초안·통계·인쇄·이력 원자적 배치,원자 저장·충돌·응답 유실·재조회 테스트
+출력,Index.html window.print / scheduleGrid,view.export / printable,개인·전체·기록 출력,안전한 CSV·인쇄용 HTML·브라우저 PDF 저장,Python 화면 렌더; 실제 인쇄·PDF 레이아웃 미검증
+과거 버전 조회,listVersions_ / getVersionLibrary_ / getVersionPreview_,Service.version_preview / handle,배정 기록·인쇄,원본 api switch에 미노출; 읽기 전용 조회를 명시적으로 연결,청크·해시 검사 코드; 실제 과거 스냅샷 미검증
+비활성 확정·잠금·복원,confirm_ / unlockConfirmed_ / discardUnlocked_ / createVersion_ / restore_,추가 활성화하지 않음,없음,원본에서 오류를 던지고 api에 미노출; 원본 파일로 보존,소스 분석
+앱 내 합성 자가진단,runSelfTests_,engine.self_tests / Service.handle(selfTests),관리자 exam.selfTests API,통합본 12개 진단; 원본 63개는 Node 비교 테스트에서 실행,원본 63/63 및 동반 GAS 63/63; Python 진단 테스트
+지속 연결·사본 선택,spreadsheet_ / connectionInfo_ / autoBindCurrentSpreadsheet_,Repository.load_config / save_config / connect,연결·권한 설정,기존 업무 Sheets 새 설정 탭; 명시적 주소 선택,설정 왕복 저장·URL 검증; 실제 서비스 계정 미검증
+양쪽 앱 저장 전환,ssLock_ / ensureRev_ / liveDataToken_,Repository.commit / Service.handoff / compatibility/Code.gs,연결·권한 설정,동시 쓰기 불허; PAUSED 390초·사전/사후 검사,합성 소유권·대기·충돌 테스트; 실서비스 교차 검증 미실행
+기존 시간표 기능 전체,timetable_app2.py / legacy / Application,기존 코드 유지 + install hook,기존 메뉴 전체,원본 진입점·legacy·backend 기존 기능 삭제 없음,기존 Python 49개 + dialog 15개; 브라우저 미실행

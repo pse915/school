@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.7.0
+rootdir: /workspace/scratch/e4b7d0c455e2/integrated
+configfile: pytest.ini
+testpaths: tests/unit, tests/integration, tests/parity, tests/exam_supervision
+collected 132 items
+
+tests/unit/test_domain.py .................                              [ 12%]
+tests/integration/test_application.py .............                      [ 22%]
+tests/integration/test_more_workflows.py ..........                      [ 30%]
+tests/integration/test_performance.py .....                              [ 34%]
+tests/parity/test_native_optimization.py .                               [ 34%]
+tests/parity/test_source.py ...                                          [ 37%]
+tests/exam_supervision/test_compatibility.py ......                      [ 41%]
+tests/exam_supervision/test_engine.py .................................. [ 67%]
+....                                                                     [ 70%]
+tests/exam_supervision/test_service.py ................................. [ 95%]
+......                                                                   [100%]
+
+============================= 132 passed in 6.98s ==============================
