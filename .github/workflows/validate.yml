@@ -1,0 +1,33 @@
+name: Migration validation
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pytest --junitxml=tests/python-results.xml
+      - working-directory: frontend
+        run: npm ci
+      - working-directory: frontend
+        run: npm run typecheck && npm run lint && npm run test && npm run build
+      - run: git diff --exit-code -- frontend/dist
+      - working-directory: frontend
+        run: npx playwright install --with-deps chromium
+      - run: python scripts/run_e2e.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-evidence
+          path: |
+            tests/*results.*
+            tests/browser-artifacts
+            screenshots

@@ -1,0 +1,902 @@
+{
+  "baseline_commit": "9989f3f6529e400857614407c7cc97550b582520",
+  "functions": [
+    {
+      "name": "render_font_runtime_css",
+      "hash": "890dbb040ff1a7faee77c47b3e8c19da9b7073c0de421e74c3c48ffd743b489d"
+    },
+    {
+      "name": "render_theme_runtime_css",
+      "hash": "73f1c448459895c416709fc0a44c87cbdf872dab042a2e601c9307dfa78c75fb"
+    },
+    {
+      "name": "_neis_secret_key",
+      "hash": "0c45b05ee71ec9f6adf1679fa2a3836c91329490d0edb8d8ec25ebc9be6dfa12"
+    },
+    {
+      "name": "_neis_api_get",
+      "hash": "5d37a9970276e844f605e658defa2849b1c1c4e0a0499de931c3274b0fffc2c1"
+    },
+    {
+      "name": "_neis_rows",
+      "hash": "bc44b29011fce42267e9dc242bb7b381f0e3bf9465170655c2edab4e4d6ffcbd"
+    },
+    {
+      "name": "_normalize_school_name_for_neis",
+      "hash": "714ed4f34e9e08e6341ad203efc024cd037bf9be7d3d1146e98dbe6fb89dfaaf"
+    },
+    {
+      "name": "neis_find_school",
+      "hash": "c5a2f2983390919457c9720e1816ce4e6df0e69f817112099fa6d8041c9bf850"
+    },
+    {
+      "name": "_neis_schedule_row_is_non_instructional",
+      "hash": "afaa564d647a5cfbc6d7be2614e68273b5598af5dc3d0e395419ca76392ba2fc"
+    },
+    {
+      "name": "_neis_event_label",
+      "hash": "2eb082466137207cd4f89f17b46f0227177b5edc0abedf0abb05069abcb4cbe2"
+    },
+    {
+      "name": "_neis_schedule_empty_df",
+      "hash": "199bac0369f8363fca0624792b7a081cd5c6931353b0c77fd86c04442c150e10"
+    },
+    {
+      "name": "_neis_schedule_rows_to_df",
+      "hash": "f6a4abff209664e46ef902bb1e1c5de030e008160a343bcf2642adbe9e46adbd"
+    },
+    {
+      "name": "_neis_is_info_200",
+      "hash": "73af066f25dd564ab1c1f170f26ac49a19f37b19d582d5c22392d851c926e15e"
+    },
+    {
+      "name": "_neis_schedule_request",
+      "hash": "1f437c4af9eb4662c7c3703a680fa36304b521b6f6610abedab24a6b756b8e53"
+    },
+    {
+      "name": "neis_fetch_schedule",
+      "hash": "496fe6ea3b7a8ecacceca9567b204bd1881a07f69c9d03363cb1a96af4190dd9"
+    },
+    {
+      "name": "get_neis_api_key",
+      "hash": "07604ab11126c660ec96d71dcca5e045903b08087b8f066c6d29eaadb9f6f3bf"
+    },
+    {
+      "name": "get_neis_cache_token",
+      "hash": "ca4b83c0b08ca7039ec6ab32eb0f02b093b9c561005bccda56b2b6e5b59aa42a"
+    },
+    {
+      "name": "get_neis_schedule_for_range",
+      "hash": "dff4eabb008326d1fbcd5da9541ead57117412f7472b6ef4947c58f347654708"
+    },
+    {
+      "name": "ensure_neis_week_loaded",
+      "hash": "803cc6351e0af0e7e807c038e2317bbb2c6ce5ba16e17aba950a227537cbdd56"
+    },
+    {
+      "name": "require_neis_week",
+      "hash": "51212c55ffe64c99cea87949738b5d6edd060536f643ffd41a00448fcab63ad5"
+    },
+    {
+      "name": "get_neis_non_instructional_days",
+      "hash": "1408b5ed20b0a9b368b1998e3f4ac4fa872898866c89842aee9874c54f423920"
+    },
+    {
+      "name": "is_neis_non_instructional_date",
+      "hash": "8364d87ed6b08db0b75e5eba7179129c01c077143b1cb57883e8a61c7a2e3b85"
+    },
+    {
+      "name": "neis_holiday_label",
+      "hash": "7ef79d7b020619d4174faed89b64bd513af4e548a742042e4d26fb28142f4ac8"
+    },
+    {
+      "name": "apply_neis_non_instructional_display",
+      "hash": "44a4769892a220814fb33f61574111e0f36019b02f11d1123fccb842543c064c"
+    },
+    {
+      "name": "_today_kst",
+      "hash": "28c1f29ffd11b0e30948242e536eadcde00555c2c65977672e6069015dfeffd3"
+    },
+    {
+      "name": "_is_current_week",
+      "hash": "811342973118df620e611991ac9f0462581933bd6471f0038669220208d1ec3e"
+    },
+    {
+      "name": "_hide_past_week_slots",
+      "hash": "6ba76b98bd457094afa1fd8c99065abe9fad173dab521de2354b1a0f24080c61"
+    },
+    {
+      "name": "_clean_user_text",
+      "hash": "e827939532ca1d40f787a21fa1b933166b8bde677c5478071b91cd9b480d757c"
+    },
+    {
+      "name": "_safe_sheet_text",
+      "hash": "01627053cc3232a6013229ef8bd4fdaf08905d5dea814145c7d621dde8afd86f"
+    },
+    {
+      "name": "_validated_role",
+      "hash": "ccce37be8a72bbf74c603d1c6195904b2125c60123c181e53b3e24a23389b602"
+    },
+    {
+      "name": "_now_text",
+      "hash": "34143f1f0b24e5bb7c78d3833f695c0a7f1f0fa483ef73dccf1d868146272c4c"
+    },
+    {
+      "name": "safe_int",
+      "hash": "b5f52d95b779b263dbc6b6a9d2b8006d5e569b033c2e31835329193933d87dc8"
+    },
+    {
+      "name": "normalize_date_str",
+      "hash": "48223dfa473cd3b4fb7a9c27ec62aa68d550894afedaff79baf11bd7b49c1747"
+    },
+    {
+      "name": "subject_group",
+      "hash": "fdfc0802fde9eeaa2e11c05ba255bfae284b86755fd43e5fd29a10e71dc924ab"
+    },
+    {
+      "name": "grade_of",
+      "hash": "f30b8e3e30ab5e126ba4ae61129c29de8ad87c1fe55ef88819416892b897b104"
+    },
+    {
+      "name": "normalized_grade",
+      "hash": "32a65ba34299bd4933c8d76446d07f9395f787445bed5265c8137d6cfbd3a98a"
+    },
+    {
+      "name": "is_grade12_thursday_7_forbidden",
+      "hash": "9cca507cbea0a9fec89d6cdd6f89115b54cf56e764b6daf6d9995ef53fba3ec0"
+    },
+    {
+      "name": "slot_allowed_for_class",
+      "hash": "48cfd2d1b7361a25294df83d7ff6a68bc4b736aa554902d9979b9e98456354ba"
+    },
+    {
+      "name": "format_periods",
+      "hash": "eca67d617c847d777efa3106855e36b23d492f9765a5889ce0fa5ebb78c0ef5f"
+    },
+    {
+      "name": "_month_calendar_df",
+      "hash": "d79e778a94d5f68d760fb328a15bc97d30035ef6a7f241127eea9261863ee7f0"
+    },
+    {
+      "name": "_calendar_set_day",
+      "hash": "db4e3f5b0d532442b1683e360f48fb149489ac725d31b15568ffb33a3544bbaf"
+    },
+    {
+      "name": "_calendar_prev_month",
+      "hash": "46103155e750b5fa84988bacc47491cf4ca9eaace3cd6a5d025091c269875a49"
+    },
+    {
+      "name": "_calendar_next_month",
+      "hash": "dced531c7203f9b25dbe25a519eb07e56ac0db44f826434eea57c632dc3d37d6"
+    },
+    {
+      "name": "_calendar_today",
+      "hash": "37a1b30a62908e3ea70c2ecbe38ceb09ecbfc1cbda4d45ac25f004e6455d8220"
+    },
+    {
+      "name": "calendar_picker",
+      "hash": "86de19552f4c0ea20122d041ba6b64c950d6496aa4645cfd2f226537858c6b33"
+    },
+    {
+      "name": "week_picker",
+      "hash": "b6c7acff8fc09e8c18f5a1b434d653d1678db38575c65b04a8abeea2f823fc2c"
+    },
+    {
+      "name": "calendar_range_picker",
+      "hash": "92e4bb6a5692aaab1db874b5a59b111c229ad25141928b319cd91fc877a75862"
+    },
+    {
+      "name": "period_matrix_picker",
+      "hash": "0bfdcfd5c09f9493192dd7657cbd3c0c7e90288af7530fc822ee487581d30adc"
+    },
+    {
+      "name": "_teacher_empty_periods_on_date",
+      "hash": "c54c82397d2ccc303e2b1c04386e05f6bc6ab7aa6f515ff96f3b1e1ffba8459f"
+    },
+    {
+      "name": "_daily_schedule_matrix",
+      "hash": "dfe7615194df3f3a3cf583b7e3cb16765be031b8249da80e1b2594c317dfad8c"
+    },
+    {
+      "name": "daily_schedule_picker",
+      "hash": "a24f7ffa2cb2a54ce41f853dffd277c566f49d19d02d891a0445f9af350e2716"
+    },
+    {
+      "name": "range_calendar_matrix_picker",
+      "hash": "9df615a5afd73fb03f3c4ac6f15cd2ab39cc1481ef1727826b8605583a44e611"
+    },
+    {
+      "name": "get_all_teacher_names",
+      "hash": "887d8727785ac8bfcd2804542612a78d78bcd5de73f2332d86b55531c4be6ad9"
+    },
+    {
+      "name": "current_user",
+      "hash": "151d81edb33459e1c2fe9568416f3a1150d8f4e6fbd673189abfa45063f73e25"
+    },
+    {
+      "name": "current_name",
+      "hash": "60b8c39a8e096b874128c7743888da6f5fab57d15d5731cec6be84fdfe547d67"
+    },
+    {
+      "name": "current_role",
+      "hash": "52af0eba1e4b833b19e9cc063dceaaa203a36ca1d627fb85f5a0ff3c59d538eb"
+    },
+    {
+      "name": "is_master",
+      "hash": "0d013d162b1a2adb59371a180dc9f34c24c808d7c611ebda52003e599acb6953"
+    },
+    {
+      "name": "is_edu_or_master",
+      "hash": "15195b90119f46c3f9c0ec76586137f2802c9274a2f0570a1dd408e8e74ffe9d"
+    },
+    {
+      "name": "is_teacher",
+      "hash": "cc58ef02c28230d717f6cc596f607c66875f323040ab9d7c5c6a93ed71cea0ec"
+    },
+    {
+      "name": "can_manage_ids",
+      "hash": "23d2eef7acd609a807b2a9b2734437f6a455ccb8af2477446989325a3ebad941"
+    },
+    {
+      "name": "can_full_data",
+      "hash": "480377a875bdb91b23c5446b8e7cc73f0b0c615ee9343c8bfad2f48b900f8271"
+    },
+    {
+      "name": "get_user_allowed_tabs",
+      "hash": "d134ab6d1c86b16e57c9237c13eb9df9f6b54be16efd3ac7c62fc7766b132dbd"
+    },
+    {
+      "name": "get_teacher_subject",
+      "hash": "f73873eb2ee2f6a3eb93795821b094681ec447b1df50381334c1c74a0ff785c6"
+    },
+    {
+      "name": "get_gspread_client",
+      "hash": "3a3ee15d348b063eb4d3768682e5a262dc1227872be8e6a3d9d534f2c14ba439"
+    },
+    {
+      "name": "_clear_gsheet_runtime_cache",
+      "hash": "491c6602108adf5c61a13f8872898006b9c7e7ddc35d0a46441cf5eecf820933"
+    },
+    {
+      "name": "_run_network_with_timeout",
+      "hash": "347cd31c6b70b3833fe6d436ed588721343a57b0dbbafdc38bf469dcbe5ee797"
+    },
+    {
+      "name": "get_worksheet",
+      "hash": "3fe3a11c0df8d5e494d872a44047a9294d0a7096e33d11dafaafdee9f133c373"
+    },
+    {
+      "name": "df_from_worksheet",
+      "hash": "0d41b4940ae3b32d2a50f9aa30263acc67b0ddcad8104f104b5a998737050999"
+    },
+    {
+      "name": "df_to_worksheet",
+      "hash": "0041677b1b08197e975a242d3bd9e8da1ff56ae6d72316cf61e67fa05876f8d9"
+    },
+    {
+      "name": "_empty_id_df",
+      "hash": "b25342d77427f3cfbc3b6a4beb711862061e2892315a1018650e9147414fccc9"
+    },
+    {
+      "name": "_seed_master_id_df",
+      "hash": "9d7f50bc1ef1647779052a7d50ef6d969b4f9f9a6e528e52104008324de92f5f"
+    },
+    {
+      "name": "load_id_sheet",
+      "hash": "cc22e70d9bf001af82b5eeae5f3e49c0528ff76577740733bc2e76698962101d"
+    },
+    {
+      "name": "_validate_id_admin_edit",
+      "hash": "34cf85bd28562d88ffb1fb1140ba2869a69e523f4354397898344c1432b569ae"
+    },
+    {
+      "name": "save_id_sheet",
+      "hash": "97a80db11916cdaff9d41029af61b49c39ff143ec6062a9af0cba00201cea59d"
+    },
+    {
+      "name": "save_id_request",
+      "hash": "de31747fbdf6a75998b7c792bad3abcb65d4a0f8a5ca5fe9b22454ecaa2d668c"
+    },
+    {
+      "name": "load_budget_df",
+      "hash": "164860d8d11a4b956f6f41526dfd2a915e6ce6c87cafe2271eaa166b39ccb8a2"
+    },
+    {
+      "name": "get_current_budget",
+      "hash": "fc7db447cda8d8ae3f97ff83f38ed478059deb098579b0e30a912047bd65145a"
+    },
+    {
+      "name": "update_budget",
+      "hash": "ed6305160320045d870da0837633fd0801f71da1a6615cfcb993938fbc18a207"
+    },
+    {
+      "name": "load_swap_requests",
+      "hash": "e9bf3c532efc955900cdb83f349bfce70bed1aaf3b92be0e3d4f3adc626577fc"
+    },
+    {
+      "name": "save_swap_request",
+      "hash": "c35e3de631154ba9a0180e024a78695aa32c4abd187015ac98711cebf52d3a64"
+    },
+    {
+      "name": "push_history",
+      "hash": "f94b653a466ac611d2ff8711b9638b33b3ba536a7623b63e223c5e99e9b87f84"
+    },
+    {
+      "name": "_restore_history_snapshot",
+      "hash": "12dede3d7ba31ad9cbe174744cac46d0474ac37d039ffe09263bb76aee46db03"
+    },
+    {
+      "name": "undo",
+      "hash": "95e6bb0caa999e37396acd2bc377173ba06aca02a4ebbfd510e2391fe3588366"
+    },
+    {
+      "name": "redo",
+      "hash": "0b1b7492aec18f98bc630fd718694dd61648f11ec4e17423b45a310bf4fbc2e6"
+    },
+    {
+      "name": "_invalidate_all_caches",
+      "hash": "20f81079d90d13f94c3d3de755d56839a6a02ec5bc884b62d739d354bfab0e13"
+    },
+    {
+      "name": "ensure_duty_columns",
+      "hash": "4f797e6afe41a87b490e2628ce863025944ab6fb8f28339c63f8621843cac07c"
+    },
+    {
+      "name": "ensure_part_time_columns",
+      "hash": "6c99e3a11272e01b05c47bac2ad5e0daff97cec1c80f3d41d5b43758e90287e6"
+    },
+    {
+      "name": "ensure_input_user",
+      "hash": "f8922782babb185d0c7f7a17a68ece373873d1ee621e891bbe8b815080983967"
+    },
+    {
+      "name": "load_timetable_from_gsheet",
+      "hash": "7bcc73de52a74653f403181fb09ff735b1543948f5c40cb655fea9ff7240e038"
+    },
+    {
+      "name": "load_work_data_from_gsheet",
+      "hash": "860763f19cd3b6ab0402056aa91fd5109ba8ba565f2a44fedf8dc378a0c9c7f9"
+    },
+    {
+      "name": "save_work_data_to_gsheet",
+      "hash": "dc61672cc3a275ecd04dca86f1be709bd5eabf659c89260d5d87082c667d16d3"
+    },
+    {
+      "name": "init_state",
+      "hash": "317ae479f8392d99782d2f2206c80aabb2753f19423753e3f87ac0ec4193b3f2"
+    },
+    {
+      "name": "_new_change_id",
+      "hash": "1e9d23848c05d4cc6790e98e73b8ffc588de21716441be27121e78ed38f195f2"
+    },
+    {
+      "name": "_lesson_record",
+      "hash": "cf71818982c2c102074776473c3a2d5cf7e3e54f5c2b4a84906c442309df3c71"
+    },
+    {
+      "name": "_truthy_availability",
+      "hash": "3b78f3ea701ccaa0050c5750b0a670ab057df2e7a5451cdb3cd9e74f44ef575d"
+    },
+    {
+      "name": "_part_time_available",
+      "hash": "529c4877c75e1ee647c4f44f0ede6c33231682f64a46e737882bf86384a2c3be"
+    },
+    {
+      "name": "_normalize_teacher_col",
+      "hash": "09c6926a0179499cc6c4cc138b597b05b378cb72d4bdecc7d532d211a78b4dd2"
+    },
+    {
+      "name": "_parse_period_tokens",
+      "hash": "8a5b25b3561932c7bbd9204467f4c178b90982a05cf3d7eff6434f0fa1e747fa"
+    },
+    {
+      "name": "_parse_teacher_availability_text",
+      "hash": "512b66aae3c9446e08bd34075da2f382dd2f774d7882b00ec0c8788eabab0755"
+    },
+    {
+      "name": "get_teacher_availability_index",
+      "hash": "c6323846d7ca2294e70c31d3e90415fbe81543e980a1d2522c38c0903b0f7ae0"
+    },
+    {
+      "name": "teacher_slot_is_available",
+      "hash": "bd3575414869978d2b546c698bb5a92d536939e8fc63ed28d75818a65502119f"
+    },
+    {
+      "name": "validate_part_time_table",
+      "hash": "a27e92c4d06aed7fca6cfaa64a317569438b91b8eb7674c85fde83ee52890d2b"
+    },
+    {
+      "name": "_effective_index",
+      "hash": "3bc8c26b3c6c77eaff9951343d65211dec44192082d258f57c32a8e722a22136"
+    },
+    {
+      "name": "_class_slot_teachers",
+      "hash": "8f4b37c064fe8c353d53a8703bab8b87e2c8f4bfc2f0cede20c3875488369f83"
+    },
+    {
+      "name": "validate_swap",
+      "hash": "7b841173da65bc2773188e40b38cf28b05e0f5b218af9590a896cd9675a138fa"
+    },
+    {
+      "name": "validate_substitute",
+      "hash": "ee159efd3a3f8393b40c03522871e81fa5347ac92b8398dd98c08277db477b24"
+    },
+    {
+      "name": "_apply_sub_to_effective",
+      "hash": "69e6c520d386e082a4031d0b52ea9c22f48afa3c1bfa0d428ba05ba00b44e454"
+    },
+    {
+      "name": "_is_direct_swap_type",
+      "hash": "e3de923528304a5bae10dd679aa0d834edaf7cdc47c2a2a396070e111732f9bc"
+    },
+    {
+      "name": "get_test_affected_slots",
+      "hash": "84b6f4287d2d82c4b7cc95b6475356c1c4ce05b99c23e02b5b9274c763532eb6"
+    },
+    {
+      "name": "_test_slot_is_affected",
+      "hash": "82a6026c3cff0f1813fec83449bcd2ffdb59e55426cbc9f263ab46cbf5d9ca33"
+    },
+    {
+      "name": "get_actual_direct_swap_affected_slots",
+      "hash": "4a5b53f3cfa7c9a6ef6c13d228749b8ad90972a1b07cc81cfe3ec2610193281f"
+    },
+    {
+      "name": "_actual_direct_slot_is_affected",
+      "hash": "965d74c66368c1e06db0fc73eda2902d8118828f21ded2187fb08804e464f351"
+    },
+    {
+      "name": "_effective_swap_origin_info",
+      "hash": "4c460e234fdfd966b9790922ef99844afb109d9844837c2a66f2490bab5daf0e"
+    },
+    {
+      "name": "_effective_sub_origin_info",
+      "hash": "baddb11b78df3b15b2f079a0ec42d8dbde1e7a5a1f9eb88a622a7ffe258184ef"
+    },
+    {
+      "name": "_build_effective_timetable_for_date",
+      "hash": "8979af7ea496dc4412ebcb3150c160dbe38b05f9c093c9b371307879318c8688"
+    },
+    {
+      "name": "_get_effective_timetable_cached",
+      "hash": "f7b62f3f0d498e78be7f004b4bcc383b182e7622f25fe530db847c34475ecb6e"
+    },
+    {
+      "name": "get_effective_timetable_for_date",
+      "hash": "3099d175933be543f4ba36f181a9ad5f110c94097383e25809325515f5312327"
+    },
+    {
+      "name": "_clear_effective_timetable_cache",
+      "hash": "656ccad9e903abf80ac738944e7ccb7bd84479378fb26275c7b0714af5550cf4"
+    },
+    {
+      "name": "get_effective_week",
+      "hash": "1ffe37ac0d92c1c54c764f375dc02f771d28088f073cf85a4642b8e60c87b675"
+    },
+    {
+      "name": "get_swap_origin_info",
+      "hash": "1132b1b294591604bf23ef24795badc59eeee95b564a48f2a83cdee765ee2a53"
+    },
+    {
+      "name": "_duty_slot_index",
+      "hash": "659e031a8860b4db587c7e382064c56110e9e53ea65def5b82047f82628416a7"
+    },
+    {
+      "name": "has_duty",
+      "hash": "8ba2dc65b95f307a8d501d5d58eee6f01782c23e0b776a10d60c9ff19e92325e"
+    },
+    {
+      "name": "is_free",
+      "hash": "1077c7cb052658278d941c98d4bee0f239df2f49eb5a27b21b97357462f66dee"
+    },
+    {
+      "name": "cumulative_sub_count",
+      "hash": "ba9199b442d5b0fc3b9ea9f88d7f47e69827785b7ff085463bf78fff3fe81a41"
+    },
+    {
+      "name": "weekly_load",
+      "hash": "35392fca7f37ddaa43431f5580ea362025e1e085e946640237a06f1be0c71b6c"
+    },
+    {
+      "name": "recommend_substitutes",
+      "hash": "efcb642afd9ac88c26ce75cda745104839b6f35e24a1c1ad670d13bd79144e1a"
+    },
+    {
+      "name": "get_cached_substitute_recommendations",
+      "hash": "edd49821b873da9be91f25567c3fbc43d1258cfc4cd80a4da2656fed345ecf34"
+    },
+    {
+      "name": "add_substitute",
+      "hash": "231b09889335d249ee10127cac402a4640be188b85f3d1774b8767d1e4b58639"
+    },
+    {
+      "name": "add_substitutes_batch",
+      "hash": "4d4050673af7d8ef4acfaac5ce221f6ca6126b049011a10ba127500a1dc693c1"
+    },
+    {
+      "name": "cancel_substitute",
+      "hash": "78a25522572006bf058b7760cb714a0f33d44fbe398a2c51a723abdc814326ae"
+    },
+    {
+      "name": "do_swap",
+      "hash": "15d5a057876d1d0d3efab805fe240f9cd404c12be061afc960e3e3cee25acb3f"
+    },
+    {
+      "name": "do_linked_swap",
+      "hash": "975853240dc01e86dbcfa4041d935dff47b786d44d686f39d0f120e02fbe80c9"
+    },
+    {
+      "name": "apply_cycle_swaps",
+      "hash": "86758ec9860ce4f5bbd34bedc8aa669a06088486c942077fc1579034317d8e0b"
+    },
+    {
+      "name": "find_cycle_linked_swaps",
+      "hash": "03b0bb88cb92bf4f6885cb65ee073d47bd97ed352501e5e6dbae98e1e6ad3887"
+    },
+    {
+      "name": "get_target_time_recommendations",
+      "hash": "abac6293053ce900f872252395196b470ede516b44d5f39aaf5874c7eb0c9a05"
+    },
+    {
+      "name": "get_weekly_1to1_swap_table",
+      "hash": "74f52a7c83196c607686a31255fbe84300ba581b91fd4efaf05ad6db4acea751"
+    },
+    {
+      "name": "get_single_lesson_1to1_candidates",
+      "hash": "9e76ddb492b7c899594ebceb4c5eb77317ebeb50083ba3a356c7ef8848d753bf"
+    },
+    {
+      "name": "get_single_lesson_linked_cycles",
+      "hash": "420688873064e313a04149ccb0aea8ee519648925b361e6a0809d2b5ddb753bf"
+    },
+    {
+      "name": "teacher_matrix",
+      "hash": "5ceef453327d1db239ad7c254877465a29c8da05f39b0bad47043b67e1aaf926"
+    },
+    {
+      "name": "effective_teacher_matrix",
+      "hash": "0a01a342248af2dede8f810691c2a8cc777f7eee5838c2a99535dc8cc4324696"
+    },
+    {
+      "name": "class_matrix",
+      "hash": "b392bc48a5d2409567bb3d09217b6750c53b605f6a9284ee44535716720d20da"
+    },
+    {
+      "name": "_weekly_cell_parts",
+      "hash": "c2a4f5a4e9fafb5e364f165a1c01df28566f90a315e46411e776d952c86bf0a6"
+    },
+    {
+      "name": "_resolve_weekly_selection",
+      "hash": "de8ad13d3b17a92ff7ca171f27fc21cdc6b14b350f246fecdc380b04bf87f08a"
+    },
+    {
+      "name": "_register_absence_from_weekly",
+      "hash": "c0bac25efb02782adc7be8d21c5c6d13921805a535ac6e764c53254479366150"
+    },
+    {
+      "name": "_weekly_display_matrix",
+      "hash": "58a518995e0eba978cd7cdeccc9ffdff60023d150811673ef5890963c53c6a9c"
+    },
+    {
+      "name": "_is_changed_lesson_cell",
+      "hash": "d95790a934b99c424cea1cc48f2b54cbb6e33b3f30fb8c4eca70c1bffb52347d"
+    },
+    {
+      "name": "_daily_styled_matrix",
+      "hash": "74546ae603ddfc43b6146c1e8e3abfc1cfb7fc258ef3eecc0cfb6217e06ef04d"
+    },
+    {
+      "name": "_weekly_styled_matrix",
+      "hash": "857c440749e18fb6a6d2a693da95ab1ee2b73bc4773946d2dfbf4feaea1883c5"
+    },
+    {
+      "name": "_clear_weekly_selection",
+      "hash": "d0478897fbca4590931edfc1ad70ce6c7ab3dc1215cce82f3bd82a36a3c7e6a6"
+    },
+    {
+      "name": "_validate_current_weekly_selection",
+      "hash": "65f078e77392e6fe55f3e56da3807386a970c95b72c12507b8d8cf6f70b1936c"
+    },
+    {
+      "name": "_filter_current_swap_candidates",
+      "hash": "769a63f5286fc1084c1b7d2afc503b37cd9220939b98bf477759d3f08a5b09d8"
+    },
+    {
+      "name": "_weekly_fragment_rerun",
+      "hash": "5ad125b38675c548cce3d7e54ba934a01261a45daea5b9ddb0f0bf0a2ed74e69"
+    },
+    {
+      "name": "_weekly_dialog_loading",
+      "hash": "19c2d6ea1e63f98ba5223d5f62e80f6f337eb20f9bdc822eb4843b0bf829fb05"
+    },
+    {
+      "name": "_weekly_action_dialog",
+      "hash": "ecb19bf45dae8eb07c404b1afcde2a5061aa1d03a30792e738f2f3bb982dd604"
+    },
+    {
+      "name": "_resolve_matrix_cell_selection",
+      "hash": "fe2de61428e4b611208b381593fe13a947f0c9018453927873b2f83e61434b67"
+    },
+    {
+      "name": "render_weekly_selection_panel",
+      "hash": "b99222bd0f24ab996dc934091493e46cf64f339b5da9bdb4a67d0fa4a67b7bc2"
+    },
+    {
+      "name": "render_standard_weekly_matrix",
+      "hash": "2c4af6cebeb19466bb6325593793f30fb1fc88cd043d07d292946d50e91e1a11"
+    },
+    {
+      "name": "_weekly_selection_signature",
+      "hash": "ca5574d818efb6bed17588c39113560137350543e5975a91fa8992695e1fac1a"
+    },
+    {
+      "name": "render_weekly_matrix",
+      "hash": "d76f74a5d5d1865c31619ce0987758cb2829cdb9e2dd0d451bf5765418f8bf47"
+    },
+    {
+      "name": "get_teacher_week_view",
+      "hash": "67074530c81e576941faee7dfb068720eb7cd13e1629ae1307aa3f834331cb1c"
+    },
+    {
+      "name": "get_changed_teachers_for_week",
+      "hash": "4fa7e239a5eb44c7c69c3db4f65a4069d3fc2d2a3686edfd29e8ba5f89ff0985"
+    },
+    {
+      "name": "filter_by_owner",
+      "hash": "11ce6616eacdbc60a42f9afe66996811d80c8551825c65425dab494dd11a89a3"
+    },
+    {
+      "name": "build_personal_plan_html",
+      "hash": "11ecd774a0d298bcaf7f984027eedb73f2c4301cf9c0d46c3d61bb343ba13910"
+    },
+    {
+      "name": "build_test_swaps_report_html",
+      "hash": "c460650c518d746b3667c6080b9c4856452fbb9d70c0e71be604cb903df27cf5"
+    },
+    {
+      "name": "build_report_html",
+      "hash": "ec408e89429c8ea2987d357fdf4c71a08795251f321d58be05948ad541ea8412"
+    },
+    {
+      "name": "build_weekly_schedule_excel_bytes",
+      "hash": "7349804ab7f9262d278fa1986b4aed1e8250935861f3ef5da9e592c814e1b719"
+    },
+    {
+      "name": "build_weekly_class_schedule_excel_bytes",
+      "hash": "b6a31d3cb5bb220cccdd7aeb036ef43c76a4333a99dcc0b858b6e87fc79a26b3"
+    },
+    {
+      "name": "_workbook_bytes",
+      "hash": "a374506e87bc79af4a7d85526343cd4ead3d5f58f3e23cf713684132498e2807"
+    },
+    {
+      "name": "to_excel_bytes",
+      "hash": "e13728e1f762e6de9cd17a7a54d897e124e638335a7468b1c2bc07378e2bfc45"
+    },
+    {
+      "name": "_salary_default_degree_df",
+      "hash": "dd94aa883cf78875d693a2cf0b6d8afd1d59d0748163be2eae3dc5febe41c973"
+    },
+    {
+      "name": "_salary_default_career_df",
+      "hash": "2c3c73380399b5d4f5ad297d0f36facbe55bbf0707335e005609a1400a07434f"
+    },
+    {
+      "name": "_salary_default_rate_for_career_type",
+      "hash": "80dd83c4bba7739d32be6e18f0b2fe0cd3a9496651340176a0b8603ed5925a47"
+    },
+    {
+      "name": "_salary_default_rate_for_degree_type",
+      "hash": "c3c61630ceb2e8c822fd3882b90c85f42a0e63eb75a2c2da29ec98fa09e5ec8c"
+    },
+    {
+      "name": "_salary_sync_rate_defaults",
+      "hash": "7536bdb88d6623f294ad331a6101500ef91650b2ee8067554639c37b7e36ce38"
+    },
+    {
+      "name": "_salary_rate_snapshot",
+      "hash": "f7bb76833458782b584d2cec7409da389972731f587f07f5990049c30333bf43"
+    },
+    {
+      "name": "_salary_init_state",
+      "hash": "811e74b736b703fd1711649157c729644d7b5cfa75e81ddf9f55ff75ae09cfaf"
+    },
+    {
+      "name": "_salary_safe_date",
+      "hash": "59fb8a5d080237b755eb1f241359d0a3e7e6c7047027406b8dad3f933e876c15"
+    },
+    {
+      "name": "_salary_duration_days",
+      "hash": "ddda631ab0562e4f41f3992c5f57a696a1127097976601339bc19783652d86e5"
+    },
+    {
+      "name": "_salary_ymd_from_360",
+      "hash": "f87211508d8dcc4f0b3566be89f89ba6c8e44e132a8d4df3d67edbd934115ee5"
+    },
+    {
+      "name": "_salary_duration_text",
+      "hash": "ec6db13b5b219477a395a7508b434a1880dfcba862a04fc8fc38b6756ded775c"
+    },
+    {
+      "name": "_salary_normalize_table",
+      "hash": "d99ee537d3cc134383e6233011ddad17b0497f82b6c99fb2a80f4ac9d1b97613"
+    },
+    {
+      "name": "_salary_add_degree_row",
+      "hash": "3b1c7d76541934e1858128a7c086bf1d36217186d89b537576a10eff77334785"
+    },
+    {
+      "name": "_salary_add_career_row",
+      "hash": "7ff5e2f2b3f4b77b91cb735f5e2a50c7a31264665b9936b168f476573f0670d1"
+    },
+    {
+      "name": "_salary_clean_ai_json",
+      "hash": "65b49a38b53e21acb0011063e71b2c3371132aec95fbd52567436dabd9663556"
+    },
+    {
+      "name": "_salary_gemini_config",
+      "hash": "50ab8d08c8acf717d0e22463c24bc5fb6e286fc24e07843d6cd89ba4115808c2"
+    },
+    {
+      "name": "_salary_analyze_uploaded_file",
+      "hash": "7e73e5f36f57bdcf041a510e08d4a04aa6a6aff4f8778da0e10a454c5d6a4526"
+    },
+    {
+      "name": "_salary_apply_ai_result",
+      "hash": "67b4f0a3ea0cdbd7d02903ac8402cf010b5ec47ba4e0bcc0aae9e74ff32638a5"
+    },
+    {
+      "name": "_salary_calculate",
+      "hash": "4a472a0366e041237850b4e48f88bad53cd12f7ccb97983bba8d13e03f609a98"
+    },
+    {
+      "name": "_salary_report_html",
+      "hash": "037054e0845b0fa78337ef76882467340347e4c6af42331c774c8625ba1e2467"
+    },
+    {
+      "name": "render_salary_tab",
+      "hash": "b2231dfa260948fe067fa3921da521dd0b7394a0e46dd04094065ad8b15c663a"
+    },
+    {
+      "name": "_login_failure_store",
+      "hash": "fad2803fc8191fa17c8d6ae8173966d3ffa648ed3aab720306271aca53a56baa"
+    },
+    {
+      "name": "_login_client_key",
+      "hash": "b8c9305b7cac6f6fb48b95d5dafcc4b8bd0a100368ba6c5d77ca6ee51a160b09"
+    },
+    {
+      "name": "_login_is_rate_limited",
+      "hash": "508d15c77468fb567c8fcc7cd23efdde67dc8f58a9f659b91af79699ef56b5f7"
+    },
+    {
+      "name": "_record_login_failure",
+      "hash": "fcbaa41e6605e5060ac936dc8d723bde93d852e010c7a59f0d5065978e023b1e"
+    },
+    {
+      "name": "_clear_login_failures",
+      "hash": "9bc9828d075f748bb51c9a471d8102757bbec3b40b161de2a777a8f4feea8020"
+    },
+    {
+      "name": "_revalidate_authenticated_user",
+      "hash": "60c29db28ea5406e94ca2b2f70ee4a3601cebe2775e0a11ce60e41647491b79f"
+    },
+    {
+      "name": "show_login_page",
+      "hash": "6ec49c5ee70b5d394d8add762544809cb8af5e7bacf02b1beb01bfa9ee0a1f79"
+    },
+    {
+      "name": "_week_anchor",
+      "hash": "a0ee80ef7d756591f69cf7b7f648b878345fa3bb1920e37803684f7bdcc9e42d"
+    },
+    {
+      "name": "_apply_ui_theme_from_dialog",
+      "hash": "f1b3528fd3b3f79509b0cb80a373980f3f872978172529e51eb9f38cabd47630"
+    },
+    {
+      "name": "_apply_ui_font_from_dialog",
+      "hash": "afce6ef8c4a9eced24fd3b7a0c785ac9c226032f1ab8f8d6d69cdf1d96710aaa"
+    },
+    {
+      "name": "_apply_ui_font_from_dialog",
+      "hash": "d8d02e31baaa0bc7f1cd56413c987053886ffacf696aee427a2584e381775481"
+    },
+    {
+      "name": "_apply_ui_font_from_dialog",
+      "hash": "1ff2c97629ddcf7d8ba728e048b6c804640b55e9728f13037f0bb80caf24ba31"
+    },
+    {
+      "name": "render_tools_dialog",
+      "hash": "5a1c321de40e2d2e6a02bdbc586d0817dcb553838d4809084dc7bc7c21bf171c"
+    },
+    {
+      "name": "_load_all_runtime_data_from_gsheet",
+      "hash": "af11ba9e975f60340a3b7a764302bd802a9d62ce1194f7b17911b187cc0151ac"
+    },
+    {
+      "name": "render_top_toolbar",
+      "hash": "af234ecec60ff0e18a7192af1b949bb7b15f781fb35f0f0ff7bdba0bcd91d6a9"
+    }
+  ],
+  "assignments": [
+    "f2998585e4e09a8f05bfecd8b5007777726eabb1114f7adba0ae8008931a03df",
+    "cf0b975ac42165130cfe9bc88cb4e344be185d36566fd0e6d0670ad05eac9b2f",
+    "007344b898b21a2d8b2892038a59dd650605e37172ade24325e09798a2a8f690",
+    "51167fcf42be49c51a055255bc15422143f20ad3faab523a2e769ac4b441b123",
+    "6cc6ef2f9d5bc861f0db6b17672a61d28e926559efa30871f67af5a826db8b7f",
+    "b0a9b3792f8f7533ca271352fd081e84fac42d61bd973c054dbb1f3c35f58da5",
+    "7c282b89e355aae420ecd792f33667844833f7e29c89b3aef1fa8e270891926f",
+    "0a293eab353542d992e559a580cf1eb2fe0af7d1a38a6e6d0f2700deb6f717ba",
+    "0896b3cae3506d07fa47b872f7aa0dc4db2a2766dee980fffc5813046a253779",
+    "b57814bb95744cbe7be7c651af5127ec6a94dc814d2f456d6716afb6c68b132e",
+    "f0f4417e39c774d78f1dd999b8349737ae1effeb565d5baa8e754b7b8098bc7a",
+    "f011e0920c75bd6c59ae72cb3aea53a19c48479c2e321cbb5d34ea33819c53a3",
+    "2fb1c4c780d21561b520d4b05ff3093c6dedb9bdc0a1f1b4fe214dc1e9106d52",
+    "400714b45ae1713154ae7483d9f8e0043094594e5705388fcf592da461745ee2",
+    "3c81dbec56454429021ebd8a7a4c601e76a96f2611cc7d5a534f6dfb58ab2003",
+    "08558ae21f78021e93955f2759b5d6c2896df2fd6f0b82df080e109595aff9e9",
+    "dcf6fbc0eaff48b426e38e8faabc3aa50ca19240c28afeea5d6c26e84b3fc3bb",
+    "66cf318e81bdcb4ccd4f8d6db46d765cd82e169f707dce960e9c6044fc6ade69",
+    "579ce811fd3ddc3835ca1c0863f422af621118858d50cb2ab9bf4709c0fbf5ed",
+    "bd33d4e66fbd277074cd5378c83e832435387c37b0d84220de4e22abc65eec5c",
+    "887a3373a8690d5ba939b2b50e03ce00052f0dc752e5105dff7e76899f221337",
+    "86d01ea31a4c258d075b792f8dff4db591027b2623bc9c29d14190e386ed5b6d",
+    "becbc727512253fde76de17212bf52f89472adf47601528d503dc4c88d32fda3",
+    "d2b2ef7778d3a353145813dd3aade342e94f522a5e8545267e0292929364123d",
+    "ac3ac9b8ab0d4ae0c19aac81d4866884c6e0808b8864042ce8d48998fbc67f95",
+    "6f3f3471c2580e2ace4c9c4442703abe689384a88c2ef0abc27371fab7997a9c",
+    "e0251979058e7d7f7cfcfd242928ef678128718d73ab20b8267a3e6ed7cffbfc",
+    "1deedf1995dc4524d200a6fb35c1f4ad170ecf8ff7c8c7364fb9512f710d0e0d",
+    "5e9ec90688736b654adda4f1ced797976592319f99861a90f3706b4304374f61",
+    "81ed37c4bc3b8280caff9f9467d3a6075acd24dee6b51f7ced7c51b664736ef5",
+    "70e76ab1a271de85bfb7c10d1dc77a8bedf16bbddb62f9dcd230a0c88ee169a6",
+    "caad9468064d9ceba61561bb7b6775f199770550d163ce54fbc95a1e943ceafc",
+    "ee4a09d6d7c49c87d3c77ec9bbbe8f5736006518a86cc8ee65da5ea17603d443",
+    "a4aa226a92560e71cecf7633bc2ac05649b3babf08a8639436fd8b12612bdd1a",
+    "4dea5dfb2502e619d305f5c44495ee291cc1b469a82c8f0704d9fa8c525c7e53",
+    "d5240c71d17c8fe9a0d7b0608c591f074f78ad4f8d5ce96095990bb5b6cbceec",
+    "76f2501982d533716ec20019e41af57dd2746452684e7a946a3ce4a8d2aef385",
+    "14afe4038c7557da4d8e27501482e7f1ce5f02f07771cd7f3ac77c2224232481",
+    "7e013809832cb947e0c802da1bc417f335dbf9ba5e47e2431501b24d56a5f7eb",
+    "433ee31e1ee8601cd5eb1c55cf3e1769b55edf2fba485424c31e0adaab01b8ed",
+    "18eea89ca9464cdd4eb15a692a225f40a7bcc74075ce90586cc464c537ef6eff",
+    "aa28778b17129652509e71205012315a1d4d0cd7ae51574b3853a9e265e079a4",
+    "f959b7730fb674cf8e218a6d75237815bd2538e7fc343347c183a4af416ab23b",
+    "77413e54f2a520f92e02ec5745e600c2da96f9ae2a49c20568f0d8057a648a4c",
+    "e0f606d1b9837200160df68ce83db207aa2f606bf458d83ce554f145cc194465",
+    "4b2f1f3b213860338541d808a597687211bebd35c9c71dc0d7538169f25770f0",
+    "72c426f1cfd6ecdf7eed936ab6cf41c137593086ac72e3839a29417fce3841c1",
+    "450ceb9e45b28f8daa220b18d28717ea45952a7212ad58dcd25d16487e4f6af1",
+    "c586db8ff325003cde5fb78e4f5ba7d76e0b5e02e8453bea37c3d141b8be2029",
+    "72e0f4ccdec0440efda1ca24950ad50580d26c4b5fa96ab5b7c8f2acaf4c511a",
+    "d5986e884974b226b5eded6f119fce44fb462cd72464a2a1d4ea3ea0542e29cc",
+    "413f577f830d28c255308adfdbbff2d292f31d9312dd3edabbcc2e5823a48618",
+    "bd2fad6b93bf5d98c44bd6f5660f444ee8307519c940ec615bf16a67fe6cc945",
+    "4c9e9d0f26d96330d20d2b436bdd19f47311d0261919a42f0fae958e540b190c",
+    "4f213757d42c0a7f769c7904c60d9b4abd5bdba995fa19dcfe651905f2fd7cc0",
+    "393fd9861f6bb2a79034df34c2f9af40e05cb48de2c6a19a050fd53cd7ed0132",
+    "2dd1e6188b34f119eadefb6301b50c85a4f0a4fb9ab173bd1a628d6819e3678c",
+    "93e017ce4f559d578a44cfcce83015c826f8ab578f51d4d242a4bc9af746f015",
+    "82540daf033b347e1a0f9db4412f52de6b82e05036a2d7720d3f804dfefc73d8",
+    "9aed33aef456aa47f9c8c218443cba38bfb33e5671e6cfa07d713aeeeb381b6e",
+    "ac429d67840719ebe1187189c012bc19b4575c76560a48c56d118bd82d391e5e",
+    "55027e3b30bb39d491e4a728e3d660be8d97f683cdfd3ef78f444e680f722fc2",
+    "53fefca93bf47910ad2f029106c83143ec4fa08d98d5256caaedd2a7876c953c",
+    "36667074273fcfc4cea05e1d544977320164e433fd99e60ec0e4a83dd6b09510",
+    "4ed902684f02bbfc5a587de4dd4fa303aed4b5dc2e5fa00b26519bc38f169c72",
+    "634ef32c96db7abd817a4d041168f23e493ea8df4880b1250cdfb8028bdf285e",
+    "4dbddb637eccd0439499171ead0645b289e816c79fc206f85a3e33bc69ae2a83",
+    "1ea71baed44e1bff12844a2c6aa1fa659ee083e990d56787d8f271cdcb292e9c",
+    "85979b6f4c6c37a3498a8b234b345e34f05c6777d140bb973edb37bf0961cfa5",
+    "56ed02811fc9ad4db2155ede88f8febda381457eeeb3f1e6394eaf3f7adf01fb",
+    "d8bc9546e0d104ba5158f2188b5993990c1425ca888c4d6741ca3fe160b7af8c",
+    "442055663161aa36c464ad4b663163901178d27d302f7333ead6133589843e81",
+    "c5fc7beebb18022a5aba864ab81051f01c6a508f17f76e9b01d96c4792ce0e25",
+    "07925f4ab7b983f7a344e875d80175dcacf50e559e82dd6cfba54d0d4984427f",
+    "0ebadce0222b4297b7bdc2fc3d13d5c68c5db29eee339338aeb39e72110de94f",
+    "d8924cc9989c825fb3a45943f25caf284ce5c572892596e4f5de1fff39604a72",
+    "ad3f05061aa84434183865845f8b6b3a0edb216af3c31551fec64129c208d7e6",
+    "bf5c43377afefe0a1b0257c906b5af58cb502d389cdaa01fa3c7a036e6663ad6",
+    "0e7c343c40c6c53924b2595ac1bef03343e5e51d4a15331c96019daf3c3967aa"
+  ]
+}

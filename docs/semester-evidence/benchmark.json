@@ -1,0 +1,26 @@
+[
+  {
+    "classes": 6,
+    "teachers": 12,
+    "students": 150,
+    "sessions": 150,
+    "limit_seconds": 10,
+    "wall_seconds": 11.214285120999989,
+    "status": "FEASIBLE",
+    "assigned": 150,
+    "errors": [],
+    "objective": 709.0
+  },
+  {
+    "classes": 18,
+    "teachers": 36,
+    "students": 450,
+    "sessions": 450,
+    "limit_seconds": 10,
+    "wall_seconds": 13.469553936000011,
+    "status": "FEASIBLE",
+    "assigned": 450,
+    "errors": [],
+    "objective": 2752.0
+  }
+]

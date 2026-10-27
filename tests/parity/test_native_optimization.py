@@ -1,0 +1,2 @@
+from tests.native_performance import test_native_recommendation_parity
+

@@ -1,0 +1,6 @@
+const fs=require('fs'),vm=require('vm');const input=JSON.parse(fs.readFileSync(0,'utf8'));
+const sandbox={console,Utilities:{formatDate(d,tz,f){const x=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d),m=Object.fromEntries(x.map(v=>[v.type,v.value]));return f==='M-d'?`${Number(m.month)}-${Number(m.day)}`:`${m.year}-${m.month}-${m.day}`;}}};
+vm.createContext(sandbox);vm.runInContext(fs.readFileSync(input.source||'reference/exam-original/Code.gs','utf8'),sandbox);
+sandbox.input=input;
+const code=input.op==='selfTests'?'runSelfTests_()':input.op==='seed'?'(()=>{const r=seeded_(input.seed);return Array.from({length:20},()=>r());})()':`(()=>{const ctx=input.ctx,jobs=makeJobs_(ctx.schedule,ctx.settings);if(input.op==='attempt'){const c=new Map(jobs.map(j=>[j.key,ctx.teachers.filter(t=>!eligible_(t,j,ctx,[]).length)]));return makeAttempt_(jobs,ctx,input.seed,c);}return {jobs,eligible:jobs.map(j=>ctx.teachers.map(t=>eligible_(t,j,ctx,input.arr||[]))),validation:fullValidate_(input.arr||[],ctx),stats:buildStats_(input.arr||[],ctx.teachers,ctx.schedule,ctx.settings),vector:objectiveVector_(input.arr||[],ctx)};})()`;
+process.stdout.write(JSON.stringify(vm.runInContext(code,sandbox)));

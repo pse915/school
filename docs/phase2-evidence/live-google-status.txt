@@ -1,0 +1,1 @@
+UNVERIFIED: clone gateway URL/key/spreadsheet ID not supplied

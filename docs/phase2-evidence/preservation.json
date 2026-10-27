@@ -1,0 +1,140 @@
+[
+  {
+    "path": "app.py",
+    "before_sha256": "825250b2ec9cdaaa6a7e01a770c6e25a15c362041315025bb092e01ae906e659",
+    "after_sha256": "825250b2ec9cdaaa6a7e01a770c6e25a15c362041315025bb092e01ae906e659",
+    "identical": true
+  },
+  {
+    "path": "backend/bridge/__init__.py",
+    "before_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "after_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "identical": true
+  },
+  {
+    "path": "backend/bridge/port.py",
+    "before_sha256": "ab152d5087c69daf9b31195dee13118e8f8201c59c78c0fc4caff217c6f7af3b",
+    "after_sha256": "ab152d5087c69daf9b31195dee13118e8f8201c59c78c0fc4caff217c6f7af3b",
+    "identical": true
+  },
+  {
+    "path": "backend/bridge/serialization.py",
+    "before_sha256": "99557f78eb9be9d865e81fce1e6f53c20bd05cc6da9673bcff7003b09459bc24",
+    "after_sha256": "99557f78eb9be9d865e81fce1e6f53c20bd05cc6da9673bcff7003b09459bc24",
+    "identical": true
+  },
+  {
+    "path": "backend/bridge/startup.py",
+    "before_sha256": "4ffcd287ec638422ab2bd966546182214bcd5b8cff3e60c3804d70ff5ecf263c",
+    "after_sha256": "4ffcd287ec638422ab2bd966546182214bcd5b8cff3e60c3804d70ff5ecf263c",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/__init__.py",
+    "before_sha256": "0b6b93b7030056f265214214715973b3e9140b3f06a5e4ce5267bc309f7f43e2",
+    "after_sha256": "0b6b93b7030056f265214214715973b3e9140b3f06a5e4ce5267bc309f7f43e2",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/engine.py",
+    "before_sha256": "3a532b343d218c0463c49dd65d8537e96c7d1382262570850d46f4ec545a0f56",
+    "after_sha256": "3a532b343d218c0463c49dd65d8537e96c7d1382262570850d46f4ec545a0f56",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/install.py",
+    "before_sha256": "fc77876cd8cef0aca501d819a18ca41018182171e1354ded14e7b3e0ef75ace2",
+    "after_sha256": "fc77876cd8cef0aca501d819a18ca41018182171e1354ded14e7b3e0ef75ace2",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/models.py",
+    "before_sha256": "6839756893a29b79958ac28d9b155b859437c3c23de10be846cc39b92f4beb13",
+    "after_sha256": "6839756893a29b79958ac28d9b155b859437c3c23de10be846cc39b92f4beb13",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/original_forms.py",
+    "before_sha256": "2bb0ab31e203a061f4c8564b350ad2396665c6c25e5151558d5851125eb91979",
+    "after_sha256": "2bb0ab31e203a061f4c8564b350ad2396665c6c25e5151558d5851125eb91979",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/repository.py",
+    "before_sha256": "b3b7802a9e56b0fd30f7f86bfc6decf3ed0ad1fdeb3a09715f374dacca99a01d",
+    "after_sha256": "b3b7802a9e56b0fd30f7f86bfc6decf3ed0ad1fdeb3a09715f374dacca99a01d",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/schedule_editor.py",
+    "before_sha256": "ddb65459bdbd543888c822ee0ffb93bebd11adf2286eb2151c49c35e52ad26c4",
+    "after_sha256": "ddb65459bdbd543888c822ee0ffb93bebd11adf2286eb2151c49c35e52ad26c4",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/schedule_view.py",
+    "before_sha256": "600f02291bbd0e4bf8d11bcb5b97649b6243011a4c83607c2fcc303f8da006e3",
+    "after_sha256": "600f02291bbd0e4bf8d11bcb5b97649b6243011a4c83607c2fcc303f8da006e3",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/schema.json",
+    "before_sha256": "b311b7c04243cd8558d2265abfe9b62fa82a377202819b559b46bbc1ca26041f",
+    "after_sha256": "b311b7c04243cd8558d2265abfe9b62fa82a377202819b559b46bbc1ca26041f",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/service.py",
+    "before_sha256": "5a8f18c847f4bbd3a5f24d8283f502716dce9d087d3c0876eeb2407de32bf690",
+    "after_sha256": "5a8f18c847f4bbd3a5f24d8283f502716dce9d087d3c0876eeb2407de32bf690",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/view.py",
+    "before_sha256": "1c9565a607fd38a7f159332f5d46ff681ff3947ba5f8397a80a24c49a574e23d",
+    "after_sha256": "1c9565a607fd38a7f159332f5d46ff681ff3947ba5f8397a80a24c49a574e23d",
+    "identical": true
+  },
+  {
+    "path": "backend/exam_supervision/view_improved.py",
+    "before_sha256": "bf4d44adec17d00ec7f7271ba5116d3a1cee1552e6fb14be5e13dae3c3b593d9",
+    "after_sha256": "bf4d44adec17d00ec7f7271ba5116d3a1cee1552e6fb14be5e13dae3c3b593d9",
+    "identical": true
+  },
+  {
+    "path": "backend/repositories/sheets.py",
+    "before_sha256": "aec3faa046dea89e7533855e15a68bc0d9f1396ba1639eebfbb8ec0f6a88e7d7",
+    "after_sha256": "aec3faa046dea89e7533855e15a68bc0d9f1396ba1639eebfbb8ec0f6a88e7d7",
+    "identical": true
+  },
+  {
+    "path": "frontend/package-lock.json",
+    "before_sha256": "4c806a68a0e75c0030820bf09ec70978cc5d17fbf1b985ede7a232721cb6456c",
+    "after_sha256": "4c806a68a0e75c0030820bf09ec70978cc5d17fbf1b985ede7a232721cb6456c",
+    "identical": true
+  },
+  {
+    "path": "frontend/package.json",
+    "before_sha256": "6c026edbbacb7d34bb380e6ca896a29adb9319744ff8d6025b185428c8dcd083",
+    "after_sha256": "6c026edbbacb7d34bb380e6ca896a29adb9319744ff8d6025b185428c8dcd083",
+    "identical": true
+  },
+  {
+    "path": "frontend/src/component.tsx",
+    "before_sha256": "a210f17c41ce6008b0cc746eaa7a637b7959ec1c04d8085a0a19cb11df220fba",
+    "after_sha256": "a210f17c41ce6008b0cc746eaa7a637b7959ec1c04d8085a0a19cb11df220fba",
+    "identical": true
+  },
+  {
+    "path": "legacy/timetable_app2_original.py",
+    "before_sha256": "81ac74ecec9f893fb0027c9113f440af4f51effbf3c26185ba9599d942b36099",
+    "after_sha256": "81ac74ecec9f893fb0027c9113f440af4f51effbf3c26185ba9599d942b36099",
+    "identical": true
+  },
+  {
+    "path": "timetable_app2.py",
+    "before_sha256": "b8eab4be72a620883b3b420f004b7fd5682dbc09a6362832637789687d395344",
+    "after_sha256": "b8eab4be72a620883b3b420f004b7fd5682dbc09a6362832637789687d395344",
+    "identical": true
+  }
+]

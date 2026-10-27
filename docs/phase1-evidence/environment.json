@@ -1,0 +1,12 @@
+{
+  "streamlit": "1.56.0",
+  "pandas": "2.2.3",
+  "numpy": "2.2.6",
+  "requests": "2.34.2",
+  "gspread": "5.12.4",
+  "google-auth": "2.62.0",
+  "openpyxl": "3.1.5",
+  "pytest": "9.1.1",
+  "ortools": "9.15.6755",
+  "argon2-cffi": "25.1.0"
+}

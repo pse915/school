@@ -1,0 +1,10 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.7.0
+rootdir: /workspace/scratch/e4b7d0c455e2/integrated
+configfile: pytest.ini
+collected 15 items
+
+tests/dialog_fix/test_dialog_actions.py ..........                       [ 66%]
+tests/dialog_fix/test_native_dialog.py .....                             [100%]
+
+============================== 15 passed in 0.66s ==============================

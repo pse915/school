@@ -1,0 +1,9 @@
+Diple School Master — NEIS lookup by school name and API key
+Branch: neis-school-name-search
+Commit: 78c8eae5106e5b58fa9fd3bb50d27891240d2e12
+Baseline: 8851ce5ef96d440e7f1c05e5c4d19609357ba86f
+Baseline Full ZIP SHA256: 8796230000e4662a45b9ee0f704a3225398bfc7a6f8abf576e982b95d4fd73f4
+Guide: docs/NEIS_NAME_ONLY_GUIDE.md
+Example: examples/secrets-school-sheets.toml
+Clone history: git clone docs/neis-checkpoint.bundle -b neis-school-name-search <new-directory>
+Prior checkpoint bundles retained as historical archives. No production deployment.

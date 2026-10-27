@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'tests/e2e',workers:1,timeout:90000,retries:0,reporter:[['list'],['json',{outputFile:'../tests/browser-results.json'}]],use:{baseURL:process.env.TIMETABLE_TEST_URL??'http://127.0.0.1:8502',headless:true,viewport:{width:1366,height:900},launchOptions:process.env.TIMETABLE_BROWSER_PATH?{executablePath:process.env.TIMETABLE_BROWSER_PATH,args:['--no-sandbox','--no-zygote','--disable-dev-shm-usage','--disable-gpu']}:{}},outputDir:'../tests/browser-artifacts'});

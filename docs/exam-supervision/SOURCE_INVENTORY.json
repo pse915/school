@@ -1,0 +1,2297 @@
+{
+  "declaredReadActionsNotExposed": [
+    "getResetPlan",
+    "getAuditData",
+    "getVersionLibrary",
+    "getVersionPreview",
+    "versions"
+  ],
+  "note": "Top-level AST inventory. effective=false means overridden by a later definition. Literal UI calls are evidence of call sites, not proof of runtime reachability. See FEATURE_PARITY.csv for port mapping.",
+  "functions": [
+    {
+      "name": "doGet",
+      "line": 42,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "beginRequest_",
+        "hexDigest_"
+      ]
+    },
+    {
+      "name": "initializeSystem",
+      "line": 51,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "beginRequest_",
+        "init_",
+        "requireAdmin_"
+      ]
+    },
+    {
+      "name": "apiBootstrap",
+      "line": 52,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "basicSummary_",
+        "beginRequest_",
+        "connectionInfo_",
+        "ensureInitialized_",
+        "getAdminData_",
+        "getConfirmed_",
+        "migrateEditable_",
+        "roster_",
+        "syncDirectResultEdits_"
+      ]
+    },
+    {
+      "name": "api",
+      "line": 57,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "apiBootstrap",
+        "availabilityReport_",
+        "beginRequest_",
+        "compareGradeBonus_",
+        "diagnose_",
+        "ensureInitialized_",
+        "fairness_",
+        "generate_",
+        "getConfirmed_",
+        "getTeacher_",
+        "improve_",
+        "migrateEditable_",
+        "readHistory_",
+        "repairSheets_",
+        "requireAdmin_",
+        "roleSwap_",
+        "runSelfTests_",
+        "saveAssignments_",
+        "saveClasses_",
+        "saveInstructorFlags_",
+        "saveRoster_",
+        "saveSchedule_",
+        "saveSettings_",
+        "saveTeachingRules_",
+        "saveUnavailable_",
+        "saveVisiting_",
+        "swap_",
+        "timedServer_",
+        "update_"
+      ]
+    },
+    {
+      "name": "getGoogleEmail_",
+      "line": 99,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String"
+      ]
+    },
+    {
+      "name": "currentEmail_",
+      "line": 103,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "getGoogleEmail_"
+      ]
+    },
+    {
+      "name": "normalizeAdminEmail_",
+      "line": 104,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String"
+      ]
+    },
+    {
+      "name": "adminList_",
+      "line": 105,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "assert_",
+        "normalizeAdminEmail_",
+        "spreadsheet_"
+      ]
+    },
+    {
+      "name": "matchAdminEmail_",
+      "line": 122,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "adminList_",
+        "normalizeAdminEmail_"
+      ]
+    },
+    {
+      "name": "hexDigest_",
+      "line": 126,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String"
+      ]
+    },
+    {
+      "name": "authKey_",
+      "line": 131,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "hexDigest_",
+        "spreadsheet_"
+      ]
+    },
+    {
+      "name": "authCache_",
+      "line": 132,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "temporaryUserKey_",
+      "line": 133,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String"
+      ]
+    },
+    {
+      "name": "authDiagnostic_",
+      "line": 136,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "adminList_",
+        "authCache_",
+        "authKey_",
+        "getGoogleEmail_",
+        "parseJSON_",
+        "temporaryUserKey_"
+      ]
+    },
+    {
+      "name": "isAdmin_",
+      "line": 165,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "requireAdmin_",
+      "line": 166,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "getGoogleEmail_"
+      ]
+    },
+    {
+      "name": "checkAdminAccess",
+      "line": 167,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "authDiagnostic_",
+        "getGoogleEmail_",
+        "matchAdminEmail_"
+      ]
+    },
+    {
+      "name": "loginAdmin",
+      "line": 177,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "adminList_",
+        "assert_",
+        "authCache_",
+        "authKey_",
+        "getGoogleEmail_",
+        "normalizeAdminEmail_",
+        "temporaryUserKey_"
+      ]
+    },
+    {
+      "name": "logoutAdminSession",
+      "line": 201,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "authCache_",
+        "authKey_"
+      ]
+    },
+    {
+      "name": "beginRequest_",
+      "line": 211,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "bindingPropertyKey_",
+      "line": 216,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "onOpen",
+      "line": 217,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "autoBindCurrentSpreadsheet_"
+      ]
+    },
+    {
+      "name": "activeEditorSpreadsheet_",
+      "line": 221,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_"
+      ]
+    },
+    {
+      "name": "registerCurrentSpreadsheet_",
+      "line": 226,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "beginRequest_",
+        "bindingPropertyKey_"
+      ]
+    },
+    {
+      "name": "setupCurrentSpreadsheet",
+      "line": 231,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "activeEditorSpreadsheet_",
+        "ensureInitialized_",
+        "registerCurrentSpreadsheet_"
+      ]
+    },
+    {
+      "name": "prepareCurrentSpreadsheetSystem",
+      "line": 232,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "activeEditorSpreadsheet_",
+        "ensureInitialized_",
+        "registerCurrentSpreadsheet_"
+      ]
+    },
+    {
+      "name": "showCurrentSpreadsheetConnection",
+      "line": 233,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "connectionInfo_"
+      ]
+    },
+    {
+      "name": "spreadsheet_",
+      "line": 234,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "autoBindCurrentSpreadsheet_",
+        "bindingPropertyKey_",
+        "parseJSON_"
+      ]
+    },
+    {
+      "name": "connectionInfo_",
+      "line": 246,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "spreadsheet_"
+      ]
+    },
+    {
+      "name": "timedServer_",
+      "line": 250,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "fn"
+      ]
+    },
+    {
+      "name": "ensureInitialized_",
+      "line": 254,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "ensureBaseHeaders_",
+        "init_",
+        "sheet_"
+      ]
+    },
+    {
+      "name": "now_",
+      "line": 256,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "clean_",
+      "line": 257,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String"
+      ]
+    },
+    {
+      "name": "norm_",
+      "line": 258,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "clean_"
+      ]
+    },
+    {
+      "name": "parseJSON_",
+      "line": 259,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "safe_",
+      "line": 260,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String"
+      ]
+    },
+    {
+      "name": "clone_",
+      "line": 261,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "assert_",
+      "line": 262,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "ssLock_",
+      "line": 263,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "beginRequest_",
+        "fn",
+        "restoreSheetBackup_"
+      ]
+    },
+    {
+      "name": "sheet_",
+      "line": 264,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "spreadsheet_"
+      ]
+    },
+    {
+      "name": "values_",
+      "line": 268,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "sheet_"
+      ]
+    },
+    {
+      "name": "replaceRows_",
+      "line": 274,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "journalSheet_",
+        "sheet_"
+      ]
+    },
+    {
+      "name": "appendRows_",
+      "line": 294,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "sheet_"
+      ]
+    },
+    {
+      "name": "init_",
+      "line": 305,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "defaultState_",
+        "ensureBaseHeaders_",
+        "migrateTeachingRuleHeaders_",
+        "settingsMap_",
+        "spreadsheet_",
+        "writeState_"
+      ]
+    },
+    {
+      "name": "migrateTeachingRuleHeaders_",
+      "line": 332,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_"
+      ]
+    },
+    {
+      "name": "defaultOptimization_",
+      "line": 345,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "optimizationConfig_",
+      "line": 347,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "defaultOptimization_"
+      ]
+    },
+    {
+      "name": "defaultState_",
+      "line": 364,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "defaultOptimization_"
+      ]
+    },
+    {
+      "name": "settingsMap_",
+      "line": 365,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "values_"
+      ]
+    },
+    {
+      "name": "readState_",
+      "line": 368,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "defaultState_",
+        "parseJSON_",
+        "settingsMap_"
+      ]
+    },
+    {
+      "name": "writeState_",
+      "line": 377,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "replaceRows_",
+        "settingsMap_"
+      ]
+    },
+    {
+      "name": "ensureRev_",
+      "line": 381,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "liveDataToken_"
+      ]
+    },
+    {
+      "name": "bump_",
+      "line": 382,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "hash_",
+        "now_",
+        "publishEditable_",
+        "values_",
+        "writeState_"
+      ]
+    },
+    {
+      "name": "isUnlocked_",
+      "line": 385,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "mayEditDraft_",
+      "line": 386,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "ensureDraft_",
+      "line": 387,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "headerMap_",
+      "line": 388,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "norm_"
+      ]
+    },
+    {
+      "name": "col_",
+      "line": 389,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "norm_"
+      ]
+    },
+    {
+      "name": "parseTeacherSubjects_",
+      "line": 392,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "clean_"
+      ]
+    },
+    {
+      "name": "roleName_",
+      "line": 395,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "roster_",
+      "line": 396,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "classId_",
+        "clean_",
+        "col_",
+        "hash_",
+        "headerMap_",
+        "parseTeacherSubjects_",
+        "roleName_",
+        "values_"
+      ]
+    },
+    {
+      "name": "classId_",
+      "line": 430,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "clean_",
+        "isNaN"
+      ]
+    },
+    {
+      "name": "classes_",
+      "line": 439,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "clean_",
+        "col_",
+        "headerMap_",
+        "values_"
+      ]
+    },
+    {
+      "name": "readSchedule_",
+      "line": 452,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "assert_",
+        "classId_",
+        "clean_",
+        "clockStr_",
+        "dateStr_",
+        "sheet_",
+        "values_"
+      ]
+    },
+    {
+      "name": "dateStr_",
+      "line": 471,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "clean_"
+      ]
+    },
+    {
+      "name": "clockStr_",
+      "line": 472,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "clean_"
+      ]
+    },
+    {
+      "name": "timestampStr_",
+      "line": 479,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "clean_"
+      ]
+    },
+    {
+      "name": "validDate_",
+      "line": 480,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "isNaN"
+      ]
+    },
+    {
+      "name": "validateSchedule_",
+      "line": 481,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "clean_",
+        "validClock",
+        "validDate_"
+      ]
+    },
+    {
+      "name": "derivedGradePlan_",
+      "line": 506,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "normalizeGradePlan_",
+      "line": 518,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "assert_",
+        "clean_",
+        "derivedGradePlan_",
+        "validDate_"
+      ]
+    },
+    {
+      "name": "dayIndex_",
+      "line": 560,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "validDate_"
+      ]
+    },
+    {
+      "name": "normWeekday_",
+      "line": 564,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "clean_"
+      ]
+    },
+    {
+      "name": "teacherIndex_",
+      "line": 570,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "norm_"
+      ]
+    },
+    {
+      "name": "resolveName_",
+      "line": 573,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "norm_"
+      ]
+    },
+    {
+      "name": "readTeaching_",
+      "line": 579,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "assert_",
+        "classId_",
+        "clean_",
+        "hasData",
+        "normWeekday_",
+        "resolveName_",
+        "teacherIndex_",
+        "values_"
+      ]
+    },
+    {
+      "name": "readVisiting_",
+      "line": 611,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "assert_",
+        "clean_",
+        "dateStr_",
+        "dayIndex_",
+        "normWeekday_",
+        "resolveName_",
+        "teacherIndex_",
+        "validDate_",
+        "values_"
+      ]
+    },
+    {
+      "name": "constraintIndex_",
+      "line": 633,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "visitingAvailability_",
+      "line": 659,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "constraintIndex_",
+        "dayIndex_"
+      ]
+    },
+    {
+      "name": "validTeachingRuleRange_",
+      "line": 677,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "dayIndex_",
+        "validDate_"
+      ]
+    },
+    {
+      "name": "teachingRuleApplies_",
+      "line": 685,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "dayIndex_"
+      ]
+    },
+    {
+      "name": "readTeachingRules_",
+      "line": 690,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "assert_",
+        "classId_",
+        "classes_",
+        "clean_",
+        "dateStr_",
+        "normWeekday_",
+        "resolveName_",
+        "teacherIndex_",
+        "validTeachingRuleRange_",
+        "values_"
+      ]
+    },
+    {
+      "name": "matchingTeachingRules_",
+      "line": 718,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "constraintIndex_",
+        "teachingRuleApplies_"
+      ]
+    },
+    {
+      "name": "teachingRuleRestrictions_",
+      "line": 721,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "matchingTeachingRules_"
+      ]
+    },
+    {
+      "name": "missingTimetableRestricted_",
+      "line": 724,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "constraintIndex_",
+        "matchingTeachingRules_"
+      ]
+    },
+    {
+      "name": "missingFallbackPlan_",
+      "line": 730,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "constraintIndex_",
+        "eligible_",
+        "makeJobs_",
+        "match"
+      ]
+    },
+    {
+      "name": "missingFallbackAllowed_",
+      "line": 751,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "missingFallbackPlan_"
+      ]
+    },
+    {
+      "name": "fallbackAssignment_",
+      "line": 755,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "missingTimetableRestricted_",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "fallbackUsage_",
+      "line": 760,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "fallbackAssignment_",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "teachAvailability_",
+      "line": 764,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "constraintIndex_",
+        "dayIndex_",
+        "matchingTeachingRules_",
+        "missingFallbackAllowed_",
+        "missingTimetableRestricted_"
+      ]
+    },
+    {
+      "name": "availabilityData_",
+      "line": 778,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "readTeachingRules_",
+        "readTeaching_",
+        "readVisiting_"
+      ]
+    },
+    {
+      "name": "availabilityReportFrom_",
+      "line": 782,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "dayIndex_",
+        "eligible_",
+        "makeJobs_",
+        "missingFallbackPlan_"
+      ]
+    },
+    {
+      "name": "availabilityReport_",
+      "line": 803,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "availabilityData_",
+        "availabilityReportFrom_",
+        "readSchedule_",
+        "readState_",
+        "readUnavailable_",
+        "roster_"
+      ]
+    },
+    {
+      "name": "saveVisiting_",
+      "line": 808,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "assert_",
+        "bump_",
+        "clean_",
+        "dayIndex_",
+        "ensureRev_",
+        "normWeekday_",
+        "readState_",
+        "readVisiting_",
+        "replaceRows_",
+        "roster_",
+        "safe_",
+        "ssLock_",
+        "validDate_"
+      ]
+    },
+    {
+      "name": "saveTeachingRules_",
+      "line": 832,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "bump_",
+        "classId_",
+        "classes_",
+        "clean_",
+        "ensureRev_",
+        "normWeekday_",
+        "norm_",
+        "readState_",
+        "readTeachingRules_",
+        "replaceRows_",
+        "roster_",
+        "safe_",
+        "ssLock_",
+        "teacherIndex_",
+        "validTeachingRuleRange_"
+      ]
+    },
+    {
+      "name": "constraintFingerprint_",
+      "line": 864,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "hash_"
+      ]
+    },
+    {
+      "name": "ensureConstraintsUnchanged_",
+      "line": 868,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "readUnavailable_",
+      "line": 869,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "clean_",
+        "dateStr_",
+        "values_"
+      ]
+    },
+    {
+      "name": "getAdminData_",
+      "line": 870,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "buildStats_",
+        "classes_",
+        "context_",
+        "derivedGradePlan_",
+        "fullValidate_",
+        "isInstructor_",
+        "liveDataToken_",
+        "readDraft_",
+        "readSchedule_",
+        "readState_",
+        "readUnavailable_",
+        "roster_"
+      ]
+    },
+    {
+      "name": "getTeachingData_",
+      "line": 877,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "availabilityData_",
+        "availabilityReportFrom_",
+        "readSchedule_",
+        "readState_",
+        "readUnavailable_",
+        "roster_"
+      ]
+    },
+    {
+      "name": "diagnose_",
+      "line": 886,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "availabilityReport_",
+        "classes_",
+        "currentEmail_",
+        "isAdmin_",
+        "readState_",
+        "roster_",
+        "spreadsheet_"
+      ]
+    },
+    {
+      "name": "sheetBackup_",
+      "line": 892,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "sheet_",
+        "values_"
+      ]
+    },
+    {
+      "name": "restoreSheetBackup_",
+      "line": 901,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Array",
+        "sheet_"
+      ]
+    },
+    {
+      "name": "saveRoster_",
+      "line": 907,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Array",
+        "String",
+        "assert_",
+        "bump_",
+        "classId_",
+        "clean_",
+        "col_",
+        "ensureRev_",
+        "headerMap_",
+        "isUnlocked_",
+        "log_",
+        "norm_",
+        "parseTeacherSubjects_",
+        "readState_",
+        "replaceRows_",
+        "restoreSheetBackup_",
+        "roleName_",
+        "roster_",
+        "safe_",
+        "sheet_",
+        "ssLock_",
+        "values_"
+      ]
+    },
+    {
+      "name": "verifyRoster_",
+      "line": 975,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "revokeRoster_",
+      "line": 976,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "resetPlan_",
+      "line": 977,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "values_"
+      ]
+    },
+    {
+      "name": "getResetPlan_",
+      "line": 987,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "ensureRev_",
+        "readState_",
+        "resetPlan_"
+      ]
+    },
+    {
+      "name": "resetWorkspace_",
+      "line": 990,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "saveSchedule_",
+      "line": 991,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "bump_",
+        "classes_",
+        "clean_",
+        "ensureRev_",
+        "normalizeGradePlan_",
+        "readState_",
+        "replaceRows_",
+        "safe_",
+        "ssLock_",
+        "validateSchedule_"
+      ]
+    },
+    {
+      "name": "saveInstructorFlags_",
+      "line": 1004,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "bump_",
+        "clean_",
+        "ensureRev_",
+        "readState_",
+        "roster_",
+        "ssLock_"
+      ]
+    },
+    {
+      "name": "saveSettings_",
+      "line": 1024,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "bump_",
+        "ensureRev_",
+        "norm_",
+        "optimizationConfig_",
+        "readState_",
+        "roster_",
+        "ssLock_"
+      ]
+    },
+    {
+      "name": "saveUnavailable_",
+      "line": 1041,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "bump_",
+        "clean_",
+        "ensureRev_",
+        "readState_",
+        "replaceRows_",
+        "roster_",
+        "safe_",
+        "ssLock_",
+        "validDate_"
+      ]
+    },
+    {
+      "name": "readDraft_",
+      "line": 1052,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "classId_",
+        "clean_",
+        "dateStr_",
+        "readSchedule_",
+        "values_"
+      ]
+    },
+    {
+      "name": "writeDraft_",
+      "line": 1063,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "now_",
+        "replaceRows_"
+      ]
+    },
+    {
+      "name": "makeJobs_",
+      "line": 1064,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "canonicalSubject_",
+      "line": 1071,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "norm_"
+      ]
+    },
+    {
+      "name": "conflictTime_",
+      "line": 1072,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "isInstructor_",
+      "line": 1078,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String"
+      ]
+    },
+    {
+      "name": "eligible_",
+      "line": 1081,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "canonicalSubject_",
+        "conflictTime_",
+        "constraintIndex_",
+        "roleName_",
+        "teachAvailability_",
+        "teachingRuleRestrictions_",
+        "visitingAvailability_"
+      ]
+    },
+    {
+      "name": "context_",
+      "line": 1102,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "availabilityData_",
+        "classes_",
+        "readSchedule_",
+        "readState_",
+        "readUnavailable_",
+        "roster_",
+        "validateSchedule_"
+      ]
+    },
+    {
+      "name": "fullValidate_",
+      "line": 1114,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "conflictTime_",
+        "eligible_",
+        "makeJobs_"
+      ]
+    },
+    {
+      "name": "statsMap_",
+      "line": 1140,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "buildStats_",
+      "line": 1146,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "isInstructor_",
+        "statsMap_"
+      ]
+    },
+    {
+      "name": "basicSummary_",
+      "line": 1153,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "buildStats_"
+      ]
+    },
+    {
+      "name": "workloadIndex_",
+      "line": 1160,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "dayIndex_"
+      ]
+    },
+    {
+      "name": "gradeAffinity_",
+      "line": 1190,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "runSummary_",
+      "line": 1195,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "workloadAnalysis_",
+      "line": 1206,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "optimizationConfig_",
+        "runSummary_",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "objectiveParts_",
+      "line": 1228,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "gradeAffinity_",
+        "isInstructor_",
+        "optimizationConfig_",
+        "range",
+        "statsMap_",
+        "vals",
+        "variance",
+        "workloadAnalysis_",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "objectiveVector_",
+      "line": 1249,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "fallbackAssignment_",
+        "objectiveParts_"
+      ]
+    },
+    {
+      "name": "compareObjectives_",
+      "line": 1261,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "score_",
+      "line": 1267,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "objectiveVector_"
+      ]
+    },
+    {
+      "name": "optimizationReportFrom_",
+      "line": 1270,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "fallbackUsage_",
+        "isInstructor_",
+        "makeJobs_",
+        "objectiveParts_",
+        "score_",
+        "statsMap_",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "compareGradeBonus_",
+      "line": 1289,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "context_",
+        "optimizationConfig_",
+        "optimizationReportFrom_",
+        "solve_"
+      ]
+    },
+    {
+      "name": "optimizationReport_",
+      "line": 1302,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "context_",
+        "optimizationReportFrom_",
+        "readDraft_",
+        "readState_",
+        "snapshotContext_"
+      ]
+    },
+    {
+      "name": "seeded_",
+      "line": 1307,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number"
+      ]
+    },
+    {
+      "name": "makeAttempt_",
+      "line": 1308,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "conflictTime_",
+        "dfs",
+        "eligible_",
+        "fallbackAssignment_",
+        "gradeAffinity_",
+        "optimizationConfig_",
+        "rand",
+        "runSummary_",
+        "seeded_",
+        "statsMap_",
+        "tight",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "incrementalObjective_",
+      "line": 1395,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "affinity",
+        "fallbackAssignment_",
+        "isInstructor_",
+        "optimizationConfig_",
+        "refreshDay",
+        "role",
+        "runSummary_",
+        "spread",
+        "update",
+        "variance",
+        "vector",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "optimizeLocal_",
+      "line": 1479,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "compareObjectives_",
+        "conflict",
+        "conflictTime_",
+        "eligible_",
+        "fullValidate_",
+        "incrementalObjective_",
+        "indexOccupancy",
+        "score_"
+      ]
+    },
+    {
+      "name": "solve_",
+      "line": 1544,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "compareObjectives_",
+        "eligible_",
+        "fullValidate_",
+        "makeAttempt_",
+        "makeJobs_",
+        "objectiveVector_",
+        "optimizeLocal_",
+        "score_"
+      ]
+    },
+    {
+      "name": "generate_",
+      "line": 1564,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "buildStats_",
+        "bump_",
+        "constraintFingerprint_",
+        "context_",
+        "ensureDraft_",
+        "ensureRev_",
+        "fullValidate_",
+        "hash_",
+        "optimizationReportFrom_",
+        "readDraft_",
+        "readState_",
+        "solve_",
+        "ssLock_",
+        "writeDraft_"
+      ]
+    },
+    {
+      "name": "improve_",
+      "line": 1580,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "bump_",
+        "compareObjectives_",
+        "constraintFingerprint_",
+        "context_",
+        "ensureConstraintsUnchanged_",
+        "ensureDraft_",
+        "ensureRev_",
+        "fullValidate_",
+        "hash_",
+        "objectiveVector_",
+        "optimizationReportFrom_",
+        "optimizeLocal_",
+        "readDraft_",
+        "readState_",
+        "score_",
+        "ssLock_",
+        "writeDraft_"
+      ]
+    },
+    {
+      "name": "transform_",
+      "line": 1596,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "buildStats_",
+        "bump_",
+        "context_",
+        "ensureRev_",
+        "fullValidate_",
+        "mutator",
+        "readDraft_",
+        "readState_",
+        "ssLock_",
+        "writeDraft_"
+      ]
+    },
+    {
+      "name": "setTeacher_",
+      "line": 1603,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_"
+      ]
+    },
+    {
+      "name": "update_",
+      "line": 1608,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "clean_",
+        "setTeacher_",
+        "transform_"
+      ]
+    },
+    {
+      "name": "swapLogic_",
+      "line": 1609,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_"
+      ]
+    },
+    {
+      "name": "swap_",
+      "line": 1616,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "clean_",
+        "swapLogic_",
+        "transform_"
+      ]
+    },
+    {
+      "name": "roleSwap_",
+      "line": 1617,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "clean_",
+        "swapLogic_",
+        "transform_"
+      ]
+    },
+    {
+      "name": "amend_",
+      "line": 1618,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "fairness_",
+      "line": 1619,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "buildStats_",
+        "clean_",
+        "compareObjectives_",
+        "context_",
+        "eligible_",
+        "fullValidate_",
+        "makeJobs_",
+        "objectiveVector_",
+        "optimizationReportFrom_",
+        "readDraft_",
+        "readState_",
+        "score_",
+        "snapshotContext_"
+      ]
+    },
+    {
+      "name": "nextVersion_",
+      "line": 1642,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number"
+      ]
+    },
+    {
+      "name": "versionCompare_",
+      "line": 1643,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String"
+      ]
+    },
+    {
+      "name": "nextUnusedVersion_",
+      "line": 1648,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "nextVersion_",
+        "values_",
+        "versionCompare_"
+      ]
+    },
+    {
+      "name": "hash_",
+      "line": 1657,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "snapshotRows_",
+      "line": 1659,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "currentEmail_",
+        "hash_",
+        "now_",
+        "safe_"
+      ]
+    },
+    {
+      "name": "parseVersionSnapshotRows_",
+      "line": 1664,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "assert_",
+        "hash_"
+      ]
+    },
+    {
+      "name": "loadSnapshot_",
+      "line": 1677,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "parseVersionSnapshotRows_",
+        "values_"
+      ]
+    },
+    {
+      "name": "snapshotContext_",
+      "line": 1681,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": []
+    },
+    {
+      "name": "currentRosterSnapshotContext_",
+      "line": 1686,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "readState_",
+        "roster_",
+        "snapshotContext_"
+      ]
+    },
+    {
+      "name": "log_",
+      "line": 1701,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "appendRows_",
+        "currentEmail_",
+        "now_",
+        "safe_"
+      ]
+    },
+    {
+      "name": "commitSnapshot_",
+      "line": 1710,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "appendRows_",
+        "assert_",
+        "beginRequest_",
+        "bump_",
+        "fullValidate_",
+        "isUnlocked_",
+        "loadSnapshot_",
+        "log_",
+        "materialize_",
+        "now_",
+        "readState_",
+        "replaceRows_",
+        "snapshotContext_",
+        "snapshotRows_",
+        "values_"
+      ]
+    },
+    {
+      "name": "materialize_",
+      "line": 1736,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Array",
+        "buildStats_",
+        "get",
+        "journalSheet_",
+        "now_",
+        "replaceRows_",
+        "safe_",
+        "sheet_"
+      ]
+    },
+    {
+      "name": "unlockConfirmed_",
+      "line": 1787,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "discardUnlocked_",
+      "line": 1788,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "confirm_",
+      "line": 1789,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "listVersions_",
+      "line": 1790,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "readState_",
+        "timestampStr_",
+        "values_",
+        "versionCompare_"
+      ]
+    },
+    {
+      "name": "getVersionLibrary_",
+      "line": 1804,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "String",
+        "listVersions_",
+        "parseVersionSnapshotRows_",
+        "presentConfirmed_",
+        "readState_",
+        "values_",
+        "versionCompare_"
+      ]
+    },
+    {
+      "name": "getVersionPreview_",
+      "line": 1832,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "clean_",
+        "listVersions_",
+        "loadSnapshot_",
+        "presentConfirmed_"
+      ]
+    },
+    {
+      "name": "createVersion_",
+      "line": 1841,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "readHistory_",
+      "line": 1842,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "timestampStr_",
+        "values_"
+      ]
+    },
+    {
+      "name": "restore_",
+      "line": 1843,
+      "effective": true,
+      "disabledByExplicitError": true,
+      "calls": []
+    },
+    {
+      "name": "getConfirmed_",
+      "line": 1844,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "presentConfirmed_",
+        "readDraft_",
+        "readSchedule_",
+        "readState_",
+        "roster_"
+      ]
+    },
+    {
+      "name": "presentConfirmed_",
+      "line": 1845,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "buildStats_"
+      ]
+    },
+    {
+      "name": "getTeacher_",
+      "line": 1851,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "clean_",
+        "getConfirmed_"
+      ]
+    },
+    {
+      "name": "repairSheets_",
+      "line": 1857,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "ensureRev_",
+        "publishEditable_",
+        "readState_",
+        "ssLock_"
+      ]
+    },
+    {
+      "name": "runSelfTests_",
+      "line": 1858,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "String",
+        "assert_",
+        "buildStats_",
+        "classId_",
+        "compareObjectives_",
+        "conflictTime_",
+        "dayIndex_",
+        "defaultOptimization_",
+        "eligible_",
+        "fn",
+        "fullValidate_",
+        "gradeAffinity_",
+        "makeJobs_",
+        "normalizeGradePlan_",
+        "objectiveParts_",
+        "objectiveVector_",
+        "optimizationConfig_",
+        "optimizationReportFrom_",
+        "parseTeacherSubjects_",
+        "runSummary_",
+        "solve_",
+        "statsMap_",
+        "swapLogic_",
+        "teachingRuleApplies_",
+        "test",
+        "validTeachingRuleRange_",
+        "validateSchedule_",
+        "visitingAvailability_",
+        "workloadAnalysis_",
+        "workloadIndex_"
+      ]
+    },
+    {
+      "name": "autoBindCurrentSpreadsheet_",
+      "line": 2146,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "bindingPropertyKey_",
+        "parseJSON_"
+      ]
+    },
+    {
+      "name": "migrateEditable_",
+      "line": 2159,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Array",
+        "String",
+        "col_",
+        "hash_",
+        "headerMap_",
+        "journalSheet_",
+        "parseVersionSnapshotRows_",
+        "readDraft_",
+        "readResultAssignments_",
+        "readSchedule_",
+        "readState_",
+        "replaceRows_",
+        "roster_",
+        "sheet_",
+        "ssLock_",
+        "values_",
+        "writeDraft_",
+        "writeState_"
+      ]
+    },
+    {
+      "name": "publishEditable_",
+      "line": 2174,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "materialize_",
+        "readDraft_",
+        "readSchedule_",
+        "readState_",
+        "roster_"
+      ]
+    },
+    {
+      "name": "saveAssignments_",
+      "line": 2175,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "assert_",
+        "bump_",
+        "context_",
+        "ensureRev_",
+        "fullValidate_",
+        "readState_",
+        "ssLock_",
+        "writeDraft_"
+      ]
+    },
+    {
+      "name": "saveClasses_",
+      "line": 2176,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "assert_",
+        "bump_",
+        "col_",
+        "ensureRev_",
+        "headerMap_",
+        "journalSheet_",
+        "readState_",
+        "sheet_",
+        "ssLock_",
+        "values_"
+      ]
+    },
+    {
+      "name": "journalSheet_",
+      "line": 2177,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "sheetBackup_"
+      ]
+    },
+    {
+      "name": "liveDataToken_",
+      "line": 2178,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "hash_",
+        "values_"
+      ]
+    },
+    {
+      "name": "syncDirectResultEdits_",
+      "line": 2179,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "hash_",
+        "readResultAssignments_",
+        "readState_",
+        "roster_",
+        "ssLock_",
+        "values_",
+        "writeDraft_",
+        "writeState_"
+      ]
+    },
+    {
+      "name": "readResultAssignments_",
+      "line": 2186,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "Number",
+        "add",
+        "classId_",
+        "clean_",
+        "dateStr_",
+        "readDraft_",
+        "roster_",
+        "values_"
+      ]
+    },
+    {
+      "name": "ensureBaseHeaders_",
+      "line": 2193,
+      "effective": true,
+      "disabledByExplicitError": false,
+      "calls": [
+        "col_",
+        "headerMap_",
+        "norm_",
+        "spreadsheet_"
+      ]
+    }
+  ],
+  "apiActions": [
+    "availabilityReport",
+    "bootstrap",
+    "compareGradeBonus",
+    "diagnose",
+    "fairness",
+    "generate",
+    "getAdminData",
+    "getConfirmed",
+    "getStatus",
+    "getTeacher",
+    "getTeachingData",
+    "history",
+    "improve",
+    "optimizationReport",
+    "repair",
+    "roleSwap",
+    "saveAssignments",
+    "saveClasses",
+    "saveInstructorFlags",
+    "saveRoster",
+    "saveSchedule",
+    "saveSettings",
+    "saveTeachingRules",
+    "saveUnavailable",
+    "saveVisiting",
+    "selfTests",
+    "swap",
+    "update"
+  ],
+  "literalFrontendCalls": [
+    "bootstrap",
+    "compareGradeBonus",
+    "diagnose",
+    "fairness",
+    "generate",
+    "getAdminData",
+    "getConfirmed",
+    "getTeachingData",
+    "improve",
+    "optimizationReport",
+    "saveClasses",
+    "saveInstructorFlags",
+    "saveRoster",
+    "saveSchedule",
+    "saveSettings",
+    "saveTeachingRules",
+    "saveUnavailable",
+    "saveVisiting",
+    "selfTests"
+  ],
+  "uiCallsNotExposedByApi": []
+}

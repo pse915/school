@@ -1,0 +1,29 @@
+﻿원본 API,통합 API,구현,권한
+availabilityReport,exam.availabilityReport,Service.handle,관리자
+bootstrap,exam.bootstrap,Service.handle(bootstrap),관리자 또는 승인된 교사(조회 범위 검사)
+compareGradeBonus,exam.compareGradeBonus,Service.compute / start_job / apply_job,관리자
+diagnose,exam.diagnose,Service.handle,관리자
+fairness,exam.fairness,Service.handle,관리자
+generate,exam.generate,Service.compute / start_job / apply_job,관리자
+getAdminData,exam.getAdminData,Service.handle,관리자
+getConfirmed,exam.getConfirmed,Service.handle,관리자 또는 승인된 교사(조회 범위 검사)
+getStatus,exam.getStatus,Service.handle,관리자 또는 승인된 교사(조회 범위 검사)
+getTeacher,exam.getTeacher,Service.handle,관리자 또는 승인된 교사(조회 범위 검사)
+getTeachingData,exam.getTeachingData,Service.handle,관리자
+history,exam.history,Service.handle,관리자
+improve,exam.improve,Service.compute / start_job / apply_job,관리자
+optimizationReport,exam.optimizationReport,Service.handle,관리자
+repair,exam.repair,Service.handle,관리자
+roleSwap,exam.roleSwap,Service.handle,관리자
+saveAssignments,exam.saveAssignments,Service.handle,관리자
+saveClasses,exam.saveClasses,Service._save_table,관리자
+saveInstructorFlags,exam.saveInstructorFlags,Service._save_table,관리자
+saveRoster,exam.saveRoster,Service._save_table,관리자
+saveSchedule,exam.saveSchedule,Service._save_table,관리자
+saveSettings,exam.saveSettings,Service._save_table,관리자
+saveTeachingRules,exam.saveTeachingRules,Service._save_table,관리자
+saveUnavailable,exam.saveUnavailable,Service._save_table,관리자
+saveVisiting,exam.saveVisiting,Service._save_table,관리자
+selfTests,exam.selfTests,engine.self_tests,관리자
+swap,exam.swap,Service.handle,관리자
+update,exam.update,Service.handle,관리자

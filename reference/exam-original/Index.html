@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ko"><head><base target="_top"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>학교 시험감독 자동 배정 v2.4.1</title>
+<style>
+:root{--ink:#172a47;--muted:#68788e;--blue:#2563eb;--teal:#0d9488;--bg:#f3f6fb;--line:#dfe6ef;--bad:#b91c1c;--good:#087759;--warn:#b45309;--card:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{background:#102a50;color:white;padding:20px clamp(15px,3vw,38px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+header h1{margin:0;font-weight:760;font-size:21px;letter-spacing:-.5px}header p{margin:4px 0 0;color:#d8e4fb;font-size:12px}header .state{background:#1f467b;border:1px solid #49709f;border-radius:100px;padding:9px 15px;font-size:12px;font-weight:750;color:white;cursor:pointer;font-family:inherit;max-width:100%;text-align:left}
+header .state:hover,header .state:focus-visible{background:#285b95;outline:2px solid #93c5fd;outline-offset:2px}
+.edit-banner{background:#eefbf7;border:1px solid #a7e1d2;border-radius:10px;padding:12px 14px;margin:12px 0;line-height:1.7}.edit-banner strong{color:#076d59}.version-banner{margin:0 0 15px;padding:12px 14px;background:#fff8e8;border:1px solid #f0d39e;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.version-banner strong{color:#8a5514}.version-manager-actions{display:flex;gap:8px;flex-wrap:wrap}.version-manager-actions button{flex:1 1 160px}
+.version-meta{margin:8px 0 14px;line-height:1.6}.version-manager-list{max-height:190px;overflow:auto;margin:12px 0}
+.container{max-width:1470px;margin:0 auto;padding:20px clamp(12px,3vw,35px) 65px}.shell{display:grid;grid-template-columns:235px minmax(0,1fr);gap:22px}
+nav{align-self:start;background:#fff;border:1px solid var(--line);border-radius:17px;padding:12px;position:sticky;top:14px;box-shadow:0 5px 20px #102a5008}
+nav button{width:100%;padding:13px 15px;text-align:left;border:0;background:none;color:var(--ink);border-radius:10px;margin:2px 0;font-weight:650;cursor:pointer}
+nav button.active,nav button:hover{background:#eaf1ff;color:#1d4ed8}nav button[data-admin]{display:none}
+.workflow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 20px}.workflow button{background:#f3f7ff;border:1px solid #d5e3fa;border-radius:11px;padding:10px 13px;font:inherit;font-weight:700;color:var(--ink);cursor:pointer}.workflow button:hover,.workflow button:focus-visible{background:#dfeeff;outline:2px solid #93c5fd}.workflow span{color:#2563eb;margin-right:7px}.compact-section{margin-top:18px}.compact-section>summary{cursor:pointer;padding:12px 10px;background:#eff5ff;border-radius:9px;font-weight:750}.compact-section[open]>summary{margin-bottom:12px}.skiplink{position:absolute;top:-70px;left:10px;background:#fff;color:#0e3965;padding:9px;z-index:4000}.skiplink:focus{top:10px}
+main{min-width:0}.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:22px;margin-bottom:18px;box-shadow:0 8px 24px #102a5008}
+.heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;flex-wrap:wrap;margin-bottom:15px}.heading h2{font-size:22px;letter-spacing:-.8px;margin:0 0 5px}.heading p{color:var(--muted);margin:0;line-height:1.6}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:13px 0}.btn{border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);font:inherit;font-weight:700;padding:10px 14px;cursor:pointer;min-height:40px}.btn.primary{background:var(--blue);color:white;border-color:var(--blue)}.btn.teal{background:var(--teal);border-color:var(--teal);color:white}.btn.danger{border-color:#fecaca;color:#a31313}.btn:disabled{opacity:.5;cursor:not-allowed}
+label{font-weight:650;font-size:12px}input,select,textarea{font:inherit;border:1px solid #cbd6e5;border-radius:9px;padding:10px;color:var(--ink);background:#fff;max-width:100%;min-height:40px}input[type=checkbox]{min-height:0;accent-color:var(--blue)}textarea{width:100%;min-height:100px;resize:vertical}.field{display:flex;flex-direction:column;gap:6px;min-width:150px}.fields{display:flex;gap:12px;flex-wrap:wrap;align-items:end}.field input,.field select{width:100%}
+.hint{color:var(--muted);font-size:12px;line-height:1.75}.error{background:#fff0f0;color:#a71919;border:1px solid #f5bcbc;padding:12px;border-radius:10px;margin:10px 0}.ok{background:#eefcf5;color:#086b42;border:1px solid #afe4c8;padding:12px;border-radius:10px;margin:10px 0}.warning{background:#fff8ed;color:#9a5916;border:1px solid #f1d3a2;padding:13px;border-radius:10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:11px;margin:18px 0}.kpi{padding:18px;background:#f5f8fe;border:1px solid #e4edfa;border-radius:13px}.kpi b{font-size:23px;display:block;margin-top:7px}.kpi span{color:var(--muted);font-size:12px}
+.grade-block{border:1px solid #cbdcf1;border-radius:16px;padding:18px;margin:24px 0;background:#fafcff}.grade-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}.grade-head h3{font-size:21px;margin:0}.day-block{background:white;border:1px solid #dde7f4;border-radius:13px;padding:16px;margin:14px 0}.day-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}.day-head h4{margin:0;font-size:16px}.grade-block.inactive{background:#f4f5f7;border-color:#dde2e7}.grade-block .tablewrap{max-height:none}.grade-mobile-cells{display:none}.grade-period-card{border:1px solid #d9e4f2;background:#f5f9ff;padding:12px;margin:12px 0;border-radius:11px}.grade-period-card h5{font-size:14px;margin:0 0 10px}
+/* Per-period bulk actions follow the exact grade/day/period row on desktop and mobile. */
+.period-bulk-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.period-bulk-tools .btn{font-size:12px;line-height:1.35;padding:7px 9px;min-height:36px;font-weight:650;text-align:center}
+.grade-period-card .period-bulk-tools{margin:4px 0 12px}
+.grade-period-card .period-bulk-tools .btn{flex:1 1 130px}
+.grade-class-card{padding:11px;margin:8px 0;background:white;border:1px solid #e2eaf6;border-radius:9px}.grade-class-card>strong{display:block;margin-bottom:6px}.grade-block .data td{min-width:170px}.tablewrap{width:100%;min-width:0;overflow:auto;max-height:650px;border:1px solid var(--line);border-radius:11px}.data{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;table-layout:auto}.data th{background:#edf3fb;color:#244060;position:sticky;top:0;z-index:1;white-space:nowrap}.data th,.data td{padding:12px;border-bottom:1px solid #e8eef7;text-align:left;vertical-align:top}.data tr:nth-child(even) td{background:#fafcff}.data td{line-height:1.65}.schedule td{min-width:172px}.schedule .role{display:inline-block;margin:2px 3px 2px 0;padding:3px 7px;border-radius:7px;font-size:12px;background:#e5edff;color:#1d4ed8}.schedule .role.assist{background:#dff8f2;color:#087663}.schedule .role.study{background:#edf0f4;color:#445469}.schedule td strong{display:block;margin:0 0 5px}.role-stack{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.role-stack .role{margin:0;max-width:100%}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0}.tabs button{cursor:pointer;border:1px solid var(--line);background:#fff;padding:8px 12px;border-radius:8px;font-weight:700}.tabs button.active{background:#1d4ed8;color:#fff}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.card{background:#f9fbff;border:1px solid var(--line);padding:15px;border-radius:12px}.card h3{margin:0 0 12px;font-size:15px}.bar{height:8px;background:#e4e9f3;border-radius:9px;overflow:hidden;margin:5px 0 12px}.bar span{height:100%;display:block;background:linear-gradient(90deg,#2563eb,#0d9488)}.stack{display:flex;height:13px;border-radius:8px;overflow:hidden;background:#edf0f4;min-width:125px}.stack .main{background:#2563eb}.stack .assist{background:#0d9488}.stack .study{background:#94a3b8}.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin:9px 0}.chart-legend span:before{content:'●';margin-right:4px}.chart-legend .main{color:#2563eb}.chart-legend .assist{color:#0d9488}.chart-legend .study{color:#64748b}
+.cell-edit{display:flex;flex-direction:column;gap:5px}.cell-edit select{min-height:32px;padding:5px}.cell-edit input{min-height:32px;padding:6px;min-width:105px;width:100%}.rowcheck{display:flex;align-items:center;gap:7px;padding:5px 0}.switches{display:flex;gap:11px;flex-wrap:wrap}.search{width:100%;max-width:510px;font-size:16px;padding:14px}.muted{color:var(--muted)}.hide{display:none!important}
+#toast{position:fixed;bottom:24px;right:22px;max-width:min(430px,calc(100vw - 44px));padding:13px 17px;border-radius:11px;background:#15325c;color:white;box-shadow:0 12px 34px #142d5066;z-index:1000;display:none;line-height:1.6}
+#mask{position:fixed;inset:0;background:#152f50a8;display:none;align-items:center;justify-content:center;z-index:2000;padding:16px}#modal{background:white;border-radius:14px;padding:22px;max-width:620px;width:100%;max-height:85vh;overflow:auto;box-shadow:0 20px 65px #132a4b66}#modal h3{margin:0 0 14px}#progress{display:none;position:fixed;top:0;left:0;right:0;height:4px;background:#d6e5ff;z-index:3000}#progress div{width:40%;height:100%;background:var(--blue);animation:sweep 1.5s infinite}@keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+footer{padding:20px;color:var(--muted);text-align:center;font-size:11px}@media(max-width:850px){.shell{display:block}nav{position:static;display:flex;overflow:auto;margin-bottom:14px}nav button{white-space:nowrap;flex:0 0 auto;width:auto}.panel{padding:15px}.heading h2{font-size:19px}.container{padding:12px 10px}header{padding:15px}header h1{font-size:18px}}
+@media(max-width:700px){.grade-block{padding:12px;margin:16px 0}.day-block{padding:12px}.grade-block .tablewrap{display:none}.grade-mobile-cells{display:block}.grade-class-card .cell-edit{gap:8px}.grade-class-card .cell-edit select,.grade-class-card .cell-edit input[type=text]{width:100%}}
+@media print{header,nav,.toolbar,.btn,#toast,#mask,.no-print,footer{display:none!important}body{background:#fff}.shell{display:block}.container{padding:0;max-width:none}.panel{border:none;box-shadow:none;padding:0}.data th{position:static}#app{width:100%}.tablewrap{max-height:none;overflow:visible}main{width:100%}}
+/* Calm, compact workspace. Existing layout classes and controls remain available. */
+:root{--ink:#20312e;--muted:#62716c;--blue:#216351;--teal:#216351;--bg:#f5f6f3;--line:#dce3dd}
+body{font-size:14px;line-height:1.5}header{background:#fff;color:var(--ink);border-bottom:1px solid var(--line);padding:22px clamp(16px,3vw,40px)}
+header h1{font-size:22px;font-weight:750}header p{color:var(--muted)}header .state{background:#eef4ef;border:1px solid #cad9ce;color:#285843;border-radius:7px}header .state:hover,header .state:focus-visible{background:#dfece3}
+.container{max-width:1560px;padding-top:24px}.shell{grid-template-columns:205px minmax(0,1fr);gap:24px}
+nav{border:0;background:transparent;box-shadow:none;padding:0;border-radius:0}nav button{font:inherit;font-size:13px;font-weight:600;padding:12px 14px;border-radius:6px;color:#53645c}
+nav button.active,nav button:hover{background:#e6eee7;color:#215840}nav button.active{box-shadow:inset 3px 0 #216351}
+nav button:nth-child(3){margin-top:24px}nav button:last-child{margin-top:20px;border-top:1px solid var(--line);border-radius:0}
+.panel{border-radius:10px;box-shadow:none;padding:28px}.heading{margin-bottom:24px}.heading h2{font-size:23px;letter-spacing:-.6px}.heading p{font-size:13px;max-width:720px}
+.btn{border-radius:6px;padding:9px 13px;font-size:13px;font-weight:600;transition:background .12s}.btn:not(:disabled):hover{background:#eef3ee}.btn.primary:not(:disabled):hover,.btn.teal:not(:disabled):hover{background:#184d3e}
+input,select,textarea{border-radius:6px;border-color:#c9d5ce}input:focus,select:focus,textarea:focus{outline:2px solid #7fab95;outline-offset:2px}
+.workflow{gap:0;border:1px solid var(--line);border-radius:7px;overflow:hidden;margin-bottom:26px}.workflow button{border:0;border-right:1px solid var(--line);border-radius:0;background:#fafbf8;flex:1;padding:12px 8px;font-size:12px}.workflow span{color:#216351}
+.kpi,.card{background:#fafbf8;border-radius:7px;box-shadow:none}.kpi{padding:14px}.kpi b{font-size:22px}.grade-block{background:#fafbf8;border-color:var(--line);border-radius:8px;margin:20px 0;padding:18px}.grade-head h3{font-size:18px}.day-block{border-radius:7px;border-color:var(--line)}
+.tablewrap{border-radius:6px}.data th{background:#eef2ed;color:#43594c}.data th,.data td{padding:10px 12px;border-bottom-color:#e6ebe6}.data tr:nth-child(even) td{background:#fafbf9}.data tbody tr:hover td{background:#eff5ef}.schedule tbody th{position:sticky;left:0;z-index:1}.schedule thead th:first-child{left:0;z-index:3}
+.schedule .role{background:#eaf1ea;color:#265841;border-radius:4px}.schedule .role.assist{background:#edf1f7;color:#405878}.bar span{background:#44836a}.compact-section>summary{background:#f1f4ee;border-radius:5px;font-size:13px}.edit-banner{background:#eef6ef;border-color:#bed4c2}.version-banner{border-radius:7px}
+#workStatus{position:fixed;left:22px;bottom:16px;z-index:100;max-width:calc(100vw - 44px);background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:6px;font-size:12px;color:var(--muted)}#workStatus:empty{display:none}body:not(.is-busy) #workStatus{display:none}
+#saveNotice{position:sticky;bottom:0;background:#fff6de;border-top:1px solid #e9d59a;padding:10px 24px;z-index:90;font-size:12px;color:#755213}#saveNotice[hidden]{display:none}
+.is-busy #app{opacity:.75}.is-busy{cursor:progress}#toast{border-radius:7px}#modal{border-radius:10px}*:focus-visible{outline:2px solid #44836a;outline-offset:3px}
+@media(max-width:850px){.shell{display:block}nav{gap:4px;padding-bottom:6px}nav button:nth-child(3),nav button:last-child{margin-top:0;border-top:0}nav button{padding:10px 12px}.panel{padding:18px}.heading h2{font-size:20px}header{padding:16px}.workflow button{flex:1 1 30%}#workStatus{bottom:12px;left:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{#saveNotice,#workStatus,#progress{display:none!important}.grade-block .tablewrap{display:block!important}.grade-mobile-cells{display:none!important}.data{font-size:9px;table-layout:fixed;overflow-wrap:anywhere}.data th,.data td{padding:5px;min-width:0!important;white-space:normal}.schedule tbody th{position:static}.grade-block,.day-block{padding:5px;margin:8px 0;background:white}.data tr{break-inside:avoid}.data thead{display:table-header-group}.panel{padding:0}.grade-block{border:0}.tablewrap{border:0}.schedule .role{color:#000;background:none}}
+
+</style></head><body>
+<button type="button" class="skiplink" onclick="document.getElementById('app').focus()">본문 바로가기</button><header><div><h1>학교 시험감독 자동 배정</h1><p>명단·일정 수정 → 자동 배정 → 직접 수정 → 조회·인쇄</p></div><button type="button" class="state" id="stateBadge" onclick="reloadSafe()" title="현재 데이터 다시 불러오기">연결 중 · 버전 선택 ▾</button></header>
+<div class="no-print" id="connectionInfo" style="padding:8px 24px;background:#eef4ef;overflow-wrap:anywhere" role="status">연결 시트 확인 중</div>
+<div class="container"><div class="shell"><nav id="nav">
+  <button data-view="home" class="active">교사별 감독 조회</button>
+  <button data-view="all">전체 감독 시간표</button>
+  <button data-view="schedule" data-admin>1. 시험일정</button>
+  <button data-view="settings" data-admin>2. 교사 명단·조건</button>
+  <button data-view="teaching" data-admin>3. 수업·겸임 일정</button>
+  <button data-view="assign" data-admin>4. 자동 배정·직접 수정</button>
+  <button data-view="fair" data-admin>5. 공정성 분석</button>
+  
+</nav><main id="app" tabindex="-1"><section class="panel"><h2>감독 일정 불러오는 중</h2><p class="hint">학교 Google Sheets와 연결하고 있습니다.</p></section></main></div></div>
+<footer>명단·일정·배정을 수정한 뒤 각 화면에서 저장하세요.</footer>
+<div id="saveNotice" role="status" hidden></div><div id="workStatus" role="status" aria-live="polite"></div><div id="toast" role="status"></div><div id="progress"><div></div></div><div id="mask"><div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"></div></div>
+<script>
+'use strict';
+const AUTH_STORAGE_KEY = <?!= JSON.stringify(authStorageKey) ?>;
+const S={boot:null,admin:null,confirmed:null,view:'home',activeDay:1,previewDay:1,search:'',teacherId:'',selected:'',detail:null,
+  gradePlans:{},editingCells:{},scheduleDirty:false,unavailable:[],aliases:{},settings:{studyCount:1,maxPerTeacher:0,aliases:{}}, draft:[], selection1:'',selection2:'',teachingRules:[],teachingLoaded:false,teachingLoading:false,optimizationReport:null,optimizationLoading:false,pending:false,
+  adminToken:(()=>{try{return sessionStorage.getItem(AUTH_STORAGE_KEY)||'';}catch(e){return '';}})(),loginEmail:'',loginName:'',
+  versionLibrary:null,versionSnapshots:new Map(),previewVersion:'',previewConfirmed:null};
+const $=(selector,root=document)=>root.querySelector(selector);const $$=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
+const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const text=s=>String(s??'');
+function connectedSheetUrl_(){return S.boot?.connection?.url||'';}
+function openRosterSheet(){
+  const url=connectedSheetUrl_();
+  if(!/^https:\/\/docs\.google\.com\/spreadsheets\/d\/[A-Za-z0-9_-]+\/edit/.test(url))return toast('연결된 시트를 확인할 수 없습니다. 새로고침하세요.','error');
+  window.open(url,'_blank','noopener,noreferrer');
+}
+// Never allow accidental navigation to relative URLs containing raw HTML snippets.
+document.addEventListener('click',event=>{
+  const anchor=event.target?.closest?.('a[href]');
+  if(!anchor)return;
+  const raw=anchor.getAttribute('href')||'';
+  if(raw!=='#app'&&!/^https:\/\/[^\s<>"'`]+$/i.test(raw)){
+    event.preventDefault();event.stopPropagation();
+    console.error('Invalid application link blocked',raw.slice(0,150));
+    toast('잘못 생성된 화면 링크를 차단했습니다. 관리자에게 화면 진단을 요청하세요.','error');
+  }
+},true);
+// Report obviously malformed DOM without silently disabling legitimate controls.
+function inspectRenderedDOM_(){
+  const root=document.body; if(!root)return;
+  const bad=[...root.querySelectorAll('a[href]')].filter(a=>a.getAttribute('href')!=='#app'&&!/^https:\/\//i.test(a.getAttribute('href')||''));
+  if(bad.length)console.error('[UI_INTEGRITY] 비정상 링크',bad.map(a=>a.outerHTML.slice(0,220)));
+}
+const perfClient={events:[],mark(name,start){const ms=Math.round(performance.now()-start);
+  this.events.push({name,ms,at:new Date().toISOString()});
+  if(this.events.length>120)this.events.shift();
+  console.info('[PERF]',name,ms+'ms');return ms;
+}};
+function toast(msg,kind='info'){const box=$('#toast');box.textContent=msg;box.style.background=kind==='error'?'#982f2f':kind==='ok'?'#106645':'#15325c';box.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>box.style.display='none',6500);}
+let modalReturnFocus_=null;
+function modal(title,body){modalReturnFocus_=document.activeElement;$('#modal').innerHTML=`<h3 id="modalTitle">${e(title)}</h3>${body}<div class="toolbar" style="justify-content:flex-end"><button class="btn" onclick="closeModal()">닫기</button></div>`;$('#mask').style.display='flex';( $('#modal').querySelector('input,button,select,[tabindex]')||$('#modal')).focus();}
+function closeModal(){$('#mask').style.display='none';$('#modal').textContent='';if(modalReturnFocus_?.isConnected)modalReturnFocus_.focus();modalReturnFocus_=null;}
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('#mask').style.display==='flex')closeModal();});
+// No persistent browser storage for unsaved roster or schedule data.
+let requestEpoch_=0;
+const dirtyGroups_=new Set(), inputEdits_=new Map();
+const savedGroup_={saveClasses:'classes',saveRoster:'roster',saveSchedule:'schedule',saveSettings:'settings',saveInstructorFlags:'instructors',saveUnavailable:'unavailable',saveTeachingRules:'rules',saveVisiting:'visiting'};
+function csvCell_(v){const s=String(v??'');return /^[\s\u0000-\u001f]*[=+@-]/.test(s)?"'"+s:s;}
+function inputKey_(el){return el.dataset.missingFallbackId?'missingTeacher:'+el.dataset.missingFallbackId:el.dataset.rosterField?'roster:'+el.closest('[data-roster-row]').dataset.rosterRow+':'+el.dataset.rosterField:el.dataset.instructorId?'instructor:'+el.dataset.instructorId:el.dataset.optFlag?'opt:'+el.dataset.optFlag:el.id||'';}
+function inputGroup_(el){const k=inputKey_(el);if(el.id==='classRows')return 'classes';if(S.view==='schedule')return 'schedule';
+  if(k.startsWith('instructor:'))return 'instructors';
+  if(k.startsWith('roster:'))return 'roster';
+  if(/^(studyCount|maxCount|aliases|opt|missing)/.test(k))return 'settings';
+  if(/^un/.test(k))return 'unavailable';if(/^rule/.test(k))return 'rules';if(/^vis/.test(k))return 'visiting';return '';}
+function rememberInput_(el){const group=inputGroup_(el),key=inputKey_(el);if(!group)return;
+  if(el.dataset.rosterField){const row=S.rosterRows?.find(x=>x.key===el.closest('[data-roster-row]').dataset.rosterRow);if(row)row[el.dataset.rosterField]=el.value;}dirtyGroups_.add(group);if(key&&group!=='schedule')inputEdits_.set(key,{group,value:el.value,checked:el.checked});updateSaveNotice_();}
+function captureInputs_(){const root=$('#app');if(!root)return;root.querySelectorAll('input,select,textarea').forEach(el=>{
+  const key=inputKey_(el);if(inputEdits_.has(key)){const x=inputEdits_.get(key);x.value=el.value;x.checked=el.checked;}
+});}
+function restoreInputs_(){if(!S.boot?.admin)return;$('#app').querySelectorAll('input,select,textarea').forEach(el=>{
+  const x=inputEdits_.get(inputKey_(el));if(!x)return;el.value=x.value;if(el.type==='checkbox')el.checked=x.checked;
+});if(S.view==='teaching'&&inputEdits_.has('ruleMode'))toggleRuleMode();}
+function clearDirty_(group){dirtyGroups_.delete(group);for(const [key,x] of inputEdits_)if(x.group===group)inputEdits_.delete(key);
+  if(group==='schedule')S.scheduleDirty=false;updateSaveNotice_();}
+function updateSaveNotice_(){const el=$('#saveNotice');if(!el)return;el.hidden=!dirtyGroups_.size;
+  const names={classes:'대상 학급',roster:'교사 명단',schedule:'시험일정',settings:'감독설정',instructors:'강사 체크',unavailable:'배정불가',rules:'포함·제외',visiting:'겸임 일정'};
+  el.textContent='저장 전 변경 · '+[...dirtyGroups_].map(x=>names[x]||x).join(', ')+' — 각 화면에서 저장하세요.';
+}
+function setBusy_(busy){document.body.classList.toggle('is-busy',busy);$('#app').setAttribute('aria-busy',String(busy));
+  // inert prevents edits and duplicate submits while a mutation/reload is in flight.
+  $('#app').inert=busy;$('#nav').inert=busy;$('#stateBadge').disabled=busy;
+  if($('#mask').style.display==='flex')$('#modal').inert=busy;
+}
+function enhanceControls_(){const root=$('#app');root.querySelectorAll('input,select,textarea').forEach((el,i)=>{
+  if(!el.id)el.id='field-'+S.view+'-'+i;
+  if(el.labels?.length||el.hasAttribute('aria-label'))return;
+  const field=el.closest('.field,.rowcheck'),label=field?.querySelector('label');
+  el.setAttribute('aria-label',label?.textContent?.trim()||el.closest('td')?.textContent?.trim()||el.placeholder||'입력값');
+});root.querySelectorAll('.tablewrap').forEach(el=>{el.tabIndex=0;el.setAttribute('role','region');el.setAttribute('aria-label','표, 좌우로 스크롤할 수 있습니다.');});}
+function installEditTracking_(){
+  document.addEventListener('input',ev=>{if(ev.target.closest?.('#app')&&S.boot?.admin)rememberInput_(ev.target);});
+  document.addEventListener('change',ev=>{if(ev.target.closest?.('#app')&&S.boot?.admin)rememberInput_(ev.target);});
+  // Re-rendering functions preserve edited controls, even when a list row is added.
+  for(const name of ['renderSettings','renderTeaching','renderSchedule']){
+    const original=window[name];window[name]=function(...args){captureInputs_();const value=original(...args);restoreInputs_();enhanceControls_();updateSaveNotice_();return value;};
+  }
+  for(const [name,group] of Object.entries({addUnavailable:'unavailable',removeUnavailable:'unavailable',addTeachingRule:'rules',removeTeachingRule:'rules',addVisiting:'visiting',removeVisiting:'visiting'})){
+    const original=window[name];window[name]=function(...args){const before=JSON.stringify([S.unavailable,S.teachingRules,S.visiting]);const value=original(...args);
+      if(before!==JSON.stringify([S.unavailable,S.teachingRules,S.visiting]))dirtyGroups_.add(group);updateSaveNotice_();return value;};
+  }
+  const logout=logoutAdmin;window.logoutAdmin=async function(){if(dirtyGroups_.size&&!confirm('저장 전 변경사항이 있습니다. 로그아웃하면 입력이 사라집니다. 계속할까요?'))return;
+    const result=await logout();if(!S.adminToken){dirtyGroups_.clear();inputEdits_.clear();S.gradePlans={};S.editingCells={};updateSaveNotice_();}return result;};
+  window.addEventListener('beforeunload',ev=>{if(dirtyGroups_.size||S.pending){ev.preventDefault();ev.returnValue='';}});
+  document.addEventListener('keydown',ev=>{if(ev.key!=='Tab'||$('#mask').style.display!=='flex')return;
+    const nodes=[...$('#modal').querySelectorAll('button,input,select,textarea,[tabindex="0"]')].filter(el=>!el.disabled&&el.getClientRects().length);
+    if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];
+    if(ev.shiftKey&&document.activeElement===first){ev.preventDefault();last.focus();}
+    else if(!ev.shiftKey&&document.activeElement===last){ev.preventDefault();first.focus();}
+  });
+}
+
+const inflightReads=new Map();
+function call(action,payload={}){
+  const readActions=new Set(['getResetPlan','bootstrap','getConfirmed','getAdminData','getTeachingData','getAuditData','getVersionLibrary','getVersionPreview','optimizationReport','getTeacher','getStatus','diagnose','availabilityReport','fairness','compareGradeBonus','versions','history','selfTests']);
+  const key=readActions.has(action)?S.adminToken+'|'+requestEpoch_+'|'+action+'|'+JSON.stringify(payload):null;
+  if(key&&inflightReads.has(key))return inflightReads.get(key);
+  const requestedToken=S.adminToken,requestedEpoch=requestEpoch_,started=performance.now();
+  const request=new Promise((resolve,reject)=>{
+  if(!window.google?.script?.run){reject(new Error('Apps Script 웹앱에서 실행해야 합니다.'));return;}
+  const r=google.script.run.withSuccessHandler(value=>{
+    perfClient.mark('api:'+action,started);
+    if(requestedToken!==S.adminToken||requestedEpoch!==requestEpoch_)return reject(new Error('화면 또는 로그인 정보가 변경되어 이전 응답을 적용하지 않았습니다.'));
+    const group=savedGroup_[action];if(group && value && value.ok!==false)clearDirty_(group);
+    if(!readActions.has(action)&&!['login','logout'].includes(action)){invalidateViews_();S.optimizationReport=null;requestEpoch_++;}
+    resolve(value);
+  }).withFailureHandler(err=>{perfClient.mark('api:error:'+action,started);reject(new Error(err?.message||String(err)));});
+  if(action==='bootstrap')r.apiBootstrap(S.adminToken);
+  else if(action==='login')r.loginAdmin(payload);
+  else if(action==='logout')r.logoutAdminSession(S.adminToken);
+  else r.api(action,Object.assign({},payload,{authToken:S.adminToken,dataToken:S.admin?.dataToken}));
+  });
+  if(!key)return request;
+  inflightReads.set(key,request);
+  request.finally(()=>{if(inflightReads.get(key)===request)inflightReads.delete(key);}).catch(()=>{});
+  return request;
+}
+async function work(label,fn){if(S.pending){toast('진행 중인 작업이 끝난 뒤 다시 시도하세요.');return null;}S.pending=true;
+  const start=Date.now();setBusy_(true);
+  const tick=()=>{$('#workStatus').textContent=label+' · '+Math.floor((Date.now()-start)/1000)+'초 경과';};tick();const timer=setInterval(tick,1000);
+  $('#progress').style.display='block';
+  try{const r=await fn();return r;}catch(err){console.error(err);toast(label+': '+err.message+' 입력값은 유지됩니다. 저장 요청의 응답이 끊겼다면 최신 데이터를 확인한 뒤 다시 시도하세요.','error');return null;}
+  finally{clearInterval(timer);S.pending=false;setBusy_(false);$('#workStatus').textContent=dirtyGroups_.size?'저장 전 변경사항이 있습니다.':'작업이 끝났습니다.';$('#progress').style.display='none';}
+}
+function draftUnlocked_(){return false;}
+function draftLocked_(){return false;}
+function updateChrome(){if(!S.boot)return;$('#connectionInfo').textContent='연결 시트: '+(S.boot.connection?.name||'');$('#stateBadge').textContent='바로 편집 가능';$$('nav [data-admin]').forEach(btn=>btn.style.display='block');}
+const viewFragments=new Map();
+function invalidateViews_(){viewFragments.clear();}
+function cacheView_(view){
+  const app=$('#app');if(!app||!app.firstChild||!view)return;
+  const nodes=document.createDocumentFragment();
+  while(app.firstChild)nodes.appendChild(app.firstChild);
+  viewFragments.delete(view);viewFragments.set(view,nodes);
+  if(viewFragments.size>3)viewFragments.delete(viewFragments.keys().next().value);
+}
+async function switchView(view){
+  captureInputs_();
+  if(!S.boot?.admin&&!['home','all'].includes(view))return;
+  if(view!==S.view){
+    cacheView_(S.view);
+    S.view=view;
+    const cached=viewFragments.get(view);
+    if(cached){$('#app').appendChild(cached);viewFragments.delete(view);updateSaveNotice_();}
+    else render();
+  }
+  $$('nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));
+  if(view==='teaching'&&!S.teachingLoaded&&!S.teachingLoading)await loadTeachingData();
+  if(view==='fair'&&!S.optimizationReport&&!S.optimizationLoading)await loadOptimizationReport();
+}
+$$('nav button').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
+async function reload(){requestEpoch_++;const boot=await call('bootstrap');
+  captureInputs_();const kept={unavailable:S.unavailable,visiting:S.visiting,teachingRules:S.teachingRules};
+  invalidateViews_();S.scheduleDirty=dirtyGroups_.has('schedule');S.previewVersion='';S.previewConfirmed=null;S.versionLibrary=null;S.versionSnapshots.clear();
+  if(S.adminToken&&!boot.admin){S.adminToken='';try{sessionStorage.removeItem(AUTH_STORAGE_KEY);}catch(e){} S.admin=null; S.view='home';}
+  S.boot=boot;S.optimizationReport=null;updateChrome();
+  S.confirmed=boot.confirmed|| (boot.version?await call('getConfirmed'):null);
+  if(boot.admin){S.admin=boot.adminData||await call('getAdminData');S.draft=S.admin.draft||[];S.settings=S.admin.settings||S.settings;
+    if(!dirtyGroups_.has('roster')){S.rosterRows=null;S.rosterDeletedIds=[];}
+    if(!dirtyGroups_.has('schedule')){S.gradePlans={};initScheduleEditor();}S.unavailable=(S.admin.unavailable||[]).slice();
+    S.teachingLoaded=false;S.visiting=[];S.teachingRules=[];
+    if(S.view==='teaching')await loadTeachingData(true);
+  }else{S.admin=null;S.teachingLoaded=false;dirtyGroups_.clear();inputEdits_.clear();S.gradePlans={};S.editingCells={};S.unavailable=[];S.visiting=[];S.teachingRules=[];S.draft=[];}
+  if(dirtyGroups_.has('unavailable'))S.unavailable=kept.unavailable;
+  if(dirtyGroups_.has('visiting'))S.visiting=kept.visiting;
+  if(dirtyGroups_.has('rules'))S.teachingRules=kept.teachingRules;
+  render();}
+async function loadTeachingData(quiet=false){
+  if(!S.admin||S.teachingLoading)return;
+  S.teachingLoading=true;
+  if(!quiet)$('#progress').style.display='block';
+  try{
+    const response=await call('getTeachingData');
+    if(!S.admin)return;
+    Object.assign(S.admin,response);
+    if(!dirtyGroups_.has('visiting'))S.visiting=(response.visiting||[]).map(x=>({...x}));
+    if(!dirtyGroups_.has('rules'))S.teachingRules=(response.teachingRules||[]).map(x=>({...x}));
+    S.teachingLoaded=true;invalidateViews_();
+  }catch(err){console.error('[teaching]',err);toast('수업·겸임 정보: '+err.message,'error');}
+  finally{S.teachingLoading=false;if(!quiet)$('#progress').style.display='none';}
+  if(S.view==='teaching')render();
+}
+async function boot(){await work('앱 초기 연결',reload);if(!S.boot)$('#app').innerHTML='<section class="panel"><h2>연결 오류</h2><p>웹앱 배포 및 Google Sheet 접근 권한을 확인한 뒤 새로고침하세요.</p><button class="btn primary" onclick="boot()">재시도</button></section>';}
+function baseTitle(name,description,extra=''){return `<div class="heading"><div><h2>${e(name)}</h2><p>${description}</p></div>${extra}</div>`;}
+function metrics(stats){if(!stats?.length)return '';
+  stats=stats.filter(t=>!t.isInstructor);if(!stats.length)return '<div class="warning">감독 대상 교사가 없습니다.</div>';
+  const totals=stats.map(t=>t.total),total=totals.reduce((a,b)=>a+b,0),avg=(total/stats.length).toFixed(2);
+  return `<div class="kpis"><div class="kpi"><span>전체 감독 배정</span><b>${total}회</b></div><div class="kpi"><span>감독 대상 교사</span><b>${stats.length}명</b></div><div class="kpi"><span>평균 횟수</span><b>${avg}회</b></div><div class="kpi"><span>최소 / 최대</span><b>${Math.min(...totals)} / ${Math.max(...totals)}</b></div><div class="kpi"><span>최대·최소 편차</span><b>${Math.max(...totals)-Math.min(...totals)}회</b></div></div>`;}
+function render(){if(!S.boot)return;
+  const started=performance.now();
+  try{
+    if(S.view==='home')renderHome();else if(S.view==='all')renderAll();else if(S.view==='schedule')renderSchedule();
+    else if(S.view==='settings')renderSettings();else if(S.view==='teaching')renderTeaching();else if(S.view==='assign')renderAssign();else if(S.view==='fair')renderFair();else if(S.view==='audit')renderAudit();
+    restoreInputs_();updateSaveNotice_();enhanceControls_();inspectRenderedDOM_();perfClient.mark('render:'+S.view,started);
+  }catch(err){console.error(err);$('#app').innerHTML=`<section class="panel">${baseTitle('화면 오류','현재 데이터를 보존했습니다.')}<div class="error">${e(err.message)}</div><button class="btn primary" onclick="reloadSafe()">다시 불러오기</button></section>`;}
+}
+async function reloadSafe(){await work('데이터 다시 불러오기',reload);}
+function displayRole(role){return role==='MAIN'?'정감독':role==='ASSIST'?'부감독':'자습감독';}
+function roleBadge(a,teachers){const name=(teachers instanceof Map?teachers.get(a.teacherId):teachers?.find(t=>t.id===a.teacherId))?.name||a.teacherId;
+  return `<span class="role ${a.role==='ASSIST'?'assist':a.role.startsWith('STUDY')?'study':''}">${e(displayRole(a.role))} ${e(name)}</span>`;}
+function showAccessDiagnosis(){return null;}
+function openAdminLogin(){return null;}
+function submitAdminLogin(){return null;}
+function logoutAdmin(){return null;}
+function displayedConfirmed_(){return S.previewConfirmed||S.confirmed;}
+function versionPreviewBanner_(){return '';}
+function renderHome(){const c=displayedConfirmed_(), teachers=c?.teachers||[],term=S.search.toLocaleLowerCase();const matches=teachers.filter(t=>t.name.toLocaleLowerCase().includes(term));
+  const a=S.boot?.auth||{},authAlert=['NOT_CONFIGURED','SHEET_INVALID','SESSION_EXPIRED','NOT_ALLOWED','GOOGLE_ACCOUNT_MISMATCH'].includes(a.code)?`<div class="warning no-print">관리자 설정 진단: ${e(a.message)} <button class="btn" onclick="showAccessDiagnosis()">진단 보기</button></div>`:'';
+  $('#app').innerHTML=`<section class="panel">${baseTitle('교사별 감독 조회','이름을 검색하고 개인 감독 시간표를 확인하세요.',`<div class="toolbar no-print"><button class="btn" onclick="reloadSafe()">↻ 저장된 데이터 다시 불러오기</button></div>`)}
+  ${versionPreviewBanner_()}${authAlert}${S.boot?.admin?`<div class="workflow no-print" aria-label="관리자 핵심 작업"><button type="button" onclick="switchView('schedule')"><span>1</span>시험일정</button><button type="button" onclick="switchView('settings')"><span>2</span>교사 조건</button><button type="button" onclick="switchView('assign')"><span>3</span>자동 배정</button><button type="button" onclick="switchView('fair')"><span>4</span>공정성 검토</button><button type="button" onclick="switchView('assign')"><span>5</span>저장</button></div>`:''}<div class="fields"><div class="field" style="flex:1"><label for="search">교사 이름 검색</label><input class="search" id="search" autocomplete="off" placeholder="교사 이름 입력" value="${e(S.search)}" oninput="S.search=this.value;refreshMatches()"></div></div>
+  <div id="matches" class="toolbar"></div><div id="personal"></div></section>`;
+  refreshMatches();}
+function refreshMatches(){const div=$('#matches');if(!div)return;
+  const c=displayedConfirmed_();
+  if(!c){div.innerHTML='<div class="warning">아직 저장된 시험감독 시간표가 없습니다. 자동 배정을 실행하면 조회할 수 있습니다.</div>';$('#personal').innerHTML='';return;}
+  const term=S.search.trim().toLocaleLowerCase(),matches=c.teachers.filter(t=>t.name.toLocaleLowerCase().includes(term));
+  div.innerHTML=matches.length?matches.map(t=>`<button class="btn ${S.teacherId===t.id?'primary':''}" onclick="chooseTeacher(${e(JSON.stringify(t.id))})">${e(t.name)} <span class="muted">(${e(t.id)})</span></button>`).join(''):'해당 교사를 찾을 수 없습니다.';
+  drawPersonal();}
+function chooseTeacher(id){S.teacherId=id;refreshMatches();}
+function drawPersonal(){const c=displayedConfirmed_(),root=$('#personal');if(!root||!c)return;
+  const t=c.teachers.find(x=>x.id===S.teacherId);if(!t){root.innerHTML='<p class="hint">교사를 선택하면 날짜별·교시별 감독 일정이 표시됩니다.</p>';return;}
+  const assigns=c.assignments.filter(a=>a.teacherId===t.id).sort((a,b)=>a.date.localeCompare(b.date)||a.period-b.period);
+  const st=c.stats.find(x=>x.id===t.id);
+  root.innerHTML=`<hr style="border:0;border-top:1px solid #e6edf6;margin:20px 0"><div class="heading"><div><h2>${e(t.name)} 선생님</h2><p>${e(c.version)} · ${e(c.status)} · 마지막 갱신 ${e(c.modifiedAt)}</p></div>
+  <button class="btn no-print" onclick="window.print()">⌁ 개인 감독표 인쇄</button><button class="btn no-print" onclick="downloadPersonal()">CSV 저장</button></div>
+  <div class="kpis"><div class="kpi"><span>전체 감독</span><b>${st.total}회</b></div><div class="kpi"><span>정감독</span><b>${st.main}회</b></div><div class="kpi"><span>부감독</span><b>${st.assist}회</b></div><div class="kpi"><span>자습감독</span><b>${st.study}회</b></div><div class="kpi"><span>평균 대비</span><b>${st.delta>0?'+':''}${st.delta}</b></div></div>
+  <div class="tablewrap"><table class="data"><thead><tr><th>날짜</th><th>교시</th><th>학급</th><th>과목</th><th>감독 구분</th></tr></thead><tbody>
+  ${assigns.length?assigns.map(a=>`<tr><td>${e(a.date)}</td><td>${a.period}교시</td><td>${e(a.classId)}</td><td>${e(a.subject||'자습')}</td><td>${e(displayRole(a.role))}</td></tr>`).join(''):'<tr><td colspan="5">배정된 감독이 없습니다.</td></tr>'}
+  </tbody></table></div>${personalTimetable(c,assigns)}`;}
+function personalTimetable(c,assigns){
+  const dates=[...new Set(c.schedule.map(x=>x.date))].sort(),periods=[...new Set(c.schedule.map(x=>x.period))].sort((a,b)=>a-b);
+  return `<h3 style="margin-top:24px">개인 시간표 모드</h3><div class="tablewrap"><table class="data"><thead><tr><th>교시</th>${dates.map(d=>`<th>${e(d)}</th>`).join('')}</tr></thead><tbody>
+  ${periods.map(p=>`<tr><th>${p}교시</th>${dates.map(d=>{const rows=assigns.filter(x=>x.date===d&&x.period===p);return `<td>${rows.length?rows.map(x=>`${e(x.classId)} ${e(displayRole(x.role))}`).join(', '):'-'}</td>`;}).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function downloadPersonal(){const c=displayedConfirmed_(),t=c?.teachers.find(x=>x.id===S.teacherId);if(!t)return;
+  const rows=[['날짜','교시','학급','과목','감독구분'],...c.assignments.filter(a=>a.teacherId===t.id).map(a=>[a.date,a.period,a.classId,a.subject||'자습',displayRole(a.role)])];
+  downloadCsv('개인감독표_'+t.name+'.csv',rows);}
+function downloadCsv(filename,rows){const csv='\uFEFF'+rows.map(row=>row.map(v=>'"'+csvCell_(v).replaceAll('"','""')+'"').join(',')).join('\r\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=filename;link.click();URL.revokeObjectURL(url);}
+function renderAll(){const c=S.confirmed;$('#app').innerHTML='<section class="panel">'+baseTitle('전체 감독 시간표','현재 저장된 배정입니다.','<button class="btn" onclick="window.print()">인쇄</button><button class="btn" onclick="reloadSafe()">다시 불러오기</button>')+(S.admin?.diagnostic?'<div class="warning">검토 필요: '+e(S.admin.diagnostic)+'</div>':'')+(c?scheduleGrid(c.schedule,c.assignments,c.teachers):'아직 배정이 없습니다.')+'</section>';}
+function scheduleGrid(schedule,assignments,teachers){
+  if(!schedule?.length)return '<p class="warning">시험일정이 없습니다.</p>';
+  const scheduleBySlot=new Map(schedule.map(x=>[x.date+'|'+x.period+'|'+x.classId,x]));
+  const assignmentsBySlot=new Map();
+  (assignments||[]).forEach(a=>{const key=a.date+'|'+a.period+'|'+a.classId;
+    if(!assignmentsBySlot.has(key))assignmentsBySlot.set(key,[]);
+    assignmentsBySlot.get(key).push(a);
+  });
+  const teachersById=new Map((teachers||[]).map(t=>[t.id,t]));
+  const grades=[...new Set(schedule.map(x=>Number(x.grade||x.classId.split('-')[0])))].sort((a,b)=>a-b);
+  return grades.map(grade=>{
+    const gradeRows=schedule.filter(x=>Number(x.grade||x.classId.split('-')[0])===grade);
+    const dates=[...new Set(gradeRows.map(x=>x.date))].sort();
+    return `<section class="grade-block"><div class="grade-head"><h3>${grade}학년 감독 시간표</h3><span class="hint">${dates.length}일 운영</span></div>`+
+      dates.map(date=>{
+        const cells=gradeRows.filter(x=>x.date===date),classes=[...new Set(cells.map(x=>x.classId))].sort(classOrder);
+        const periods=[...new Set(cells.map(x=>x.period))].sort((a,b)=>a-b);
+        return `<article class="day-block"><h4>${e(date)} · ${e(cells[0].day)}일차</h4><div class="tablewrap"><table class="data schedule"><thead><tr><th>교시</th>${classes.map(c=>`<th>${e(c)}</th>`).join('')}</tr></thead><tbody>${periods.map(p=>`<tr><th>${p}교시</th>${classes.map(cid=>{
+          const key=date+'|'+p+'|'+cid,cell=scheduleBySlot.get(key);if(!cell)return '<td class="muted">미실시</td>';
+          const rolePriority=role=>role==='MAIN'?0:role==='ASSIST'?1:2;
+          const arr=(assignmentsBySlot.get(key)||[]).slice()
+            .sort((a,b)=>rolePriority(a.role)-rolePriority(b.role)||String(a.role).localeCompare(String(b.role)));
+          const roleMarkup=arr.length?`<div class="role-stack">${arr.map(a=>roleBadge(a,teachersById)).join('')}</div>`:'';
+          return `<td><strong>${e(cell.type==='EXAM'?cell.subject:'자습')}</strong>${roleMarkup||(cell.type==='STUDY'&&(S.previewVersion&&S.view==='all'?S.previewConfirmed?.studyCount:(S.admin?.settings?.studyCount??S.confirmed?.studyCount))===0?'감독 없음 (설정)':'<span style="color:#aa2222">미배정</span>')}</td>`;
+        }).join('')}</tr>`).join('')}</tbody></table></div></article>`;
+      }).join('')+'</section>';
+  }).join('');
+}
+function classOrder(a,b){const x=a.split('-').map(Number),y=b.split('-').map(Number);return x[0]-y[0]||x[1]-y[1];}
+function initScheduleEditor(){
+  if(!S.admin)return;
+  S.editingCells={};const rows=S.admin.schedule||[],classes=S.admin.classes||[],saved=S.admin.gradePlan||{};
+  const grades=[...new Set(classes.map(c=>c.grade))].sort((a,b)=>a-b);
+  for(const grade of grades){
+    const own=rows.filter(r=>r.grade===grade),old=saved[grade],maxDay=Math.max(1,...own.map(r=>r.day));
+    const length=old?.days?.length||maxDay;
+    const days=Array.from({length},(_,i)=>{
+      const day=i+1,dr=own.filter(r=>r.day===day),p=[...new Set(dr.map(r=>r.period))].sort((a,b)=>a-b),original=old?.days?.find(x=>x.day===day);
+      return {day,enabled:original?.enabled??(!rows.length||dr.length>0),date:original?.date??(dr[0]?.date||''),
+        periods:original?.periods?.slice()||(p.length?p:[1,2,3])};
+    });
+    S.gradePlans[grade]={enabled:old?.enabled??(!rows.length||own.length>0),days};
+  }
+  rows.forEach(r=>{S.editingCells[`${r.grade}|${r.day}|${r.period}|${r.classId}`]={type:r.type,subject:r.subject,start:r.start,end:r.end,active:true};});
+  // An absent row in an already saved active grade-day-period means "this class is not participating".
+  if(rows.length)grades.forEach(grade=>S.gradePlans[grade].days.forEach(day=>{
+    // Do not silently mark all classes inactive when a disabled grade/day is re-enabled later.
+    if(!S.gradePlans[grade].enabled||!day.enabled)return;
+    day.periods.forEach(p=>classes.filter(c=>c.grade===grade).forEach(c=>{
+      const key=`${grade}|${day.day}|${p}|${c.id}`;
+      if(!S.editingCells[key])S.editingCells[key]={type:'EXAM',subject:'',start:'',end:'',active:false};
+    }));
+  }));
+}
+function setGradeEnabled(grade,enabled){S.gradePlans[grade].enabled=enabled;markScheduleDirty_();renderSchedule();}
+function setGradeDayCount(grade,count){const g=S.gradePlans[grade],old=g.days;
+  g.days=Array.from({length:count},(_,i)=>old.find(x=>x.day===i+1)||{day:i+1,enabled:true,date:'',periods:[1,2,3]});markScheduleDirty_();renderSchedule();}
+function setGradeDayEnabled(grade,day,enabled){S.gradePlans[grade].days.find(x=>x.day===day).enabled=enabled;markScheduleDirty_();renderScheduleDay_(grade,day);}
+function setGradeDate(grade,day,date){S.gradePlans[grade].days.find(x=>x.day===day).date=date;markScheduleDirty_();}
+function setGradePeriod(grade,day,period,enabled){const d=S.gradePlans[grade].days.find(x=>x.day===day);
+  d.periods=d.periods.filter(p=>p!==period);if(enabled)d.periods.push(period);d.periods.sort((a,b)=>a-b);markScheduleDirty_();renderScheduleDay_(grade,day);}
+function setGradePeriodTime(grade,day,period,field,value){S.admin.classes.filter(c=>c.grade===grade).forEach(c=>{
+  const key=`${grade}|${day}|${period}|${c.id}`;const x=S.editingCells[key]||(S.editingCells[key]={type:'EXAM',subject:'',active:true});x[field]=value;});markScheduleDirty_();}
+function changeGradeCell(key,field,value){const x=S.editingCells[key]||(S.editingCells[key]={type:'EXAM',subject:'',active:true});
+  x[field]=value;markScheduleDirty_();if(field==='type'||field==='active'){const [g,d]=key.split('|').map(Number);renderScheduleDay_(g,d);}}
+function fillGradeSubject(grade,day){const subject=prompt(`${grade}학년 ${day}일차 전체 운영 교시에 지정할 시험과목을 입력하세요.`);
+  if(!subject?.trim())return;
+  const d=S.gradePlans[grade].days.find(x=>x.day===day);
+  d.periods.forEach(p=>S.admin.classes.filter(c=>c.grade===grade).forEach(c=>{
+    const key=`${grade}|${day}|${p}|${c.id}`,old=S.editingCells[key]||{};
+    S.editingCells[key]={...old,type:'EXAM',subject:subject.trim(),active:true};
+  }));markScheduleDirty_();renderScheduleDay_(grade,day);}
+// Affects only one selected grade/day/period; the day-wide bulk controls stay unchanged.
+function fillGradePeriodSubject(grade,day,period){
+  const plan=S.gradePlans[grade],d=plan?.days.find(x=>x.day===day);
+  if(!plan?.enabled||!d?.enabled||!d.periods.includes(period))return toast('운영 중인 학년·날짜·교시를 선택하세요.','error');
+  const classes=(S.admin?.classes||[]).filter(c=>c.grade===grade);
+  if(!classes.length)return toast('이 학년에 등록된 학급이 없습니다.','error');
+  const answer=prompt(`${grade}학년 ${day}일차 ${period}교시 전체 ${classes.length}개 학급에 적용할 시험과목을 입력하세요.`);
+  if(answer===null)return; // Cancel must not change state.
+  const subject=answer.trim();
+  if(!subject)return toast('시험과목을 입력하세요.','error');
+  const changes=classes.some(c=>{
+    const x=S.editingCells[`${grade}|${day}|${period}|${c.id}`];
+    return x && (x.active===false||x.type==='STUDY'||(x.subject||'').trim()!==subject);
+  });
+  if(changes&&!confirm(`${grade}학년 ${day}일차 ${period}교시 전체 학급의 기존 과목·자습·미운영 설정을 '${subject}' 시험으로 바꾸시겠습니까?`))return;
+  classes.forEach(c=>{
+    const key=`${grade}|${day}|${period}|${c.id}`,old=S.editingCells[key]||{};
+    // Preserve start/end times and all unrelated grade/day/period cells.
+    S.editingCells[key]={...old,type:'EXAM',subject,active:true};
+  });
+  markScheduleDirty_();renderScheduleDay_(grade,day);
+  toast(`${grade}학년 ${day}일차 ${period}교시 전체 ${classes.length}개 학급: ${subject} 적용`,'ok');
+}
+function fillGradePeriodStudy(grade,day,period){
+  const plan=S.gradePlans[grade],d=plan?.days.find(x=>x.day===day);
+  if(!plan?.enabled||!d?.enabled||!d.periods.includes(period))return toast('운영 중인 학년·날짜·교시를 선택하세요.','error');
+  const classes=(S.admin?.classes||[]).filter(c=>c.grade===grade);
+  if(!classes.length)return toast('이 학년에 등록된 학급이 없습니다.','error');
+  if(!confirm(`${grade}학년 ${day}일차 ${period}교시 전체 ${classes.length}개 학급을 자습으로 설정하시겠습니까? 기존 시험과목·미운영 설정은 덮어씁니다.`))return;
+  classes.forEach(c=>{
+    const key=`${grade}|${day}|${period}|${c.id}`,old=S.editingCells[key]||{};
+    S.editingCells[key]={...old,type:'STUDY',subject:'',active:true};
+  });
+  markScheduleDirty_();renderScheduleDay_(grade,day);
+  toast(`${grade}학년 ${day}일차 ${period}교시 전체 학급: 자습 적용`,'ok');
+}
+function gradePeriodBulkButtons(grade,day,period){
+  return `<div class="period-bulk-tools">
+    <button type="button" class="btn" aria-label="${grade}학년 ${day}일차 ${period}교시 전 학급 과목 일괄 입력" onclick="fillGradePeriodSubject(${grade},${day},${period})">과목 전체 입력</button>
+    <button type="button" class="btn" aria-label="${grade}학년 ${day}일차 ${period}교시 전 학급 자습 일괄 지정" onclick="fillGradePeriodStudy(${grade},${day},${period})">전체 자습</button>
+  </div>`;
+}
+function fillGradeStudy(grade,day){if(!confirm(`${grade}학년 ${day}일차 운영 교시를 모두 자습으로 설정합니까?`))return;
+  const d=S.gradePlans[grade].days.find(x=>x.day===day);
+  d.periods.forEach(p=>S.admin.classes.filter(c=>c.grade===grade).forEach(c=>{
+    const key=`${grade}|${day}|${p}|${c.id}`,old=S.editingCells[key]||{};
+    S.editingCells[key]={...old,type:'STUDY',subject:'',active:true};
+  }));markScheduleDirty_();renderScheduleDay_(grade,day);}
+function copyGradePreviousPeriod(grade,day){const d=S.gradePlans[grade].days.find(x=>x.day===day),ps=d.periods.slice().sort((a,b)=>a-b);
+  if(ps.length<2)return toast('복사할 교시가 부족합니다.','error');
+  const target=Number(prompt(`${grade}학년 ${day}일차: 설정을 붙여 넣을 교시를 선택하세요.`,String(ps[1]))),index=ps.indexOf(target);
+  if(index<1)return toast('2번째 이후의 활성 교시를 선택하세요.','error');
+  S.admin.classes.filter(c=>c.grade===grade).forEach(c=>{
+    const from=S.editingCells[`${grade}|${day}|${ps[index-1]}|${c.id}`]||{type:'EXAM',subject:'',active:true};
+    S.editingCells[`${grade}|${day}|${target}|${c.id}`]={...from};
+  });markScheduleDirty_();renderScheduleDay_(grade,day);}
+function copyGradePreviousDay(grade,day){const days=S.gradePlans[grade].days,d=days.find(x=>x.day===day),prev=days.find(x=>x.day===day-1);
+  if(!prev)return toast('해당 학년의 이전 시험일이 없습니다.','error');
+  if(!confirm(`${grade}학년 이전 일차의 교시·과목을 ${day}일차로 복사합니까? 날짜는 유지합니다.`))return;
+  d.periods=prev.periods.slice();d.periods.forEach(p=>S.admin.classes.filter(c=>c.grade===grade).forEach(c=>{
+    S.editingCells[`${grade}|${day}|${p}|${c.id}`]={...(S.editingCells[`${grade}|${day-1}|${p}|${c.id}`]||{type:'EXAM',subject:'',active:true})};
+  }));markScheduleDirty_();renderScheduleDay_(grade,day);}
+function renderGradeCell(grade,day,period,c){
+  const key=`${grade}|${day}|${period}|${c.id}`,x=S.editingCells[key]||{type:'EXAM',subject:'',active:true};
+  return `<div class="cell-edit"><label class="rowcheck"><input type="checkbox" ${x.active!==false?'checked':''} onchange="changeGradeCell('${e(key)}','active',this.checked)"> 이 학급 운영</label>
+    <select ${x.active===false?'disabled':''} onchange="changeGradeCell('${e(key)}','type',this.value)"><option value="EXAM" ${x.type==='EXAM'?'selected':''}>시험</option><option value="STUDY" ${x.type==='STUDY'?'selected':''}>자습</option></select>
+    <input type="text" aria-label="${e(c.id)} ${period}교시 시험과목" placeholder="시험과목" value="${e(x.subject||'')}" ${x.type==='STUDY'||x.active===false?'disabled':''} onchange="changeGradeCell('${e(key)}','subject',this.value)"></div>`;
+}
+function renderGradeDay(grade,d,classes){
+  const periods=d.periods.slice().sort((a,b)=>a-b);
+  // Do not build both desktop and mobile editors; large class grids doubled DOM size.
+  const compact=window.matchMedia('(max-width:700px)').matches;
+  return `<article id="grade-day-${grade}-${d.day}" class="day-block"><div class="day-head"><h4>${grade}학년 ${d.day}일차</h4>
+    <label class="rowcheck"><input type="checkbox" ${d.enabled?'checked':''} onchange="setGradeDayEnabled(${grade},${d.day},this.checked)"> 이 날짜 시험 실시</label></div>
+    ${!d.enabled?'<p class="hint">이 날짜는 미실시로 저장하며 감독을 배정하지 않습니다.</p>':`
+    <div class="fields" style="margin:12px 0"><div class="field"><label>${grade}학년 ${d.day}일차 시험 날짜</label><input type="date" value="${e(d.date)}" onchange="setGradeDate(${grade},${d.day},this.value)"></div></div>
+    <div class="switches">${[1,2,3,4,5].map(p=>`<label class="rowcheck"><input type="checkbox" ${periods.includes(p)?'checked':''} onchange="setGradePeriod(${grade},${d.day},${p},this.checked)">${p}교시 운영</label>`).join('')}</div>
+    <div class="toolbar"><button class="btn" onclick="fillGradeSubject(${grade},${d.day})">이 학년·날짜 과목 일괄 입력</button><button class="btn" onclick="fillGradeStudy(${grade},${d.day})">이 학년·날짜 자습 지정</button>
+      <button class="btn" onclick="copyGradePreviousPeriod(${grade},${d.day})">이전 교시 복사</button><button class="btn" onclick="copyGradePreviousDay(${grade},${d.day})">이전 일차 복사</button></div>
+    <p class="hint">아래 각 교시의 '과목 전체 입력' / '전체 자습'은 <strong>${grade}학년 ${d.day}일차의 해당 교시</strong>에만 적용되며, 다른 교시는 변경하지 않습니다.</p>
+    ${periods.map(p=>{const time=S.editingCells[`${grade}|${d.day}|${p}|${classes[0]?.id}`]||{};
+      return `<div class="fields" style="margin:8px 0"><div class="field"><label>${p}교시 시작 (선택)</label><input type="time" value="${e(time.start||'')}" onchange="setGradePeriodTime(${grade},${d.day},${p},'start',this.value)"></div>
+        <div class="field"><label>${p}교시 종료 (선택)</label><input type="time" value="${e(time.end||'')}" onchange="setGradePeriodTime(${grade},${d.day},${p},'end',this.value)"></div></div>`;}).join('')}
+    ${!compact?`<div class="tablewrap"><table class="data"><thead><tr><th>교시</th>${classes.map(c=>`<th>${e(c.id)}</th>`).join('')}</tr></thead><tbody>
+      ${periods.map(p=>`<tr><th><strong>${p}교시</strong>${gradePeriodBulkButtons(grade,d.day,p)}</th>${classes.map(c=>`<td>${renderGradeCell(grade,d.day,p,c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:''}
+      ${compact?`<div class="grade-mobile-cells">${periods.map(p=>`<div class="grade-period-card"><h5>${p}교시 — ${grade}학년 전체 학급</h5>${gradePeriodBulkButtons(grade,d.day,p)}${classes.map(c=>`<div class="grade-class-card"><strong>${e(c.id)} 학급</strong>${renderGradeCell(grade,d.day,p,c)}</div>`).join('')}</div>`).join('')}</div>`:''}`}
+  </article>`;
+}
+function markScheduleDirty_(){
+  S.scheduleDirty=true;dirtyGroups_.add('schedule');updateSaveNotice_();
+  const x=document.getElementById('scheduleDirty');if(x)x.hidden=false;
+}
+function renderScheduleDay_(grade,day){
+  const article=document.getElementById(`grade-day-${grade}-${day}`);
+  if(!article||S.view!=='schedule')return renderSchedule();
+  const model=S.gradePlans[grade]?.days.find(x=>x.day===day);
+  const own=(S.admin?.classes||[]).filter(c=>c.grade===grade);
+  if(!model)return renderSchedule();
+  article.outerHTML=renderGradeDay(grade,model,own);
+}
+function renderSchedule(){
+  const classes=S.admin?.classes||[],grades=[...new Set(classes.map(c=>c.grade))].sort((a,b)=>a-b);
+  $('#app').innerHTML=`<section class="panel">${baseTitle('학년별 시험일정 설정','1학년 · 2학년 · 3학년을 세로로 구분합니다. 학년·날짜·교시별로 전체 학급에 과목 또는 자습을 일괄 적용할 수 있습니다.')}
+    <div class="warning">시험을 보지 않는 학년 또는 날짜는 체크를 해제하세요. 미실시 학년에는 시험감독과 자습감독이 모두 배정되지 않습니다.</div>
+    ${grades.map(grade=>{const g=S.gradePlans[grade],own=classes.filter(c=>c.grade===grade);
+      if(!g)return `<p class="error">${grade}학년 일정 초기화 오류입니다. 새로고침하세요.</p>`;
+      return `<section id="grade-${grade}" class="grade-block ${g.enabled?'':'inactive'}"><div class="grade-head"><h3>${grade}학년 시험일정</h3>
+        <label class="rowcheck"><input type="checkbox" ${g.enabled?'checked':''} onchange="setGradeEnabled(${grade},this.checked)"> ${grade}학년 시험 실시</label></div>
+        ${!g.enabled?`<p class="warning">${grade}학년 미실시 — 저장 시 이 학년의 시험·자습 감독 배정이 제외됩니다. 체크하면 설정을 계속 편집할 수 있습니다.</p>`:
+        `<div class="fields"><div class="field"><label>${grade}학년 시험일수</label><select onchange="setGradeDayCount(${grade},Number(this.value))">${[1,2,3,4,5].map(n=>`<option value="${n}" ${n===g.days.length?'selected':''}>${n}일</option>`).join('')}</select></div>
+          <div class="field"><span class="hint">${grade}학년 등록 학급 ${own.length}개 — 날짜와 교시를 이 학년에서만 관리합니다.</span></div></div>
+          ${g.days.map(d=>renderGradeDay(grade,d,own)).join('')}`}</section>`;
+    }).join('')}
+    <p class="hint">시험을 실시하는 학년·날짜의 활성 교시에만 감독이 배정됩니다. 학년별 날짜가 달라도 저장 가능합니다. 기존 배정은 보존되며 변경된 일정과 비교해 오류를 표시합니다.</p>
+    <p id="scheduleDirty" class="warning" ${S.scheduleDirty?'':'hidden'}>저장되지 않은 일정 변경사항이 있습니다.</p><div class="toolbar"><button class="btn primary" onclick="saveSchedule()">학년별 시험일정 전체 저장</button></div></section>`;
+}
+function gatherSchedule(){
+  const rows=[],classes=S.admin.classes||[],plans=S.gradePlans;
+  for(const grade of Object.keys(plans).map(Number).sort((a,b)=>a-b)){
+    const g=plans[grade];if(!g.enabled)continue;
+    const own=classes.filter(c=>c.grade===grade);
+    for(const d of g.days){if(!d.enabled)continue;
+      if(!d.date)throw new Error(`${grade}학년 ${d.day}일차 시험 날짜를 입력하세요.`);
+      if(!d.periods.length)throw new Error(`${grade}학년 ${d.day}일차 운영 교시가 없습니다.`);
+      for(const period of d.periods){let count=0;
+        for(const c of own){const x=S.editingCells[`${grade}|${d.day}|${period}|${c.id}`]||{type:'EXAM',subject:'',active:true};
+          if(x.active===false)continue;
+          if(x.type==='EXAM'&&!x.subject?.trim())throw new Error(`${grade}학년 ${d.day}일차 ${period}교시 ${c.id} 시험과목을 입력하세요.`);
+          rows.push({day:d.day,date:d.date,period,classId:c.id,type:x.type||'EXAM',subject:x.type==='STUDY'?'':x.subject||'',start:x.start||'',end:x.end||''});count++;
+        }
+        if(!count)throw new Error(`${grade}학년 ${d.day}일차 ${period}교시에 운영하는 학급이 없습니다. 교시 체크를 해제하거나 학급을 선택하세요.`);
+      }
+    }
+  }
+  if(!rows.length)throw new Error('시험을 실시하는 학년과 교시를 하나 이상 지정하세요.');
+  return {rows,gradePlan:JSON.parse(JSON.stringify(plans))};
+}
+async function saveSchedule(){let payload;
+  try{payload=gatherSchedule();}catch(err){toast(err.message,'error');return;}
+  if(!confirm(`시험일정을 저장하시겠습니까? 활성 시험/자습 학급·교시 ${payload.rows.length}건이 저장되고 기존 배정은 보존되며 오류를 재검토합니다.`))return;
+  const r=await work('학년별 시험일정 저장',()=>call('saveSchedule',{revision:S.admin.revision,...payload}));
+  if(r){toast('학년별 시험일정 저장 완료','ok');S.gradePlans={};S.editingCells={};await reloadSafe();}
+}
+function optionsTeachers(includeAll=false){const teachers=S.admin?.roster?.teachers||[];return (includeAll?teachers:teachers).map(t=>`<option value="${e(t.id)}">${e(t.name)} (${e(t.id)} / 담당 ${e(t.subjects.join(', '))} / 상치 ${e((t.crossSubjects||[]).join(', ')||'없음')})</option>`).join('');}
+function rosterEditorMarkup_(roster){
+  if(!S.rosterRows)S.rosterRows=roster.teachers.map(teacher=>({key:'existing_'+teacher.id,originalId:teacher.id,id:teacher.id,name:teacher.name,subjectsText:teacher.subjects.join(', '),crossSubjectsText:(teacher.crossSubjects||[]).join(', '),homeroom:teacher.homeroom||'',MAIN:teacher.roleEligibility?.MAIN===true?'O':teacher.roleEligibility?.MAIN===false?'X':'',ASSIST:teacher.roleEligibility?.ASSIST===true?'O':teacher.roleEligibility?.ASSIST===false?'X':'',STUDY:teacher.roleEligibility?.STUDY===true?'O':teacher.roleEligibility?.STUDY===false?'X':''}));
+  const fields=[['id','교사ID'],['name','교사명'],['subjectsText','담당교과'],['crossSubjectsText','상치교과'],['homeroom','담임학급']];
+  return `<div class="tablewrap"><table class="data"><thead><tr>${fields.map(([,label])=>`<th>${label}</th>`).join('')}<th>정감독</th><th>부감독</th><th>자습감독</th><th>강사 여부</th><th>삭제</th></tr></thead><tbody>${S.rosterRows.map(row=>`<tr data-roster-row="${e(row.key)}" data-original-id="${e(row.originalId||'')}">${fields.map(([field,label])=>`<td><input data-roster-field="${field}" aria-label="${e(row.id||'새 교사')} ${label}" value="${e(row[field])}" ${field==='id'&&row.originalId?'readonly':''} style="min-width:${field==='id'?'65':'110'}px;width:100%" ${field==='homeroom'?'placeholder="비담임은 공란"':''}></td>`).join('')}${['MAIN','ASSIST','STUDY'].map(role=>`<td><select data-roster-field="${role}" aria-label="${e(row.id||'새 교사')} ${role==='MAIN'?'정감독':role==='ASSIST'?'부감독':'자습감독'}"><option value="" ${!row[role]?'selected':''}>선택</option>${['O','X'].map(flag=>`<option value="${flag}" ${row[role]===flag?'selected':''}>${flag}</option>`).join('')}</select></td>`).join('')}<td>${row.originalId?`<label class="check"><input type="checkbox" data-instructor-id="${e(row.id)}" ${roster.teachers.find(teacher=>teacher.id===row.id)?.isInstructor?'checked':''} > 강사</label>` :'저장 후 설정'}</td><td><button type="button" class="btn danger" data-delete-teacher onclick="removeRosterTeacher(this)" aria-label="${e(row.name||'새 교사')} 삭제">삭제</button></td></tr>`).join('')}</tbody></table></div>`;
+}
+function addRosterTeacher(){
+  const ids=$$('[data-roster-field="id"]').map(input=>input.value.trim()).concat(S.admin.roster.teachers.map(teacher=>teacher.id));let next=Math.max(0,...ids.filter(id=>/^\d+$/.test(id)).map(Number))+1;
+  while(ids.includes(String(next)))next++;
+  S.rosterRows.push({key:'new_'+Date.now()+'_'+S.rosterRows.length,originalId:'',id:String(next),name:'',subjectsText:'',crossSubjectsText:'',homeroom:'',MAIN:'O',ASSIST:'O',STUDY:'O'});
+  dirtyGroups_.add('roster');renderSettings();
+}
+function removeRosterTeacher(button){
+  const element=button.closest('[data-roster-row]'),key=element.dataset.rosterRow;
+  const row=S.rosterRows.find(teacher=>teacher.key===key);if(!row)return;
+
+  const name=element.querySelector('[data-roster-field="name"]').value.trim()||'새 교사';
+  if(!confirm(`${name} 교사를 명단에서 삭제할까요?\n명단 변경 저장을 눌러야 시트에 반영됩니다. 저장 시 이 교사의 배정불가·겸임·감독규칙·강사 지정도 정리합니다. 수업시간표와 과거 기록은 보존합니다.`))return;
+  if(row.originalId){S.rosterDeletedIds=S.rosterDeletedIds||[];S.rosterDeletedIds.push(row.originalId);}
+  S.rosterRows=S.rosterRows.filter(teacher=>teacher.key!==key);
+  for(const [inputKey] of inputEdits_)if(inputKey.startsWith('roster:'+key+':')||inputKey==='instructor:'+row.originalId)inputEdits_.delete(inputKey);
+  dirtyGroups_.add('roster');renderSettings();
+}
+function cancelRosterEdits(){
+  if(!confirm('저장하지 않은 명단 변경과 새 교사 입력을 취소할까요?'))return;
+  clearDirty_('roster');S.rosterRows=null;S.rosterDeletedIds=[];renderSettings();
+}
+async function saveRoster(){
+  const rows=$$('[data-roster-row]').map(element=>{const row={originalId:element.dataset.originalId};$$('[data-roster-field]',element).forEach(input=>row[input.dataset.rosterField]=input.value);return row;});
+  if(rows.some(row=>!row.id.trim()||!row.name.trim()||!row.subjectsText.trim()||!['MAIN','ASSIST','STUDY'].every(role=>['O','X'].includes(row[role]))))return toast('번호·이름·담당교과와 세 역할의 O/X를 모두 입력하세요.','error');
+  const deletedTeacherIds=S.rosterDeletedIds||[];
+  if(!confirm(`교사 명단을 배정인원 시트에 저장할까요?${deletedTeacherIds.length?'\n삭제할 교사: '+deletedTeacherIds.map(id=>{const teacher=S.admin.roster.teachers.find(teacher=>teacher.id===id);return teacher?teacher.name+' ('+id+')':id;}).join(', '):''}\n저장 즉시 반영되며 기존 배정의 충돌을 표시합니다.`))return;
+  const result=await work('교사 명단 저장',()=>call('saveRoster',{revision:S.admin.revision,fingerprint:S.admin.roster.fingerprint,rows,deletedTeacherIds}));
+  if(result){S.rosterRows=null;S.rosterDeletedIds=[];toast(`명단 ${result.count}명 저장·추가 ${result.added}명·삭제 ${result.deleted||0}명. 저장되었습니다.`,'ok');await reloadSafe();}
+}
+function renderSettings(){const a=S.admin,roster=a.roster||{teachers:[],errors:[]};const verified=a.rosterVerified;
+  const opt=Object.assign({profile:'balanced',gradeStrength:0.5,mainWeight:3,assistWeight:2,studyWeight:1,avoidThree:true,avoidFour:true,roleFairness:true,burdenFairness:true,dateBalance:true,lunchBreakAfter:0},a.settings.optimization||{});
+  $('#app').innerHTML=`<section class="panel">${baseTitle('교사 명단·감독 설정','웹 앱에서 명단과 O/X를 편집한 뒤 명단 변경 저장을 누르세요.')}
+  <div class="${verified?'ok':'warning'}">${verified?'교사 명단 입력 정상':'교사 명단 확인이 필요합니다. 특히 상치교과·담임학급·비담임 공란을 검토하세요.'}</div>
+  ${roster.errors?.length?`<div class="error">${roster.errors.map(x=>e(x)).join('<br>')}</div>`:''}
+  <div class="kpis"><div class="kpi"><span>교사</span><b>${roster.teachers.length}명</b></div><div class="kpi"><span>강사(감독 제외)</span><b>${roster.teachers.filter(t=>t.isInstructor).length}명</b></div><div class="kpi"><span>학급</span><b>${a.classes.length}개</b></div></div>
+  ${rosterEditorMarkup_(roster)}
+  ${S.rosterDeletedIds?.length?`<p class="warning">삭제 예정 ${S.rosterDeletedIds.length}명 — 명단 변경 저장을 눌러야 시트에 반영됩니다. 명단 편집 취소로 되돌릴 수 있습니다.</p>`:''}
+  <div class="toolbar"><button type="button" class="btn" id="addRosterTeacherButton" onclick="addRosterTeacher()">＋ 교사 추가</button><button type="button" class="btn primary" id="saveRosterButton" onclick="saveRoster()">명단 변경 저장</button><button type="button" class="btn" id="cancelRosterButton" onclick="cancelRosterEdits()">명단 편집 취소</button><span class="hint">기존 교사 번호는 고정입니다. 새 교사는 담당교과와 시간표도 확인하세요. 저장 즉시 반영됩니다.</span></div>
+  <p class="hint">배정인원 시트의 정감독·부감독·자습감독 열: O=해당 역할 가능, X=해당 역할 금지. 공란·다른 값은 오류입니다. O여도 교과·담임·수업·강사 등의 기존 금지 조건은 적용됩니다.</p>
+  <div class="toolbar"><button class="btn primary" onclick="saveInstructorFlags()" >강사 체크 저장</button><span class="hint">체크된 강사는 정·부·자습 감독에서 모두 제외됩니다. 저장 즉시 반영됩니다.</span></div>
+  </section>
+  <section class="panel">${baseTitle('감독 인원 및 교과 동의어','정감독 1명·부감독 1명은 고정이며 자습감독 수를 조정합니다.')}
+    <div class="fields"><div class="field"><label>자습감독 인원</label><select id="studyCount">${[0,1,2].map(x=>`<option value="${x}" ${x===a.settings.studyCount?'selected':''}>${x}명</option>`).join('')}</select></div>
+    <div class="field"><label>교사별 최대 감독 횟수</label><input type="number" min="0" max="100" id="maxCount" value="${e(a.settings.maxPerTeacher||0)}"><span class="hint">0은 상한 없음</span></div></div>
+    <div class="field" style="margin-top:12px"><label>교과 동의어(JSON 형식)</label><textarea id="aliases" spellcheck="false">${e(JSON.stringify(a.settings.aliases||{},null,2))}</textarea><span class="hint">예: {"기술·가정":"기술가정"}. 명시한 동의어만 같은 교과로 판단합니다.</span></div>
+    <h3>시간표 미등록 교사의 부족 교시 투입</h3>
+    <label class="rowcheck"><input type="checkbox" id="missingTimetableFallback" ${a.settings.missingTimetableFallback===true?'checked':''} >인원이 부족한 교시에만 선택한 미등록 교사 투입 허용</label>
+    <div class="warning">기본값은 시간표 미등록 교사 제외입니다. 이 설정을 켜고 아래에서 투입 대상을 선택하면, 정규 후보만으로 학급별 감독 자리를 채울 수 없는 교시에 한해 미등록 제한을 해제합니다. 정규 후보를 먼저 배정하고 미등록 교사의 투입을 최소화합니다. O/X·교과·담임·배정불가·강사·타교근무·감독 제외 규칙은 그대로 적용됩니다.</div>
+    <p class="hint">특수반·독립시험실 담당으로 남겨둘 교사는 선택하지 마세요. 일부 교시만 참여할 수 있으면 배정불가 시간 또는 감독 제외 규칙을 함께 등록하세요. 시간표가 없으므로 실제 근무·수업 가능 여부는 관리자가 확인해야 합니다. 모든 교사의 시간표가 비어 있는 경우에는 자동 배정을 계속 차단합니다.</p>
+    <details><summary>부족 시 투입을 허용할 교사 선택 (${(a.settings.missingFallbackTeacherIds||[]).length}명 저장됨)</summary><p class="hint">아래 명단 중 시간표 미등록자에게만 적용됩니다. 선택하지 않은 미등록 교사는 계속 제외합니다.</p><div class="switches">${roster.teachers.map(teacher=>`<label class="rowcheck"><input type="checkbox" data-missing-fallback-id="${e(teacher.id)}" ${(a.settings.missingFallbackTeacherIds||[]).includes(teacher.id)?'checked':''} >${e(teacher.name)} (${e(teacher.id)})</label>`).join('')}</div></details>
+    <div class="toolbar"><button class="btn primary" onclick="saveSettings()">감독설정 저장</button></div>
+  </section><section class="panel">${baseTitle('배정 최적화 설정','기존 절대 금지 조건을 유지하면서 학년 우대·연강·정/부/자습 공정성의 상대적 우선순위를 조정합니다.')}
+    <div class="warning">감독 금지 조건은 어떤 프리셋이나 가산점으로도 해제되지 않습니다. 학년 우대 50%는 상대적 후보 선호 계수이며, 실제 배정 확률이 정확히 50% 증가한다는 뜻이 아닙니다.</div>
+    <div class="fields">
+      <div class="field"><label for="optProfile">최적화 우선순위</label><select id="optProfile">${[['balanced','종합 균형'],['fairness','공정성 우선'],['consecutive','연강 방지 우선'],['grade','담당 학년 우선']].map(([v,n])=>`<option value="${v}" ${opt.profile===v?'selected':''}>${n}</option>`).join('')}</select></div>
+      <div class="field"><label for="optGrade">담당 학년 우대 (%)</label><input id="optGrade" type="number" min="0" max="100" step="5" value="${Math.round(opt.gradeStrength*100)}"><span class="hint">기본 50%, 0%는 우대 미적용</span></div>
+      <div class="field"><label for="optLunch">점심 긴 휴식 직전 교시</label><select id="optLunch">${[0,1,2,3,4,5,6,7].map(x=>`<option value="${x}" ${opt.lunchBreakAfter===x?'selected':''}>${x?x+'교시 이후 연강 단절':'단절 없음'}</option>`).join('')}</select></div>
+      <div class="field"><label>정감독 부담 가중치</label><input type="number" id="optMain" min="0.1" max="10" step="0.5" value="${e(opt.mainWeight)}"></div>
+      <div class="field"><label>부감독 부담 가중치</label><input type="number" id="optAssist" min="0.1" max="10" step="0.5" value="${e(opt.assistWeight)}"></div>
+      <div class="field"><label>자습감독 부담 가중치</label><input type="number" id="optStudy" min="0.1" max="10" step="0.5" value="${e(opt.studyWeight)}"></div>
+    </div>
+    <div class="switches" style="margin:14px 0">
+      ${[['avoidThree','3연강 억제'],['avoidFour','4~5연강 강력 억제'],['roleFairness','정·부·자습 역할별 균등화'],['burdenFairness','가중 부담 균등화'],['dateBalance','날짜별 감독 분산']].map(([key,label])=>`<label class="rowcheck"><input type="checkbox" data-opt-flag="${key}" ${opt[key]?'checked':''}>${label}</label>`).join('')}
+    </div>
+    <div class="toolbar"><button class="btn primary" onclick="saveSettings()" >배정 최적화 설정 저장</button><span class="hint">저장 시 기존 배정은 보존됩니다. 변경 내용은 기존 배정과 비교해 검토하세요.</span></div>
+  </section><section class="panel">${baseTitle('배정 불가 시간' ,'출장·연가·학교 업무 등으로 배정할 수 없는 교시를 등록합니다.')}
+  <div class="fields"><div class="field"><label>교사</label><select id="unTeacher">${optionsTeachers()}</select></div><div class="field"><label>날짜</label><input type="date" id="unDate"></div><div class="field"><label>교시</label><select id="unPeriod">${[1,2,3,4,5].map(x=>`<option value="${x}">${x}교시</option>`).join('')}</select></div><div class="field"><label>사유</label><input id="unReason" placeholder="학교 업무"></div><button class="btn" onclick="addUnavailable()">+ 추가</button></div>
+  <div class="tablewrap" style="margin-top:13px"><table class="data"><thead><tr><th>교사</th><th>날짜</th><th>교시</th><th>사유</th><th>삭제</th></tr></thead><tbody>
+  ${S.unavailable.map((x,i)=>`<tr><td>${e(roster.teachers.find(t=>t.id===x.teacherId)?.name||x.teacherId)}</td><td>${e(x.date)}</td><td>${x.period}</td><td>${e(x.reason)}</td><td><button class="btn danger" onclick="removeUnavailable(${i})">삭제</button></td></tr>`).join('')||'<tr><td colspan="5">등록된 배정 불가 시간이 없습니다.</td></tr>'}
+  </tbody></table></div><div class="toolbar"><button class="btn primary" onclick="saveUnavailable()">배정불가 설정 저장</button></div>
+  </section><section class="panel">${baseTitle('관리자 진단·단위 테스트','실제 확정 데이터를 건드리지 않는 합성 데이터 기반 검사입니다.')}
+  <div class="toolbar"><button class="btn" onclick="diagnose()">원본 시트 점검</button><button class="btn" onclick="selfTests()">검증 테스트 실행</button><button type="button" class="btn" onclick="showPerformanceDiagnostics()">화면 성능 진단</button></div></section>
+  `;appendClassEditor_();restoreInputs_();}
+async function saveInstructorFlags(){
+  if(S.rosterDeletedIds?.length)return toast('교사 삭제를 명단 변경 저장으로 반영하거나 명단 편집을 취소하세요.','error');
+  const instructorIds=$$('[data-instructor-id]:checked').map(el=>el.dataset.instructorId);
+  if(!confirm(`${instructorIds.length}명의 교사를 강사로 지정합니다. 강사는 감독에서 전부 제외되고 기존 배정은 보존되며 충돌을 표시합니다. 저장할까요?`))return;
+  const result=await work('강사 체크 저장',()=>call('saveInstructorFlags',{revision:S.admin.revision,instructorIds}));
+  if(result){toast(`강사 ${result.instructorCount}명 저장 완료. 명단 확인 후 다시 자동 배정하세요.`,'ok');await reloadSafe();}
+}
+function verifyRoster(){toast('각 편집 화면에서 바로 저장하세요.');}
+function revokeRoster(){toast('각 편집 화면에서 바로 저장하세요.');}
+function resetWorkspace(){toast('각 편집 화면에서 바로 저장하세요.');}
+function previewResetSelection(){toast('각 편집 화면에서 바로 저장하세요.');}
+function executeResetSelection(){toast('각 편집 화면에서 바로 저장하세요.');}
+async function saveSettings(){let aliases;try{aliases=JSON.parse($('#aliases').value||'{}');if(!aliases||Array.isArray(aliases)||typeof aliases!=='object')throw new Error();}catch(e){return toast('동의어 설정은 JSON 객체 형식이어야 합니다.','error');}
+  const optimization={profile:$('#optProfile').value,gradeStrength:Number($('#optGrade').value)/100,
+    mainWeight:Number($('#optMain').value),assistWeight:Number($('#optAssist').value),studyWeight:Number($('#optStudy').value),
+    lunchBreakAfter:Number($('#optLunch').value)};
+  $$('[data-opt-flag]').forEach(el=>optimization[el.dataset.optFlag]=el.checked);
+  if(!Number.isFinite(optimization.gradeStrength)||optimization.gradeStrength<0||optimization.gradeStrength>1)
+    return toast('담당 학년 우대는 0~100% 사이로 입력하세요.','error');
+  if(!(optimization.mainWeight>optimization.assistWeight&&optimization.assistWeight>optimization.studyWeight&&optimization.studyWeight>0))
+    return toast('업무 강도는 정감독 > 부감독 > 자습감독 순서여야 합니다.','error');
+  const missingTimetableFallback=$('#missingTimetableFallback').checked,missingFallbackTeacherIds=$$('[data-missing-fallback-id]:checked').map(input=>input.dataset.missingFallbackId);
+  if(missingTimetableFallback&&!missingFallbackTeacherIds.length)return toast('부족 시 투입을 허용할 교사를 선택하세요.','error');
+  const settings={studyCount:Number($('#studyCount').value),maxPerTeacher:Number($('#maxCount').value),aliases,optimization,missingTimetableFallback,missingFallbackTeacherIds};
+  const r=await work('감독설정 저장',()=>call('saveSettings',{revision:S.admin.revision,settings}));if(r){toast('설정 저장 완료','ok');await reloadSafe();}}
+function addUnavailable(){const teacherId=$('#unTeacher').value,date=$('#unDate').value,period=Number($('#unPeriod').value),reason=$('#unReason').value;
+  if(!teacherId||!date)return toast('교사와 날짜를 입력하세요.','error');S.unavailable.push({teacherId,date,period,reason});renderSettings();}
+function removeUnavailable(i){S.unavailable.splice(i,1);renderSettings();}
+async function saveUnavailable(){const r=await work('배정 불가 저장',()=>call('saveUnavailable',{revision:S.admin.revision,rows:S.unavailable}));if(r){toast('저장되었습니다.','ok');await reloadSafe();}}
+async function diagnose(){const x=await work('진단',()=>call('diagnose'));if(x)modal('Google 시트 진단',`<pre style="white-space:pre-wrap;word-break:break-word">${e(JSON.stringify(x,null,2))}</pre>`);}
+async function selfTests(){const x=await work('테스트',()=>call('selfTests'));if(x)modal(`단위 테스트 ${x.passed}개 통과 / ${x.failed}개 실패`,`<div class="tablewrap"><table class="data"><tbody>${x.tests.map(t=>`<tr><td>${e(t.name)}</td><td>${e(t.status)}</td><td>${e(t.detail||'')}</td></tr>`).join('')}</tbody></table></div><p class="hint">${e(x.note)}</p>`);}
+
+async function loadOptimizationReport(){
+  if(!S.boot?.admin||S.optimizationLoading)return;
+  S.optimizationLoading=true;
+  try {S.optimizationReport=await call('optimizationReport');}
+  catch(err){console.error('[optimizationReport]',err);toast('업무부담 분석: '+err.message,'error');}
+  finally{S.optimizationLoading=false;}
+  if(S.view==='fair')renderFair();
+}
+function renderTeaching(){
+  if(!S.teachingLoaded){$('#app').innerHTML='<section class="panel"><h2>교사 수업·겸임 일정 불러오는 중</h2><p class="hint">수업·겸임 제약 자료는 이 메뉴에서만 요청합니다.</p><button type="button" class="btn" onclick="loadTeachingData()">다시 시도</button></section>';return;}
+  const a=S.admin,report=a.availabilityReport||{},visits=S.visiting||[],roster=a.roster?.teachers||[];
+  const missing=report.missingTeachers||[],unknown=report.unknownTeachers||[],invalid=[...(report.invalidRows||[]),...(a.visitingErrors||[]),...(a.teachingRuleErrors||[])];
+  const summaries=(report.slots||[]).map((x,i)=>`<tr><td>${e(x.date)} (${e(x.weekday)})</td><td>${x.period}교시</td><td>${x.possible}명</td><td>${x.excluded}명</td><td><button type="button" class="btn" onclick="showAvailabilityDetails(${i})">상세 보기</button></td></tr>`).join('');
+  $('#app').innerHTML=`<section class="panel">${baseTitle('교사 시간표 · 포함/제외 · 겸임교사 설정','시험을 치르지 않는 학급의 정규수업, 타교 출강, 본교 방문 시간을 감독 가능 여부에 자동 반영합니다.')}
+  <div class="kpis"><div class="kpi"><span>수업시간표 행</span><b>${report.teachingRows||0}</b></div><div class="kpi"><span>명단 연결 교사</span><b>${report.teachingMatched||0} / ${report.teacherCount||roster.length}</b></div><div class="kpi"><span>겸임 근무 규칙</span><b>${visits.length}</b></div><div class="kpi"><span>수업시간표 미등록</span><b>${missing.length}</b></div></div>
+  <div class="warning">${report.teachingRows?'수업시간표 제약 적용 중.':'수업시간표가 비어 있습니다. 아직 수업시간 제약이 적용되지 않으므로 자동 배정 전에 반드시 시간표를 입력하세요.'}<br>현재 읽는 탭: <b>${e(report.teachingSource||'교사시간표')}</b>${report.ignoredAlias?' · 수업시간표 탭에도 데이터가 있지만 교사시간표 탭을 우선 사용합니다.':''}
+  <br>원본 <b>배정인원</b>의 이름과 교사시간표 교사명이 같아야 합니다. 시간표에 없는 교사는 자동 배정 후보에서 제외합니다. 수업 없는 교사는 교사시간표에 <b>교사명 / 수업없음</b> 행을 추가해 확인하세요.</div>
+  <div class="toolbar"><button type="button" class="btn" onclick="openRosterSheet()">Google 시트에서 교사시간표 열기 ↗</button><button type="button" class="btn primary" onclick="reloadSafe()">시트 내용 새로고침</button></div>
+  <div class="tablewrap"><table class="data"><thead><tr><th>교사명</th><th>요일</th><th>교시</th><th>과목</th><th>학급</th><th>과목군</th></tr></thead><tbody><tr><td>예시: 김○○</td><td>월</td><td>1</td><td>국어1</td><td>1-2</td><td>국어</td></tr></tbody></table></div>
+  <p class="hint">Google 시트 <b>교사시간표</b> 또는 <b>수업시간표</b>에 첨부한 6열 데이터를 헤더와 함께 붙여 넣으세요. 두 탭에 데이터가 있으면 교사시간표를 우선합니다. 교시가 겹쳐도 해당 학급이 시험/자습으로 전환된 경우에는 수업 부담이 해제됩니다. 같은 날짜·교시에 수업하는 다른 학급이 남아 있으면 제외합니다.</p>
+  ${unknown.length?`<div class="warning"><b>배정인원과 연결되지 않는 시간표 교사</b> (${unknown.length}명): ${unknown.slice(0,35).map(e).join(', ')}${unknown.length>35?' 외':''}</div>`:''}
+  ${missing.length?`<div class="warning"><b>시간표 미등록으로 기본 제외되는 교사</b>: ${missing.map(e).join(', ')}<p>${report.missingTimetableFallback?'부족 교시 투입이 켜져 있습니다. 설정에서 선택한 교사만 후보 부족 교시에 참여합니다. 특수반·독립시험실 담당자는 선택 해제하거나 해당 교시를 배정불가로 등록하세요.':'현재는 모두 기본 제외입니다. 감독 설정에서 부족 시 투입을 켜고 허용할 교사를 선택할 수 있습니다.'}</p>${report.fallbackSlots?.length?`<p>정규 후보 부족 교시: ${report.fallbackSlots.map(slot=>`${e(slot.date)} ${slot.period}교시 (필요 ${slot.required}자리 / 정규 후보로 최대 ${slot.regularMatched}자리 배정 가능)`).join(' · ')}</p>`:''}</div>`:''}
+  ${invalid.length?`<div class="error"><b>시간표/겸임 데이터 오류 (수정 전 배정 불가)</b><ul>${invalid.slice(0,20).map(x=>`<li>${e(x)}</li>`).join('')}</ul></div>`:''}
+  <h3>시험일·교시별 감독 가능 인원 (정규수업·겸임 사유 포함)</h3><div class="tablewrap"><table class="data"><thead><tr><th>날짜</th><th>교시</th><th>후보 수</th><th>제외 인원</th><th>상세</th></tr></thead><tbody>${summaries||'<tr><td colspan="5">시험일정을 저장하면 교시별 후보 수가 표시됩니다.</td></tr>'}</tbody></table></div>
+  </section><section class="panel">${baseTitle('교사 감독 포함·제외 규칙','특정 날짜·교시의 수업 충돌을 개별 조정하거나 교사를 감독 대상에서 제외합니다.')}
+  <div class="warning"><b>적용 기준:</b> 제외 규칙은 감독을 금지합니다. 포함 규칙은 <b>정규수업 충돌 또는 시간표 미등록 제한만</b> 해제하며, 동일 교과·상치교과·담임·배정불가·타교근무·겸임 출근 확인·동시간 중복은 해제하지 않습니다. 포함 전에 수업 대체/해제 여부를 확인하고 사유를 기록하세요. 같은 시간에 제외·포함이 겹치면 제외가 우선합니다.</div>
+  <div class="fields">
+    <div class="field"><label>교사</label><select id="ruleTeacher">${optionsTeachers()}</select></div>
+    <div class="field"><label>규칙</label><select id="ruleMode" onchange="toggleRuleMode()"><option value="제외">감독 제외</option><option value="포함">감독 포함 (수업 예외)</option></select></div>
+    <div class="field"><label>시작일</label><input id="ruleDate" type="date"></div>
+    <div class="field"><label>종료일 (비우면 시작일 하루)</label><input id="ruleEndDate" type="date"></div>
+    <div class="field"><label>요일 (기간 내 특정 요일 또는 매주 반복)</label><select id="ruleWeekday"><option value="">선택 안 함</option>${['월','화','수','목','금','토','일'].map(x=>`<option>${x}</option>`).join('')}</select></div>
+    <div class="field"><label>교시</label><select id="rulePeriod"><option value="">종일 (제외 전용)</option>${Array.from({length:10},(_,i)=>`<option value="${i+1}">${i+1}교시</option>`).join('')}</select></div>
+    <div class="field"><label>수업학급 (포함 시 선택)</label><select id="ruleClass" disabled><option value="">전체 수업 충돌</option>${(a.classes||[]).map(c=>`<option value="${e(c.id)}">${e(c.id)}</option>`).join('')}</select></div>
+    <div class="field" style="flex:2;min-width:200px"><label>사유 (필수)</label><input id="ruleReason" placeholder="예: 2학년 수업 대체 교사 배치 확인"></div>
+    <button class="btn" onclick="addTeachingRule()">+ 규칙 추가</button>
+  </div>
+  <p class="hint">기간은 시작일과 종료일을 모두 포함합니다. 종료일을 비우면 시작일 하루만 적용됩니다. 날짜를 비우고 요일만 선택하면 매주 반복하며, 기간과 요일을 함께 선택하면 기간 내 해당 요일만 적용됩니다. 포함은 수업 충돌만 해제하고 강사·담당/상치교과·담임·타교 근무 금지는 해제하지 않습니다.</p>
+  <div class="tablewrap"><table class="data"><thead><tr><th>교사</th><th>규칙</th><th>시작일</th><th>종료일</th><th>요일</th><th>교시</th><th>수업학급</th><th>사유</th><th>삭제</th></tr></thead><tbody>${(S.teachingRules||[]).map((r,i)=>`<tr><td>${e(r.teacherName)}</td><td><b>${e(r.mode)}</b></td><td>${e(r.startDate||r.date||'-')}</td><td>${e(r.endDate||(r.startDate||r.date)||'-')}</td><td>${e(r.weekday||'-')}</td><td>${r.period||'종일'}</td><td>${e(r.classId||'전체')}</td><td>${e(r.reason)}</td><td><button class="btn danger" onclick="removeTeachingRule(${i})">삭제</button></td></tr>`).join('')||'<tr><td colspan="9">등록된 포함·제외 규칙이 없습니다.</td></tr>'}</tbody></table></div>
+  <div class="toolbar"><button class="btn primary" onclick="saveTeachingRules()" >포함·제외 규칙 저장</button></div>
+  
+  </section><section class="panel">${baseTitle('겸임교사 본교·타교 근무 시간','타교출강 교사는 타교 근무 시간 제외, 본교방문 교사는 본교에 있는 시간만 감독 후보가 됩니다.')}
+  <div class="fields">
+    <div class="field"><label>교사</label><select id="visTeacher">${optionsTeachers()}</select></div>
+    <div class="field"><label>구분</label><select id="visType"><option>타교출강</option><option>본교방문</option></select></div>
+    <div class="field"><label>날짜 (특정일)</label><input type="date" id="visDate"></div>
+    <div class="field"><label>요일 (반복)</label><select id="visWeekday"><option value="">선택 안 함</option>${['월','화','수','목','금','토','일'].map(d=>`<option>${d}</option>`).join('')}</select></div>
+    <div class="field"><label>교시</label><select id="visPeriod"><option value="">종일</option>${[1,2,3,4,5,6,7,8,9,10].map(x=>`<option value="${x}">${x}교시</option>`).join('')}</select></div>
+    <div class="field"><label>근무장소</label><select id="visPlace"><option value="타교">타교 (감독 제외)</option><option value="본교">본교 (조건 충족 시 가능)</option></select></div>
+    <div class="field"><label>비고</label><input id="visNote" placeholder="방문일/예외"></div>
+    <button class="btn" onclick="addVisiting()">+ 근무 규칙 추가</button>
+  </div>
+  <p class="hint">날짜만 넣으면 해당 날짜에 적용, 요일만 넣으면 반복 적용합니다. 교시를 비우면 종일 적용합니다. 날짜별 예외는 주간 반복보다 우선합니다. 방문교사는 명시된 <b>본교</b> 근무시간 외에는 제외됩니다.</p>
+  <div class="tablewrap"><table class="data"><thead><tr><th>교사</th><th>유형</th><th>날짜</th><th>요일</th><th>교시</th><th>근무장소</th><th>비고</th><th>삭제</th></tr></thead><tbody>
+  ${visits.map((v,i)=>`<tr><td>${e(v.teacherName)}</td><td>${e(v.type)}</td><td>${e(v.date||'-')}</td><td>${e(v.weekday||'-')}</td><td>${v.period||'종일'}</td><td>${e(v.location)}</td><td>${e(v.note||'')}</td><td><button class="btn danger" onclick="removeVisiting(${i})">삭제</button></td></tr>`).join('')||'<tr><td colspan="8">아직 겸임교사 근무 규칙이 없습니다.</td></tr>'}
+  </tbody></table></div><div class="toolbar"><button class="btn primary" onclick="saveVisiting()" >겸임교사 근무설정 저장</button></div>
+  
+  </section>`;
+}
+function showAvailabilityDetails(index){
+  const slot=S.admin?.availabilityReport?.slots?.[index];
+  if(!slot)return toast('제외 내역을 다시 불러와 주세요.','error');
+  const reasons=Object.entries(slot.reasons||{}).sort((a,b)=>b[1]-a[1]);
+  const people=slot.excludedTeachers||[];
+  const summary=`<p class="hint">서로 다른 사유로 중복 집계된 교사는 제외 인원에 한 번만 포함됩니다.</p><div class="kpis"><div class="kpi"><span>감독 가능 교사</span><b>${slot.possible}명</b></div><div class="kpi"><span>제외 교사</span><b>${slot.excluded}명</b></div></div>`;
+  const byReason=`<h4>제외 사유별 건수 (중복 허용)</h4><div class="cards">${reasons.map(([reason,count])=>`<div class="card"><b>${e(reason)}</b> · ${count}명</div>`).join('')||'<p>제외 사유가 없습니다.</p>'}</div>`;
+  const detail=people.length?`<h4>제외된 교사별 상세</h4><div class="tablewrap"><table class="data"><thead><tr><th>교사</th><th>제외 사유</th></tr></thead><tbody>${people.map(t=>`<tr><td>${e(t.name)}</td><td>${(t.reasons||[]).map(e).join('<div></div>')}</td></tr>`).join('')}</tbody></table></div>`:'<p class="hint">이번 교시에는 제외된 교사가 없습니다.</p>';
+  modal(`${slot.date} · ${slot.period}교시 감독 가능 인원`,summary+byReason+detail);
+}
+function toggleRuleMode(){
+  const include=$('#ruleMode')?.value==='포함';
+  if($('#ruleClass'))$('#ruleClass').disabled=!include;
+  if(!include&&$('#ruleClass'))$('#ruleClass').value='';
+}
+function addTeachingRule(){
+  const id=$('#ruleTeacher')?.value,t=S.admin.roster.teachers.find(x=>x.id===id);
+  const row={teacherName:t?.name||'',mode:$('#ruleMode')?.value,date:$('#ruleDate')?.value||'',endDate:$('#ruleEndDate')?.value||'',
+    weekday:$('#ruleWeekday')?.value||'',period:$('#rulePeriod')?.value||'',
+    classId:$('#ruleMode')?.value==='포함'?$('#ruleClass')?.value||'':'',reason:$('#ruleReason')?.value.trim()||''};
+  if(!row.teacherName)return toast('교사를 선택하세요.','error');
+  if(!row.date&&!row.weekday)return toast('시작일 또는 반복 요일을 입력하세요.','error');
+  if(row.endDate&&!row.date)return toast('종료일을 설정하려면 시작일도 필요합니다.','error');
+  if(row.endDate&&row.endDate<row.date)return toast('종료일이 시작일보다 빠를 수 없습니다.','error');
+  if(row.date&&row.weekday&&!row.endDate){const wd=['일','월','화','수','목','금','토'][new Date(row.date+'T12:00:00Z').getUTCDay()];
+    if(wd!==row.weekday)return toast('단일 날짜와 요일이 일치하지 않습니다.','error');}
+  if(row.mode==='포함'){
+    if(!row.date||!row.period)return toast('포함 규칙에는 시작일과 교시가 필요합니다.','error');
+    if(row.reason.length<4)return toast('포함 시 수업을 비우는 방법을 포함해 사유를 4자 이상 적으세요.','error');
+    if(!confirm('이 교사의 정규수업이 실제로 해제되거나 대체 인력이 배치됐습니까? 다른 절대 금지 조건은 유지됩니다.'))return;
+  }else if(row.reason.length<2)return toast('제외 사유를 2자 이상 적으세요.','error');
+  S.teachingRules.push(row);renderTeaching();
+}
+function removeTeachingRule(i){if(!confirm('선택한 교사 포함·제외 규칙을 삭제하시겠습니까?'))return;S.teachingRules.splice(i,1);renderTeaching();}
+async function saveTeachingRules(){
+  if(!confirm('교사 감독 포함·제외 규칙을 저장할까요? 기존 배정은 보존됩니다.'))return;
+  const result=await work('교사 감독 규칙 저장',()=>call('saveTeachingRules',{revision:S.admin.revision,rows:S.teachingRules}));
+  if(result){toast(result.count+'개 규칙 저장 완료. 자동 배정을 다시 실행하세요.','ok');await reloadSafe();}
+}
+function addVisiting(){
+  const id=$('#visTeacher')?.value, t=S.admin.roster.teachers.find(t=>t.id===id);
+  const x={teacherName:t?.name||'',type:$('#visType').value,date:$('#visDate').value,weekday:$('#visWeekday').value,
+    period:$('#visPeriod').value,location:$('#visPlace').value,note:$('#visNote').value};
+  if(!x.date&&!x.weekday)return toast('날짜 또는 요일을 입력하세요.','error');
+  if(x.date&&x.weekday){const day=['일','월','화','수','목','금','토'][new Date(x.date+'T12:00:00Z').getUTCDay()];
+    if(x.weekday!==day)return toast('선택 날짜와 요일이 일치하지 않습니다.','error');}
+  S.visiting.push(x);renderTeaching();
+}
+function removeVisiting(i){if(!confirm('이 겸임 규칙을 삭제하시겠습니까? (저장 전까지 임시 변경)'))return;S.visiting.splice(i,1);renderTeaching();}
+async function saveVisiting(){if(!confirm('겸임교사 근무 설정을 저장하시겠습니까? 기존 배정은 보존되며 오류를 재검토합니다.'))return;
+  const x=await work('겸임교사 근무설정 저장',()=>call('saveVisiting',{revision:S.admin.revision,rows:S.visiting}));
+  if(x){toast('겸임 근무설정 저장 완료','ok');await reloadSafe();}}
+
+function renderAssign(){const a=S.admin,ctx={schedule:a.schedule,assignments:S.draft,teachers:a.roster.teachers};$('#app').innerHTML= '<section class="panel">'+baseTitle('자동 배정 · 직접 수정','변경 버튼을 누르면 검증 후 즉시 저장됩니다.')+
+ (a.diagnostic?'<div class="warning">현재 배정 검토 필요: '+e(a.diagnostic)+'</div>':'')+
+ '<div class="toolbar"><label>난수 시드 <input id="seed" type="number" value="2026"></label><button class="btn primary" onclick="generate()">자동 배정 실행·저장</button><button class="btn" onclick="improve(false)">공정성 개선안</button><button class="btn" onclick="improve(true)">개선안 적용·저장</button><button class="btn" onclick="reloadSafe()">다시 불러오기</button></div>'+
+ metrics(a.stats)+scheduleGrid(a.schedule,S.draft,a.roster.teachers)+'</section><section class="panel">'+baseTitle('감독자 수정 · 맞교환','기존 오류는 표시되며, 오류를 줄이는 수정도 저장할 수 있습니다.')+
+ '<div class="fields"><div class="field"><label>자리 A</label><select id="slot1">'+slotOptions(ctx,S.selection1)+'</select></div><div class="field"><label>자리 B</label><select id="slot2">'+slotOptions(ctx,S.selection2)+'</select></div><div class="field"><label>새 감독자</label><select id="newTeacher">'+optionsTeachers()+'</select></div></div><div class="toolbar"><button class="btn primary" onclick="manual(\'update\')">감독자 변경·저장</button><button class="btn" onclick="manual(\'swap\')">맞교환·저장</button><button class="btn" onclick="manual(\'roleSwap\')">정·부 역할 교환·저장</button></div></section>';}
+function slotOptions(ctx,selected){return `<option value="">자리 선택</option>`+(ctx.assignments||[]).map(a=>{
+    const teacher=ctx.teachers.find(t=>t.id===a.teacherId)?.name||a.teacherId;
+    return `<option value="${e(a.key)}" ${selected===a.key?'selected':''}>${e(a.date)} ${a.period}교시 ${e(a.classId)} ${e(displayRole(a.role))} — ${e(teacher)}</option>`;
+  }).join('');}
+async function generate(){if(!confirm('현재 저장된 시험일정과 감독설정으로 배정을 생성하시겠습니까?'))return;
+  const x=await work('자동 배정',()=>call('generate',{revision:S.admin.revision,seed:Number($('#seed').value)}));
+  if(!x)return;
+  if(!x.ok){modal('배정 불가능 — 제약 조건을 보존했습니다',`<p>현재 조건으로 정감독·부감독을 완전히 채울 수 없습니다.</p><pre style="white-space:pre-wrap;word-break:break-word">${e(JSON.stringify(x.detail,null,2))}</pre><p class="hint">가능 인원 확대, 시험일정 변경, 자습 인원 조정 또는 배정불가 시간 검토가 필요합니다.</p>`);return;}
+  toast(`유효한 배정 ${x.validation.assigned}자리 생성 완료`, 'ok');await reloadSafe();}
+async function improve(apply){const x=await work('균형 개선',()=>call('improve',{revision:S.admin.revision,apply}));if(!x)return;
+  if(apply){toast('공정성 개선안 적용 완료','ok');await reloadSafe();}else modal('공정성 개선 시뮬레이션',`<p>개선 전 표시 점수 ${e(x.before)}, 개선 후 ${e(x.after)}</p><p>개선 탐색 변경 횟수: ${x.changes}</p>${x.comparison?`<div class="tablewrap"><table class="data"><tr><th>지표</th><th>변경 전</th><th>변경 후</th></tr>${[['addedFour','새로 생긴 4연강'],['addedThree','새로 생긴 3연강'],['mainSpread','정감독 횟수 편차'],['assistSpread','부감독 횟수 편차'],['studySpread','자습감독 횟수 편차'],['burdenSpread','업무 부담 편차']].map(([k,n])=>`<tr><td>${n}</td><td>${e(x.comparison.before[k])}</td><td>${e(x.comparison.after[k])}</td></tr>`).join('')}</table></div>`:''}<p class="hint">설정한 우선순위에 따라 개선 여부를 결정합니다. 모든 금지 조건은 변경되지 않습니다.</p>`);}
+async function manual(type){const key=$('#slot1')?.value||S.selection1,key2=$('#slot2')?.value||S.selection2,teacherId=$('#newTeacher')?.value;
+  const reason=$('#reason')?.value?.trim()||'';if(!key)return toast('변경할 감독 자리 A를 선택하세요.','error');if(type!=='update'&&!key2)return toast('교환할 자리 B를 선택하세요.','error');
+
+  if(!confirm('서버에서 모든 감독 제약을 검사한 후 적용하시겠습니까?'))return;
+  const action=type;
+  const payload={revision:S.admin.revision,type,key,key1:key,key2,teacherId,reason};
+  const x=await work('감독 변경',()=>call(action,payload));if(x){toast('감독 변경 및 검증 완료','ok');S.selection1='';S.selection2='';await reloadSafe();}}
+function unlockConfirmed(){toast('각 편집 화면에서 바로 저장하세요.');}
+function discardUnlocked(){toast('각 편집 화면에서 바로 저장하세요.');}
+function confirmAssignment(){toast('각 편집 화면에서 바로 저장하세요.');}
+function fairnessCharts(stats){stats=stats.filter(t=>!t.isInstructor);if(!stats.length)return '';
+  const max=Math.max(1,...stats.map(x=>x.total)),freq={};stats.forEach(t=>freq[t.total]=(freq[t.total]||0)+1);
+  const series=Object.keys(freq).map(Number).sort((a,b)=>a-b),peak=Math.max(...Object.values(freq));
+  return `<div class="cards"><div class="card"><h3>전체 감독 횟수 분포</h3>${series.map(n=>`<div class="hint">${n}회 — ${freq[n]}명</div><div class="bar"><span style="width:${100*freq[n]/peak}%"></span></div>`).join('')}</div>
+  <div class="card"><h3>정·부·자습 감독 유형 구성</h3><div class="chart-legend"><span class="main">정감독</span><span class="assist">부감독</span><span class="study">자습감독</span></div>
+  ${stats.slice().sort((a,b)=>b.total-a.total).map(t=>`<div class="hint" style="margin-top:5px">${e(t.name)} · ${t.total}회</div><div class="stack" style="width:${Math.max(12,100*t.total/max)}%"><span class="main" style="width:${t.total?100*t.main/t.total:0}%"></span><span class="assist" style="width:${t.total?100*t.assist/t.total:0}%"></span><span class="study" style="width:${t.total?100*t.study/t.total:0}%"></span></div>`).join('')}</div></div>`;
+}
+function renderFair(){
+  const a=S.admin,stats=(a.activeVersion?S.confirmed?.stats:a.stats)||[],report=S.optimizationReport;
+  const enrich=new Map((report?.teachers||[]).map(t=>[String(t.id),t]));
+  const m=report?.metrics,fmt=x=>typeof x==='number'?Number(x.toFixed(2)):x;
+  const kpis=m?`<div class="kpis">
+    <div class="kpi"><span>정감독 횟수 편차</span><b>${m.mainSpread}회</b></div>
+    <div class="kpi"><span>부감독 횟수 편차</span><b>${m.assistSpread}회</b></div>
+    <div class="kpi"><span>자습감독 횟수 편차</span><b>${m.studySpread}회</b></div>
+    <div class="kpi"><span>가중 부담 편차</span><b>${fmt(m.burdenSpread)}점</b></div>
+    <div class="kpi"><span>감독으로 추가된 3연강</span><b>${m.addedThree}건</b></div>
+    <div class="kpi"><span>추가된 4연강 이상</span><b>${m.addedFour}건</b></div>
+  </div>`:'<p class="hint">정규수업·감독 통합 분석을 불러오는 중입니다. <button class="btn" onclick="loadOptimizationReport()">분석 불러오기</button></p>';
+  $('#app').innerHTML=`<section class="panel">${baseTitle('감독 공정성·연강 분석','정·부·자습 감독 횟수, 3:2:1 업무 강도, 실제 남아 있는 정규수업을 모두 고려합니다.',
+    '<button class="btn" onclick="loadOptimizationReport()">분석 새로고침</button><button class="btn" onclick="compareGradeBonus()">담당 학년 우대 0%와 비교</button>')}${metrics(stats)}${kpis}${fairnessCharts(stats)}
+  <div class="tablewrap"><table class="data"><thead><tr><th>교사</th><th>정</th><th>부</th><th>자습</th><th>전체</th><th>부담 점수</th><th>최대 연강</th><th>추가 3/4연강</th><th>주 담당 학년</th><th>분석</th></tr></thead><tbody>
+  ${stats.slice().sort((x,y)=>y.total-x.total).map(t=>{const v=enrich.get(String(t.id));return `<tr><td>${e(t.name)} <span class="muted">${e(t.id)}</span>${t.isInstructor?' · 강사':''}</td>
+    <td>${t.main}</td><td>${t.assist}</td><td>${t.study}</td><td><b>${t.total}</b></td>
+    <td>${v?fmt(v.burden):'-'}</td><td>${v?v.maxBefore+' → '+v.maxAfter:'-'}</td>
+    <td>${v?v.addedThree+' / '+v.addedFour:'-'}</td><td>${v&&v.primaryGrade?v.primaryGrade+'학년':'미분류'}</td>
+    <td><button class="btn" onclick="explain(${e(JSON.stringify(t.id))})">이유 보기</button></td></tr>`;}).join('')||'<tr><td colspan="10">배정 결과가 없습니다.</td></tr>'}</tbody></table></div>
+  <p class="hint">가중 부담은 기본 정감독 3·부감독 2·자습감독 1점입니다. 모든 교사가 동일한 횟수로 감독하는 것은 자리 수와 제약에 따라 불가능할 수 있습니다. '추가 연강'은 기존 수업 대비 감독 배정이 새로 만든 연강입니다.</p></section>`;
+}
+async function compareGradeBonus(){
+  const x=await work('학년 우대 비교 시뮬레이션',()=>call('compareGradeBonus',{seed:2026}));if(!x)return;
+  if(!x.ok)return modal('배정 비교 불가',`<div class="warning">${e(x.explanation)}</div>`);
+  const rows=[['mainSpread','정감독 편차'],['assistSpread','부감독 편차'],['studySpread','자습감독 편차'],
+    ['burdenSpread','가중 부담 편차'],['addedThree','감독으로 추가된 3연강'],['addedFour','추가된 4연강'],
+    ['gradeAffinityTotal','담당 학년 연관성 점수 합계']];
+  modal('담당 학년 우대 0% vs '+Math.round(x.gradeStrength*100)+'%',`<p>${e(x.note)}</p>
+    <div class="tablewrap"><table class="data"><thead><tr><th>지표</th><th>우대 0%</th><th>설정 우대</th></tr></thead><tbody>
+    ${rows.map(([key,label])=>`<tr><td>${e(label)}</td><td>${e(x.zero[key])}</td><td>${e(x.current[key])}</td></tr>`).join('')}</tbody></table></div>
+    <p class="hint">계산시간: 0% ${e(x.elapsedMs.zero)}ms / 설정 ${e(x.elapsedMs.current)}ms. 이 비교는 데이터를 저장하거나 기존 배정을 변경하지 않습니다.</p>`);
+}
+async function explain(teacherId){const x=await work('공정성 설명',()=>call('fairness',{teacherId}));if(!x)return;
+  const t=x.teacher;
+  modal(`${t.name} 선생님 — 감독 ${t.total}회`, `<div class="kpis"><div class="kpi"><span>정감독</span><b>${t.main}</b></div><div class="kpi"><span>부감독</span><b>${t.assist}</b></div><div class="kpi"><span>자습</span><b>${t.study}</b></div><div class="kpi"><span>전체 평균 대비</span><b>${t.delta}</b></div></div>
+  <p>후보가 되는 감독 자리: ${x.eligibleJobs}/${x.totalJobs}개</p><p>가중 부담 ${e(t.burden)}점 · 기존 최대 ${e(t.maxBefore)}연강 → 배정 후 최대 ${e(t.maxAfter)}연강 · 새로 생긴 3연강 ${e(t.addedThree)}건 / 4연강 ${e(t.addedFour)}건</p><p>주 담당 학년: ${e(t.primaryGrade||"미분류")}학년 · 학년별 수업 비중 ${e(JSON.stringify(t.gradeShares||{}))}</p>
+  <p>강사 자동 제외 ${x.exclusions.강사감독자동제외||0}건, 동일교과 제한 ${x.exclusions.동일교과||0}건, 상치교과 제한 ${x.exclusions.상치교과||0}건, 담임학급 제한 ${x.exclusions.담임학급||0}건, 불가 시간 제한 ${x.exclusions.배정불가||0}건, 정규수업/겸임 관련 제외 ${Object.entries(x.exclusions).filter(([k])=>k.startsWith('정규수업')||k.startsWith('겸임')||k==='타교근무'||k==='교사시간표미등록').reduce((n,[,v])=>n+v,0)}건</p>
+  <p>${x.transfer?`규칙을 유지하면서 감독 한 자리를 ${e(x.transfer.toName)} 선생님에게 이전할 수 있는 안을 발견했습니다 (${e(x.transfer.slot)}).`:'탐색 범위 내에서 단일 자리 이전에 의한 공정성 개선안을 발견하지 못했습니다.'}</p>
+  <p class="hint">${e(x.explanation)}</p>`);}
+
+/** Version manager: fetch all metadata + bounded previews together, and lazy load large ones. */
+function loadVersionLibrary_(){return null;}
+function versionIdSafe_(){return null;}
+function selectedVersion_(){return null;}
+function versionManagerMarkup_(){return null;}
+function refreshVersionSelection_(){return null;}
+function openVersionManager(){return null;}
+function refreshVersionManager(){return null;}
+function getVersionView_(){return null;}
+function previewSelectedVersion(){return null;}
+function showActiveVersion(){return null;}
+function createNewVersionFromSelected(){return null;}
+function renderAudit(){return null;}
+function loadVersions(){return null;}
+function restoreVersion(){return null;}
+function repairMaterialized(){return null;}
+function showPerformanceDiagnostics(){
+  if(!S.boot?.admin)return toast('관리자 로그인 후 확인할 수 있습니다.','error');
+  const rows=perfClient.events.slice(-40);
+  modal('화면 성능 진단 (실측)',`<p class="hint">현 브라우저에서 수집한 화면 렌더링 및 API 왕복 시간입니다. Apps Script 서버 로그는 실행 기록에서 [PERF]를 검색하세요.</p><div class="tablewrap"><table class="data"><thead><tr><th>작업</th><th>소요</th><th>일시</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${e(r.name)}</td><td>${r.ms}ms</td><td>${e(r.at)}</td></tr>`).join('')}</tbody></table></div>`);
+}
+window.matchMedia('(max-width:700px)').addEventListener('change',()=>{
+  captureInputs_();
+  if(S.view==='schedule'&&S.admin)renderSchedule();
+});
+window.addEventListener('unhandledrejection',ev=>{console.error(ev.reason);toast('처리되지 않은 오류: '+(ev.reason?.message||ev.reason),'error');});
+window.addEventListener('error',ev=>console.error('화면 오류',ev.error));
+installEditTracking_();
+boot();
+function appendClassEditor_(){const box=document.createElement('section');box.className='panel';box.innerHTML='<h2>대상 학급 수정</h2><p>한 줄에 학년-반을 입력하세요.</p><textarea id="classRows">'+e(S.admin.classes.map(c=>c.id).join('\n'))+'</textarea><button class="btn primary" onclick="saveClasses()">학급 저장</button>';$('#app').appendChild(box);}
+async function saveClasses(){const rows=$('#classRows').value.split(/\n/).filter(x=>x.trim()).map(x=>{const [grade,classNo]=x.trim().split('-');return {grade:Number(grade),classNo:Number(classNo)};});const r=await work('학급 저장',()=>call('saveClasses',{revision:S.admin.revision,rows}));if(r){clearDirty_('classes');await reloadSafe();}}
+</script></body></html>
